@@ -12,7 +12,7 @@
       </select>
     </div>
     <div>
-      <button type="button" (click)="next(selectStudentForm)" class="btn btn-primary">Next</button>
+      <button type="button" (click)="studentSelect(selectStudentForm)" class="btn btn-primary">Next</button>
     </div>
   </form>
 </div>
@@ -25,15 +25,20 @@
       <label class="txt-green add-text-height">Add a new student:</label>
       <p class="txt-blue sub-student">Please enter their full name</p>
     </div>
-    <div class="center">
-      <label class="txt-green txt-first">First</label>
-      <label class="txt-green txt-last">Last</label>
-      <label class="txt-green txt-nick">Nickname</label>
-    </div>
-    <div class="center">
-      <input type="text" placeholder="First" (ngModel)="firstname" name="firstname" class="txt txt-input">
-      <input type="text" placeholder="Last" (ngModel)="lastname" name="lastname" class="txt txt-input">
-      <input type="text" placeholder="Nickname" (ngModel)="nickname" name="nickname" class="txt txt-input">
+    <div class="row">
+      <div class="form-group offset-2 col-xs-4 d-flex flex-column">
+        <label class="txt-green txt-group">First</label>
+        <input type="text" placeholder="First" (ngModel)="firstname" name="firstname" class="txt txt-input">
+      </div>
+      <div class="form-group col-xs-4 d-flex flex-column">
+        <label class="txt-green txt-group">Last</label>
+        <input type="text" placeholder="Last" (ngModel)="lastname" name="lastname" class="txt txt-input">
+      </div>
+      <div class="form-group col-xs-4 d-flex flex-column">
+        <label class="txt-green txt-group">First</label>
+        <input type="text" placeholder="Nickname" (ngModel)="nickname" name="nickname" class="txt txt-input">
+      </div>
+
     </div>
     <div class="add-student-button">
       <button type="button" (click)="studentAdd(addStudentForm)" class="btn btn-primary">Next</button>

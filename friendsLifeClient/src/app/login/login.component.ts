@@ -10,6 +10,7 @@ export class LoginComponent implements OnInit {
   state: string = '';
   error: any;
   students = [];
+  userName: string;
   student: string;
   firstname: string;
   lastname: string;
