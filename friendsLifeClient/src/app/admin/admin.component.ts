@@ -11,9 +11,6 @@ export class AdminComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    console.log("this", this);
-    debugger;
-    this.router.navigate(['admin']);
   }
 
 }
