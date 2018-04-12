@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router  } from '@angular/router';
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-friend',
+  templateUrl: './friend.component.html',
+  styleUrls: ['./friend.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class FriendComponent implements OnInit {
 
   state: string = '';
   error: any;
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   lastname: string;
   nickname: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -24,10 +24,12 @@ export class LoginComponent implements OnInit {
   studentSelect(formData) {
     console.log("formData", formData.value);
     console.log("this", this);
+    this.router.navigate(['availability']);
   }
 
   studentAdd(formData) {
     console.log("formData", formData.value);
     console.log("this", this);
+    this.router.navigate(['availability']);    
   }
 }

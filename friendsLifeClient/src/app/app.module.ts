@@ -9,16 +9,22 @@ import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from './login/login.component';
+import { FriendComponent } from './friend/friend.component';
 import { AvailabilityComponent } from './availability/availability.component';
+import { CategoriesComponent } from './admin/categories/categories.component';
+import { UsersComponent } from './admin/users/users.component';
+import { ProfileComponent } from './admin/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
     HomeComponent,
-    LoginComponent,
+    FriendComponent,
     AvailabilityComponent,
+    CategoriesComponent,
+    UsersComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

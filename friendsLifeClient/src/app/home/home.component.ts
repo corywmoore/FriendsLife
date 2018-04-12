@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
   username: string = '';
   password: string = '';
 
-  constructor() { }
+  constructor( private router: Router) { }
 
   ngOnInit() {
   }
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   next(formData) {
     console.log("formData", formData.value);
     console.log("this", this);
+    this.router.navigate(['friend']);
   }
 
 }
