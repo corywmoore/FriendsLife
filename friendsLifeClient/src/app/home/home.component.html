@@ -2,7 +2,7 @@
   Welcome to Friend's Life class selection!
 </h3>
 <div class="form-container">
-  <form #formData='ngForm' (ngSubmit)="next(formData)">
+  <form #homeForm='ngForm'>
     <div>
       <label class="txt-green txt-username">Username</label>
     </div>
@@ -17,7 +17,7 @@
       <input type="text" placeholder="Password" (ngModel)="password" name="password" class="txt password">
     </div>
     <div>
-      <button type="button" class="btn btn-primary">Next</button>
+      <button type="button" (click)="next(homeForm)" class="btn btn-primary">Next</button>
     </div>
   </form>
 </div>
