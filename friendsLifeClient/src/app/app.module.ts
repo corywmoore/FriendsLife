@@ -9,12 +9,14 @@ import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AvailabilityComponent } from './availability/availability.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
     HomeComponent,
+    AvailabilityComponent,
   ],
   imports: [
     BrowserModule,
