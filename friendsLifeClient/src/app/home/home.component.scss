@@ -22,12 +22,12 @@ label {
 }
 
 .txt-username {
-  margin-left: -100px;
+  margin-left: -200px;
   margin-bottom: -10px;
 }
 
 .txt-password {
-  margin-left: -100px;
+  margin-left: -200px;
   margin-bottom: -10px;
 }
 
@@ -37,4 +37,36 @@ label {
 
 .input-password {
   margin-bottom: 50px;
+}
+
+.home-header {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.username {
+  border: 1px solid grey;
+  border-radius: 6px;
+  width: 275px;
+  height: 40px;
+}
+
+.password {
+  border: 1px solid grey;
+  border-radius: 6px;
+  width: 275px;
+  height: 40px;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  padding-left: 10px;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  padding-left: 10px;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  padding-left: 10px;
+}
+:-moz-placeholder { /* Firefox 18- */
+  padding-left: 10px;
 }
