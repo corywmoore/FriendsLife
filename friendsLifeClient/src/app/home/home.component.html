@@ -1,3 +1,23 @@
-<p>
-  home works!
-</p>
+<h3 class="txt-blue">
+  Welcome to Friend's Life class selection!
+</h3>
+<div class="form-container">
+  <form #formData='ngForm' (ngSubmit)="next(formData)">
+    <div>
+      <label class="txt-green txt-username">Username</label>
+    </div>
+    <div class="center input-username">
+      <input type="text" placeholder="Username" (ngModel)="username" name="username" class="txt">
+    </div>
+
+    <div>
+      <label class="txt-green txt-password">Password</label>
+    </div>
+    <div class="center input-password">
+      <input type="text" placeholder="Password" (ngModel)="password" name="password" class="txt">
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary">Next</button>
+    </div>
+  </form>
+</div>

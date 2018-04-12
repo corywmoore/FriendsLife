@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  state: string = '';
+  error: any;
+  username: string;
+  password: string;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  next(formData) {
+    console.log("formData", formData.value);
+    console.log("this", this);
   }
 
 }
