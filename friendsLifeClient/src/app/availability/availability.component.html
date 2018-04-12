@@ -1,0 +1,86 @@
+<h3 class="txt-blue home-header">Availability for NAME</h3>
+<div class="form-container">
+  <h4>Please select he availability days and times:</h4>
+</div>
+<div class="selection">
+  <div class="row">
+    <div class="col-2 offset-1">
+      <h5>Monday</h5>
+    </div>
+    <div class="col-2">
+      <h5>Tuesday</h5>
+    </div>
+    <div class="col-2">
+      <h5>Wednesday</h5>
+    </div>
+    <div class="col-2">
+      <h5>Thursday</h5>
+    </div>
+    <div class="col-2">
+      <h5>Friday</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2 offset-1">
+      <div class="card" (click)="dateTimeClicked($event, 'AM','Monday')">
+        <div class="card-block">Morning</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card" (click)="dateTimeClicked($event, 'AM','Tuesday')">
+        <div class="card-block">Morning</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card" (click)="dateTimeClicked($event, 'AM','Wednesday')">
+        <div class="card-block">Morning</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card" (click)="dateTimeClicked($event, 'AM','Thursday')">
+        <div class="card-block">Morning</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card" (click)="dateTimeClicked($event, 'AM','Friday')">
+        <div class="card-block">Morning</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2 offset-1">
+      <div class="card" (click)="dateTimeClicked($event, 'PM','Monday')">
+        <div class="card-block">Afternoon</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card" (click)="dateTimeClicked($event, 'PM','Tuesday')">
+        <div class="card-block">Afternoon</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card" (click)="dateTimeClicked($event, 'PM','Wednesday')">
+        <div class="card-block">Afternoon</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card" (click)="dateTimeClicked($event, 'PM','Thursday')">
+        <div class="card-block">Afternoon</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card" (click)="dateTimeClicked($event, 'PM','Friday')">
+        <div class="card-block">Afternoon</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="alert alert-warning" *ngIf="warning">
+  Please choose a day and time.
+</div>
+<div>
+  <button type="button" class="btn btn-primary" (click)="validateAndRoute()">Next</button>
+</div>
+

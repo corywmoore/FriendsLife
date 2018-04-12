@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
+import { AvailabilityComponent } from './availability/availability.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LoginComponent } from './login/login.component';
     AdminComponent,
     HomeComponent,
     LoginComponent,
+    AvailabilityComponent,
   ],
   imports: [
     BrowserModule,
