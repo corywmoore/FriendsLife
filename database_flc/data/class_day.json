@@ -1,0 +1,132 @@
+{
+  "class_days": [
+    {
+      "class_id": 1,
+      "day_id": 5
+    },
+    {
+      "class_id": 2,
+      "day_id": 10
+    },
+    {
+      "class_id": 3,
+      "day_id": 1
+    },
+    {
+      "class_id": 3,
+      "day_id": 3
+    },
+    {
+      "class_id": 3,
+      "day_id": 6
+    },
+    {
+      "class_id": 4,
+      "day_id": 2
+    },
+    {
+      "class_id": 4,
+      "day_id": 10
+    },
+    {
+      "class_id": 5,
+      "day_id": 3
+    },
+    {
+      "class_id": 6,
+      "day_id": 4
+    },
+    {
+      "class_id": 7,
+      "day_id": 5
+    },
+    {
+      "class_id": 8,
+      "day_id": 7
+    },
+    {
+      "class_id": 9,
+      "day_id": 8
+    },
+    {
+      "class_id": 10,
+      "day_id": 9
+    },
+    {
+      "class_id": 11,
+      "day_id": 6
+    },
+    {
+      "class_id": 11,
+      "day_id": 8
+    },
+    {
+      "class_id": 11,
+      "day_id": 10
+    },
+    {
+      "class_id": 12,
+      "day_id": 2
+    },
+    {
+      "class_id": 12,
+      "day_id": 4
+    },
+    {
+      "class_id": 13,
+      "day_id": 4
+    },
+    {
+      "class_id": 14,
+      "day_id": 1
+    },
+    {
+      "class_id": 15,
+      "day_id": 7
+    },
+    {
+      "class_id": 16,
+      "day_id": 1
+    },
+    {
+      "class_id": 17,
+      "day_id": 5
+    },
+    {
+      "class_id": 18,
+      "day_id": 2
+    },
+    {
+      "class_id": 19,
+      "day_id": 3
+    },
+    {
+      "class_id": 20,
+      "day_id": 6
+    },
+    {
+      "class_id": 21,
+      "day_id": 7
+    },
+    {
+      "class_id": 21,
+      "day_id": 9
+    },
+    {
+      "class_id": 22,
+      "day_id": 8
+    },
+    {
+      "class_id": 23,
+      "day_id": 6
+    },
+    {
+      "class_id": 24,
+      "day_id": 1
+    },
+    {
+      "class_id": 24,
+      "day_id": 9
+    }
+  ]
+}
