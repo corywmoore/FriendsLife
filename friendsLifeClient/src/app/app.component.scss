@@ -3,9 +3,11 @@ $fl-blue: #003869;
 $fl-grey: #A4A4A4;
 
 .navbar {
-    margin-left: -15px;
-    margin-right: -15px;
     padding: 30px;
+}
+
+.container-fluid {
+  padding: 0;
 }
 
 .footer {
@@ -17,4 +19,6 @@ $fl-grey: #A4A4A4;
   text-align: center;
 }
 
-
+.navbar-logo {
+  padding-left: 10%;
+}
