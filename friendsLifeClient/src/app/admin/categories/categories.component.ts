@@ -7,9 +7,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriesComponent implements OnInit {
 
+  public addCategoryView = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  public addCategory() {
+    this.addCategoryView = true;
+    console.log('add Cat');
+  }
+
+  public cancelAddCategory() {
+    console.log('cancel cat');
+    
+    this.addCategoryView = false;
+
+  }
+
+  public submitAddCategory() {
+    console.log('submit cat');
+    
+    this.addCategoryView = false;
+  }
 }

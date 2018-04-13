@@ -29,11 +29,11 @@ export class AvailabilityComponent implements OnInit {
       dt.day = day;
       dt.time = time;
       this.selection.push(dt);
-      this.renderer.setElementClass(el, 'green', true);
+      this.renderer.setElementClass(el, 'green-bg', true);
       this.warning = false;
     } else {
       this.selection.splice(index, 1);
-      this.renderer.setElementClass(el, 'green', false);      
+      this.renderer.setElementClass(el, 'green-bg', false);      
     }
   }
 
