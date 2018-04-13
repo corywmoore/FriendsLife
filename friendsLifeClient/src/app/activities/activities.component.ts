@@ -21,7 +21,11 @@ export class ActivitiesComponent implements OnInit {
   }
 
   public submitActivities() {
-
+    if(this.activitiesSelection.length < 3 || !this.currentSkill) {
+      this.warning = true;
+    } else {
+      console.log('next');
+    }
   }
 
   public resetActivities() {
@@ -35,6 +39,8 @@ export class ActivitiesComponent implements OnInit {
         els[i].classList.remove(this.colors[j]);
       }
     }
+
+    this.warning = false;
   }
 
   public activityClicked($event: any, id: number) {
@@ -54,6 +60,8 @@ export class ActivitiesComponent implements OnInit {
       this.renderer.setElementClass(el, this.colors[am.rank - 1], true);
       this.warning = false;
     } 
+
+    this.warning = false;
   }
 
   public skillClicked($event: any, skill: string) {
@@ -70,6 +78,7 @@ export class ActivitiesComponent implements OnInit {
     this.currentSkill = skill;
     this.renderer.setElementClass(el, this.colors[0], true);
     
+    this.warning = false;
   }
 }
 
