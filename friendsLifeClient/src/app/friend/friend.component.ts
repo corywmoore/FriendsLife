@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router  } from '@angular/router';
+import { SelectionService } from '../services/selection/selection.service';
+import { Friend } from '../models/friend.model';
+
 @Component({
   selector: 'app-friend',
   templateUrl: './friend.component.html',
@@ -16,7 +19,7 @@ export class FriendComponent implements OnInit {
   lastname: string;
   nickname: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private selection: SelectionService) { }
 
   ngOnInit() {
   }
@@ -28,8 +31,14 @@ export class FriendComponent implements OnInit {
   }
 
   studentAdd(formData) {
+    const friend: Friend = formData.value;
     console.log("formData", formData.value);
     console.log("this", this);
+
+    this.selection.addFriend(friend).subscribe(data => {
+      console.log(data);
+    });
+
     this.router.navigate(['availability']);    
   }
 }

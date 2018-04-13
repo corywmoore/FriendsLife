@@ -19,7 +19,7 @@ import { FriendsComponent } from './admin/friends/friends.component';
 import { AdminActivitiesComponent } from './admin/activities/activities.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminService } from './services/admin/admin.service';
-
+import { SelectionService } from './services/selection/selection.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +41,7 @@ import { AdminService } from './services/admin/admin.service';
     NgbModule.forRoot(),
     HttpClientModule
   ],
-  providers: [AdminService],
+  providers: [AdminService, SelectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
