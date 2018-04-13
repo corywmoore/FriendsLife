@@ -1,0 +1,22 @@
+.input-div {
+    display: flex;
+    justify-content: center;
+    padding: 1%;
+    div {
+        align-content: right;
+    }
+    label {
+        width: 15%;
+    }
+}
+
+.input-main-div {
+    padding: 2%;
+    text-align: left
+}
+
+.canc-btn {
+    color: red;
+    background-color: white;
+    border-color: white;
+}
