@@ -33,11 +33,9 @@ export class ActivitiesComponent implements OnInit {
   }
 
   public submitActivities() {
-    if(this.activitiesSelection.length < 3 || !this.currentSkill) {
-      this.warning = true;
-    } else {
+
       this.router.navigate(['selections']);
-    }
+
   }
 
   public resetActivities() {
