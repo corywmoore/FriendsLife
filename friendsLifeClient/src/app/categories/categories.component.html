@@ -1,0 +1,30 @@
+<div class="container">
+
+  <div *ngIf="categoryDays">
+    <div *ngFor="let catday of categoryDays; let i = index">
+      <h3 class="txt-blue home-header">
+        Availability for {{catday.day}}
+        <br>
+        <small>Please select up to 3 categories</small>
+      </h3>
+      <div class="row" *ngIf="catday">
+        <div class="col-4" *ngFor="let cat of catday.categories; let j = index">
+          <div class="card" [ngClass]="{'green-bg': cat.selected}" (click)="selectCategory(i, j)">
+            <div class="card-block">
+              <h4>{{cat.title}}</h4>
+              <img [src]="cat.imgUrl" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="btn btn-primary mt-5" (click)="submitCategories()">Next</div>
+    </div>
+  </div>
+
+</div>

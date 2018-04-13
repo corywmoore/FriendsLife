@@ -7,7 +7,7 @@ import { AdminService } from '../../services/admin/admin.service';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent implements OnInit {
+export class AdminCategoriesComponent implements OnInit {
 
   public categories;
 

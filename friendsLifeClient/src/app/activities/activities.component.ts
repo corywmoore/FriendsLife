@@ -14,6 +14,7 @@ export class ActivitiesComponent implements OnInit {
   public currentSkill: string;
   public warning = false;
   public selectedFriend;
+  public activity: ActivityModel[] = [];
 
   private colors = ['green-activity', 'yellow-activity', 'red-activity'];
 
@@ -22,24 +23,31 @@ export class ActivitiesComponent implements OnInit {
   ngOnInit() {
     let friend =JSON.parse(localStorage.getItem('selectedFriend'));
     this.selectedFriend = friend;
+    const imgArr = ['../../assets/cooking-foodprep.png', '../../assets/cooking-kitchentools.png', '../../assets/cooking-shopping.png'];
+    let act;
+    for (let i = 1; i <= 3; i++) {
+      act = new ActivityModel();
+      act.name = 'Place Holder';
+      act.rank = 0;
+      act.imgUrl = imgArr[i - 1];
+      this.activity.push(act);
+    }
   }
 
   public submitActivities() {
-    if(this.activitiesSelection.length < 3 || !this.currentSkill) {
-      this.warning = true;
-    } else {
+
       this.router.navigate(['selections']);
-    }
+
   }
 
   public resetActivities() {
     this.currentRank = 1;
     this.activitiesSelection = [];
 
-    var els = document.getElementsByClassName('activity');
+    const  els = document.getElementsByClassName('activity');
 
-    for(var i=els.length-1; i>=0; i--) {
-      for(var j=this.colors.length-1; j>=0; j--) {
+    for(let i=els.length-1; i>=0; i--) {
+      for(let j=this.colors.length-1; j>=0; j--) {
         els[i].classList.remove(this.colors[j]);
       }
     }
@@ -48,36 +56,22 @@ export class ActivitiesComponent implements OnInit {
   }
 
   public activityClicked($event: any, id: number) {
-    var index = _.findIndex(this.activitiesSelection, (item: ActivitySelectionModel) => {
-      return id === item.id;
-    });
-
-    var el = ($event.target.classList.contains('card')) ? $event.target : $event.target.parentElement;
-
-    if (index < 0) {
-      var am = new ActivitySelectionModel();
-
-      am.id = id;
-      am.rank = this.currentRank;
-      this.currentRank++;
-      this.activitiesSelection.push(am);
-      this.renderer.setElementClass(el, this.colors[am.rank - 1], true);
+    console.log(id)
+      this.activity[id].rank = this.currentRank;
+    this.currentRank++;
       this.warning = false;
-    }
-
-    this.warning = false;
   }
 
   public skillClicked($event: any, skill: string) {
-    var els = document.getElementsByClassName('skills');
+    let els = document.getElementsByClassName('skills');
 
-    for(var i=els.length-1; i>=0; i--) {
-      for(var j=this.colors.length-1; j>=0; j--) {
+    for(let i=els.length-1; i>=0; i--) {
+      for(let j=this.colors.length-1; j>=0; j--) {
         els[i].classList.remove(this.colors[0]);
       }
     }
 
-    var el = ($event.target.classList.contains('card')) ? $event.target : $event.target.parentElement;
+    let el = ($event.target.classList.contains('card')) ? $event.target : $event.target.parentElement;
 
     this.currentSkill = skill;
     this.renderer.setElementClass(el, this.colors[0], true);
@@ -93,7 +87,8 @@ export class ActivityModel {
   rank: number;
 }
 
+
 export class ActivitySelectionModel {
   id: number;
-  rank: number;
+  crank: number;
 }
