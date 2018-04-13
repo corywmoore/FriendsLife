@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     categories.belongsToMany(models.friend, { through: 'friends_interest' });
+    categories.hasMany(models.classes, {
+      foreignkey: 'category_id'
+    });
   };
   return categories;
 };

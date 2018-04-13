@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     classes.belongsToMany(models.days, {
       through: 'class_days'
     });
+
+    classes.belongsTo(models.categories, {
+      foreignkey: 'category_id'
+    });
   };
   return classes;
 };
