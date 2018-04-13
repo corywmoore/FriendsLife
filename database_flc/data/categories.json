@@ -1,0 +1,44 @@
+{
+  "categories": [
+    {
+      "name": "Cooking",
+      "picture": null,
+      "active": true
+    },
+    {
+      "name": "Visual Arts",
+      "picture": null,
+      "active": true
+    },
+    {
+      "name": "Performing Arts",
+      "picture": null,
+      "active": true
+    },
+    {
+      "name": "Explorations",
+      "picture": null,
+      "active": true
+    },
+    {
+      "name": "Life Skills",
+      "picture": null,
+      "active": true
+    },
+    {
+      "name": "Job Readiness",
+      "picture": null,
+      "active": true
+    },
+    {
+      "name": "Service Learning",
+      "picture": null,
+      "active": true
+    },
+    {
+      "name": "Exercise",
+      "picture": null,
+      "active": true
+    }
+  ]
+}
