@@ -1,10 +1,13 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "FriendsLife",
-    "host": "127.0.0.1",
+    "username": "gmposisbiuobov",
+    "password": "923723c932f46cd91f22f69ce227a59062cdb287ddb05fc939bd6021355142d5",
+    "database": "d3np7vpg5qolk8",
+    "host": "ec2-54-235-193-34.compute-1.amazonaws.com",
     "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": true
+    },
     "define": {
       "paranoid": false,
       "timestamps": true,
