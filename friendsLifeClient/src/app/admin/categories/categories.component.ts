@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin/admin.service';
+// import {Observable} from 'rxjs/Observble';
 
 @Component({
   selector: 'app-categories',
@@ -8,30 +9,31 @@ import { AdminService } from '../../services/admin/admin.service';
 })
 export class CategoriesComponent implements OnInit {
 
-  categories;
+  public categories;
 
   public addCategoryView = false;
 
   constructor(private adminService : AdminService) { }
 
   ngOnInit() {
-    this.categories = this.adminService.getCategories();
+    this.adminService.getCategories().subscribe(
+      data => {
+        this.categories = data;
+      });
   }
 
   public addCategory() {
     this.addCategoryView = true;
-    console.log('add Cat');
   }
 
   public cancelAddCategory() {
-    console.log('cancel cat');
 
     this.addCategoryView = false;
 
   }
 
   public submitAddCategory() {
-    console.log('submit cat');
+
 
     this.addCategoryView = false;
   }

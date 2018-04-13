@@ -13,12 +13,15 @@ export class ActivitiesComponent implements OnInit {
   public currentRank = 1;
   public currentSkill: string;
   public warning = false;
+  public selectedFriend;
 
   private colors = ['green-activity', 'yellow-activity', 'red-activity'];
 
   constructor(private renderer: Renderer, private ref: ElementRef, private router: Router) { }
 
   ngOnInit() {
+    let friend =JSON.parse(localStorage.getItem('selectedFriend'));
+    this.selectedFriend = friend;
   }
 
   public submitActivities() {
@@ -32,9 +35,9 @@ export class ActivitiesComponent implements OnInit {
   public resetActivities() {
     this.currentRank = 1;
     this.activitiesSelection = [];
-    
+
     var els = document.getElementsByClassName('activity');
-    
+
     for(var i=els.length-1; i>=0; i--) {
       for(var j=this.colors.length-1; j>=0; j--) {
         els[i].classList.remove(this.colors[j]);
@@ -60,14 +63,14 @@ export class ActivitiesComponent implements OnInit {
       this.activitiesSelection.push(am);
       this.renderer.setElementClass(el, this.colors[am.rank - 1], true);
       this.warning = false;
-    } 
+    }
 
     this.warning = false;
   }
 
   public skillClicked($event: any, skill: string) {
     var els = document.getElementsByClassName('skills');
-    
+
     for(var i=els.length-1; i>=0; i--) {
       for(var j=this.colors.length-1; j>=0; j--) {
         els[i].classList.remove(this.colors[0]);
@@ -78,7 +81,7 @@ export class ActivitiesComponent implements OnInit {
 
     this.currentSkill = skill;
     this.renderer.setElementClass(el, this.colors[0], true);
-    
+
     this.warning = false;
   }
 }

@@ -7,12 +7,12 @@
             <label class="txt-green txt-student">Please select a student's name:</label>
         </div>
         <div class="center input-username">
-            <select class="select-student" id="student" [(ngModel)]="student" [ngModelOptions]="{standalone: true}">
-        <option *ngFor="let student of students" [ngValue]="friend">{{friend.name}}</option>
+            <select class="select-student" id="student" [(ngModel)]="friend" [ngModelOptions]="{standalone: true}">
+        <option *ngFor="let friend of friends" [ngValue]="friend">{{friend.firstName}} {{friend.lastName}}</option>
       </select>
         </div>
         <div>
-            <button type="button" (click)="friendSelect(selectStudentForm)" class="btn btn-primary">Next</button>
+            <button type="button" (click)="friendSelect()" class="btn btn-primary">Next</button>
         </div>
     </form>
 </div>
@@ -28,15 +28,15 @@
         <div class="row input-div">
             <div class="form-group col-xs-4 d-flex flex-column">
                 <label class="txt-green txt-group">First</label>
-                <input type="text" placeholder="First" (ngModel)="firstname" name="firstname" class="txt txt-input">
+                <input type="text" placeholder="First" (ngModel)="firstName" name="firstName" class="txt txt-input">
             </div>
             <div class="form-group col-xs-4 d-flex flex-column">
                 <label class="txt-green txt-group">Last</label>
-                <input type="text" placeholder="Last" (ngModel)="lastname" name="lastname" class="txt txt-input">
+                <input type="text" placeholder="Last" (ngModel)="lastName" name="lastName" class="txt txt-input">
             </div>
             <div class="form-group col-xs-4 d-flex flex-column">
                 <label class="txt-green txt-group">First</label>
-                <input type="text" placeholder="Nickname" (ngModel)="nickname" name="nickname" class="txt txt-input">
+                <input type="text" placeholder="Nickname" (ngModel)="nickName" name="nickName" class="txt txt-input">
             </div>
 
         </div>

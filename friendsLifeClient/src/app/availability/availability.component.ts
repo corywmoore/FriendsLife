@@ -11,10 +11,13 @@ export class AvailabilityComponent implements OnInit {
 
   public selection: DateTimeSelection[] = [];
   public warning = false;
+  public selectedFriend;
 
   constructor(private renderer: Renderer, private router: Router) { }
 
   ngOnInit() {
+    let friend =JSON.parse(localStorage.getItem('selectedFriend'));
+    this.selectedFriend = friend;
   }
 
   public dateTimeClicked($event: any, time: string, day: string) {
@@ -33,7 +36,7 @@ export class AvailabilityComponent implements OnInit {
       this.warning = false;
     } else {
       this.selection.splice(index, 1);
-      this.renderer.setElementClass(el, 'green-bg', false);      
+      this.renderer.setElementClass(el, 'green-bg', false);
     }
 
     console.log(this.selection);

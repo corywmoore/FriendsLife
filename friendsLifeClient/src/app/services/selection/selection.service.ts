@@ -10,13 +10,12 @@ export class SelectionService {
 
   getHeaders() {
     const headers = new HttpHeaders()
-        .set('Authorization','B37C60B6C25DC12E3809D89D85A75E92')
+        .set('Authorization', sessionStorage.getItem("userToken"))
         .set('Content-Type',  'application/json');
 
-    console.log("headers", headers);
     return headers;
   }
-  
+
   addFriend(friend: Friend): Observable<any> {
     return this.http.post('https://mighty-hollows-34327.herokuapp.com/fl/createFriend', friend, {headers: this.getHeaders()});
   }
