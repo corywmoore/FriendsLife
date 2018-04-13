@@ -1,12 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/scss/bootstrap";
-
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
 
 $fl-green: #7ED321;
 $fl-blue: #003869;
 $fl-grey: #A4A4A4;
 
-
+body {
+  font-family: Roboto, serif;
+  font-weight: 400;
+}
 .center {
     text-align: center;
   }
@@ -26,7 +29,7 @@ $fl-grey: #A4A4A4;
   .btn {
     background-color: #043967;
     border-color: #043967;
-    font-color: white;
+    color: white;
     width: 125px;
   }
   
