@@ -4,14 +4,17 @@ module.exports = (sequelize, DataTypes) => {
     'categories',
     {
       name: DataTypes.STRING,
-      picture: DataTypes.BLOB
+      picture: DataTypes.BLOB,
+      active: DataTypes.STRING
     },
     {}
   );
   categories.associate = function(models) {
-    categories.hasMany(models.classes, {
+    categories.hasMany(models.activities, {
       foreignkey: 'category_id'
     });
+
+    categories.belongsToMany(models.friend, { through: 'friends_interest' });
   };
   return categories;
 };

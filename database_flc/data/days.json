@@ -1,0 +1,44 @@
+{
+  "days": [
+    {
+      "day": "Monday",
+      "slot": "am"
+    },
+    {
+      "day": "Monday",
+      "slot": "pm"
+    },
+    {
+      "day": "Tuesday",
+      "slot": "am"
+    },
+    {
+      "day": "Tuesday",
+      "slot": "pm"
+    },
+    {
+      "day": "Wednesday",
+      "slot": "am"
+    },
+    {
+      "day": "Wednesday",
+      "slot": "pm"
+    },
+    {
+      "day": "Thursday",
+      "slot": "am"
+    },
+    {
+      "day": "Thursday",
+      "slot": "pm"
+    },
+    {
+      "day": "Friday",
+      "slot": "am"
+    },
+    {
+      "day": "Friday",
+      "slot": "pm"
+    }
+  ]
+}

@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   activities.associate = function(models) {
-    activities.belongsTo(models.classes, {
-      foreignkey: 'class_id'
+    activities.belongsTo(models.categories, {
+      foreignkey: 'category_id'
     });
 
     activities.hasMany(models.friends_interest, {

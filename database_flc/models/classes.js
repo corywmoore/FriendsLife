@@ -12,10 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     classes.belongsToMany(models.days, {
       through: 'class_days'
     });
-
-    classes.belongsToMany(models.friend, {
-      through: 'friends_interest'
-    });
   };
   return classes;
 };

@@ -1,0 +1,172 @@
+{
+  "activities": [
+    {
+      "name": "Shopping",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 1
+    },
+    {
+      "name": "Kitchen Tools",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 1
+    },
+    {
+      "name": "Food Prep",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 1
+    },
+    {
+      "name": "Art Projects",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 2
+    },
+    {
+      "name": "Art to Sell",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 2
+    },
+    {
+      "name": "Art Shows",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 2
+    },
+    {
+      "name": "Acting, Music and Performing",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 3
+    },
+    {
+      "name": "Writing and Direction",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 3
+    },
+    {
+      "name": "Design and Production",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 3
+    },
+    {
+      "name": "Indoor Activities",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 4
+    },
+    {
+      "name": "Outdoor Activites",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 4
+    },
+    {
+      "name": "Art Activities",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 4
+    },
+    {
+      "name": "Social Skills",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 5
+    },
+    {
+      "name": "Community Participation",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 5
+    },
+    {
+      "name": "Household Skills",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 5
+    },
+    {
+      "name": "Assembly",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 6
+    },
+    {
+      "name": "Restaurant",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 6
+    },
+    {
+      "name": "Hospitality",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 6
+    },
+    {
+      "name": "Gardening",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 7
+    },
+    {
+      "name": "Office, Organization and Janitorial",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 7
+    },
+    {
+      "name": "Meals and Food Preperation",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 7
+    },
+    {
+      "name": "Sports",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 8
+    },
+    {
+      "name": "Group Exercise and Games",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 8
+    },
+    {
+      "name": "Individual",
+      "picture": null,
+      "description": null,
+      "active": true,
+      "class_id": 8
+    }
+  ]
+}

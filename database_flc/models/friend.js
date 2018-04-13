@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   friend.associate = function(models) {
-    friend.belongsToMany(models.classes, {
+    friend.belongsToMany(models.categories, {
       through: 'friends_interest'
     });
 
