@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     days.belongsToMany(models.classes, {
       through: 'class_days'
     });
-    days.belongsToMany(models.friend, {
+    days.belongsToMany(models.friends, {
       through: 'friend_days'
     });
   };

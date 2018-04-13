@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignkey: 'category_id'
     });
 
-    categories.belongsToMany(models.friend, { through: 'friends_interest' });
+    categories.belongsToMany(models.friends, { through: 'friends_interest' });
     categories.hasMany(models.classes, {
       foreignkey: 'category_id'
     });

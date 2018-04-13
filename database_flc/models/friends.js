@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var friend = sequelize.define(
-    'friend',
+  var friends = sequelize.define(
+    'friends',
     {
       first_name: DataTypes.STRING,
       last_name: DataTypes.STRING,
@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  friend.associate = function(models) {
-    friend.belongsToMany(models.categories, {
+  friends.associate = function(models) {
+    friends.belongsToMany(models.categories, {
       through: 'friends_interest'
     });
 
-    friend.belongsToMany(models.days, {
+    friends.belongsToMany(models.days, {
       through: 'friend_days'
     });
   };
-  return friend;
+  return friends;
 };
