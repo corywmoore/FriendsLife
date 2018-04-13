@@ -1,0 +1,124 @@
+{
+  "classes": [
+    {
+      "name": "Intro to cooking",
+      "picture": null,
+      "category_id": 1
+    },
+    {
+      "name": "Advanced cooking",
+      "picture": null,
+      "category_id": 1
+    },
+    {
+      "name": "Art Entreprenuers",
+      "picture": null,
+      "category_id": 2
+    },
+    {
+      "name": "Open Studio",
+      "picture": null,
+      "category_id": 2
+    },
+    {
+      "name": "Filmmakers",
+      "picture": null,
+      "category_id": 3
+    },
+    {
+      "name": "Advocacy Through the Arts ",
+      "picture": null,
+      "category_id": 3
+    },
+    {
+      "name": "Tandem Troupe",
+      "picture": null,
+      "category_id": 3
+    },
+    {
+      "name": "MUsic",
+      "picture": null,
+      "category_id": 3
+    },
+    {
+      "name": "Book Club",
+      "picture": null,
+      "category_id": 3
+    },
+    {
+      "name": "Cultures",
+      "picture": null,
+      "category_id": 3
+    },
+    {
+      "name": "Explorations",
+      "picture": null,
+      "category_id": 4
+    },
+    {
+      "name": "Power Skills",
+      "picture": null,
+      "category_id": 5
+    },
+    {
+      "name": "Social Skills Cinema",
+      "picture": null,
+      "category_id": 5
+    },
+    {
+      "name": "Mainstay Suites",
+      "picture": null,
+      "category_id": 6
+    },
+    {
+      "name": "Edley's ",
+      "picture": null,
+      "category_id": 6
+    },
+    {
+      "name": "Quality Traffic",
+      "picture": null,
+      "category_id": 6
+    },
+    {
+      "name": "Employment Discovery",
+      "picture": null,
+      "category_id": 6
+    },
+    {
+      "name": "Room at the Inn",
+      "picture": null,
+      "category_id": 7
+    },
+    {
+      "name": "Nashville Food Project",
+      "picture": null,
+      "category_id": 7
+    },
+    {
+      "name": "Monroe Harding",
+      "picture": null,
+      "category_id": 7
+    },
+    {
+      "name": "Meals on Wheels",
+      "picture": null,
+      "category_id": 7
+    },
+    {
+      "name": "Woodmont Baptist",
+      "picture": null,
+      "category_id": 7
+    },
+    {
+      "name": "Full Exercise",
+      "picture": null,
+      "category_id": 8
+    },
+    {
+      "name": "YMCA",
+      "picture": null,
+      "category_id": 8
+    }
+  ]
+}
