@@ -12,9 +12,9 @@ export class ActivitiesComponent implements OnInit {
   public activities: ActivityModel[] = [];
   public currentRank = 1;
   public currentSkill: string;
+  public warning = false;
 
   private colors = ['green-activity', 'yellow-activity', 'red-activity'];
-  private warning = false;
 
   constructor(private renderer: Renderer, private ref: ElementRef, private router: Router) { }
 
