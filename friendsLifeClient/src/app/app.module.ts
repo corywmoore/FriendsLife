@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FriendComponent } from './friend/friend.component';
 import { AvailabilityComponent } from './availability/availability.component';
-import { CategoriesComponent } from './admin/categories/categories.component';
+import { AdminCategoriesComponent } from './admin/categories/categories.component';
 import { UsersComponent } from './admin/users/users.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { SelectionsComponent } from './selections/selections.component';
@@ -20,6 +20,7 @@ import { AdminActivitiesComponent } from './admin/activities/activities.componen
 import { HttpClientModule } from '@angular/common/http';
 import { AdminService } from './services/admin/admin.service';
 import { SelectionService } from './services/selection/selection.service';
+import { CategoriesComponent } from './categories/categories.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,12 +28,13 @@ import { SelectionService } from './services/selection/selection.service';
     HomeComponent,
     FriendComponent,
     AvailabilityComponent,
-    CategoriesComponent,
+    AdminCategoriesComponent,
     UsersComponent,
     ActivitiesComponent,
     SelectionsComponent,
     FriendsComponent,
-    AdminActivitiesComponent
+    AdminActivitiesComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
