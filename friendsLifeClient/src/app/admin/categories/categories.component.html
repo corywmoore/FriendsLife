@@ -8,32 +8,35 @@
     <thead>
       <tr>
         <th scope="col">Name</th>
-        <th scope="col">Description</th>
+        <!--<th scope="col">Description</th>-->
         <th scope="col">Active</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody  *ngFor="let category of categories">
       <tr>
-        <td>Cooking</td>
-        <td>Cook some stuff</td>
-        <td>
+        <td>{{category.name}}</td>
+        <!--<td>Cook some stuff</td>-->
+        <td *ngIf="!category.active">
           <h2 class="red">X</h2>
         </td>
-      </tr>
-      <tr>
-        <td>Art</td>
-        <td>Paint some stuff</td>
-        <td>
-          <h2 class="red">X</h2>
-        </td>
-      </tr>
-      <tr>
-        <td>Shop</td>
-        <td>Build some stuff</td>
-        <td>
+        <td *ngIf="category.active">
           <h2 class="green">✓</h2>
         </td>
       </tr>
+      <!--<tr>-->
+        <!--<td>Art</td>-->
+        <!--<td>Paint some stuff</td>-->
+        <!--<td>-->
+          <!--<h2 class="red">X</h2>-->
+        <!--</td>-->
+      <!--</tr>-->
+      <!--<tr>-->
+        <!--<td>Shop</td>-->
+        <!--<td>Build some stuff</td>-->
+        <!--<td>-->
+          <!--<h2 class="green">✓</h2>-->
+        <!--</td>-->
+      <!--</tr>-->
     </tbody>
   </table>
 </div>

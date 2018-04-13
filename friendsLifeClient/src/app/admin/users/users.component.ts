@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-users',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  selectedUser = {};
+  selectedUser : User = new User();
   users = [];
   constructor() { }
 
@@ -44,7 +45,7 @@ export class UsersComponent implements OnInit {
   }
 
   resetForm() {
-    this.selectedUser = {};
+    this.selectedUser = new User();
   }
 
 }
