@@ -1,44 +1,44 @@
 {
   "days": [
     {
-      "day": "Monday",
-      "slot": "am"
+      "day": "MON",
+      "slot": "AM"
     },
     {
-      "day": "Monday",
-      "slot": "pm"
+      "day": "MON",
+      "slot": "PM"
     },
     {
-      "day": "Tuesday",
-      "slot": "am"
+      "day": "TUE",
+      "slot": "AM"
     },
     {
-      "day": "Tuesday",
-      "slot": "pm"
+      "day": "TUE",
+      "slot": "PM"
     },
     {
-      "day": "Wednesday",
-      "slot": "am"
+      "day": "WED",
+      "slot": "AM"
     },
     {
-      "day": "Wednesday",
-      "slot": "pm"
+      "day": "WED",
+      "slot": "PM"
     },
     {
-      "day": "Thursday",
-      "slot": "am"
+      "day": "THU",
+      "slot": "AM"
     },
     {
-      "day": "Thursday",
-      "slot": "pm"
+      "day": "THU",
+      "slot": "PM"
     },
     {
-      "day": "Friday",
-      "slot": "am"
+      "day": "FRI",
+      "slot": "AM"
     },
     {
-      "day": "Friday",
-      "slot": "pm"
+      "day": "FRI",
+      "slot": "PM"
     }
   ]
 }
