@@ -8,6 +8,7 @@ import { AvailabilityComponent } from './availability/availability.component';
 import { UsersComponent } from './admin/users/users.component';
 import { CategoriesComponent } from './admin/categories/categories.component';
 import { ActivitiesComponent } from './activities/activities.component';
+import { SelectionsComponent } from './selections/selections.component';
 import { FriendsComponent } from './admin/friends/friends.component';
 
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'friends-life-management/categories', component: CategoriesComponent },
   { path: 'activities', component: ActivitiesComponent },
   { path: 'friends-life-management/users', component: UsersComponent },
+  { path: 'selections', component: SelectionsComponent },
   { path: 'friends-life-management/friends', component: FriendsComponent }
 ];
 

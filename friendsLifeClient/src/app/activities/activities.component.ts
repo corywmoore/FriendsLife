@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer, ElementRef } from '@angular/core';
 import * as _ from "lodash";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-activities',
@@ -15,7 +16,7 @@ export class ActivitiesComponent implements OnInit {
   private colors = ['green-activity', 'yellow-activity', 'red-activity'];
   private warning = false;
 
-  constructor(private renderer: Renderer, private ref: ElementRef) { }
+  constructor(private renderer: Renderer, private ref: ElementRef, private router: Router) { }
 
   ngOnInit() {
   }
@@ -24,7 +25,7 @@ export class ActivitiesComponent implements OnInit {
     if(this.activitiesSelection.length < 3 || !this.currentSkill) {
       this.warning = true;
     } else {
-      console.log('next');
+      this.router.navigate(['selections']);
     }
   }
 
