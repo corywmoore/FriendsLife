@@ -1,47 +1,47 @@
 <h3 class="txt-blue home-header">
-  Welcome, {{ userName }}!
+    Welcome, {{ userName }}!
 </h3>
 <div class="form-container">
-  <form #selectStudentForm='ngForm'>
-    <div>
-      <label class="txt-green txt-student">Please select a student's name:</label>
-    </div>
-    <div class="center input-username">
-      <select class="select-student"  id="student" [(ngModel)]="student" [ngModelOptions]="{standalone: true}">
+    <form #selectStudentForm='ngForm'>
+        <div>
+            <label class="txt-green txt-student">Please select a student's name:</label>
+        </div>
+        <div class="center input-username">
+            <select class="select-student" id="student" [(ngModel)]="student" [ngModelOptions]="{standalone: true}">
         <option *ngFor="let student of students" [ngValue]="student">{{student.name}}</option>
       </select>
-    </div>
-    <div>
-      <button type="button" (click)="studentSelect(selectStudentForm)" class="btn btn-primary">Next</button>
-    </div>
-  </form>
+        </div>
+        <div>
+            <button type="button" (click)="studentSelect(selectStudentForm)" class="btn btn-primary">Next</button>
+        </div>
+    </form>
 </div>
 
 <hr class="line">
 
 <div class="form-container">
-  <form #addStudentForm='ngForm'>
-    <div>
-      <label class="txt-green add-text-height">Add a new student:</label>
-      <p class="txt-blue sub-student">Please enter their full name</p>
-    </div>
-    <div class="row">
-      <div class="form-group offset-2 col-xs-4 d-flex flex-column">
-        <label class="txt-green txt-group">First</label>
-        <input type="text" placeholder="First" (ngModel)="firstname" name="firstname" class="txt txt-input">
-      </div>
-      <div class="form-group col-xs-4 d-flex flex-column">
-        <label class="txt-green txt-group">Last</label>
-        <input type="text" placeholder="Last" (ngModel)="lastname" name="lastname" class="txt txt-input">
-      </div>
-      <div class="form-group col-xs-4 d-flex flex-column">
-        <label class="txt-green txt-group">First</label>
-        <input type="text" placeholder="Nickname" (ngModel)="nickname" name="nickname" class="txt txt-input">
-      </div>
+    <form #addStudentForm='ngForm'>
+        <div>
+            <label class="txt-green add-text-height">Add a new student:</label>
+            <p class="txt-blue sub-student">Please enter their full name</p>
+        </div>
+        <div class="row input-div">
+            <div class="form-group col-xs-4 d-flex flex-column">
+                <label class="txt-green txt-group">First</label>
+                <input type="text" placeholder="First" (ngModel)="firstname" name="firstname" class="txt txt-input">
+            </div>
+            <div class="form-group col-xs-4 d-flex flex-column">
+                <label class="txt-green txt-group">Last</label>
+                <input type="text" placeholder="Last" (ngModel)="lastname" name="lastname" class="txt txt-input">
+            </div>
+            <div class="form-group col-xs-4 d-flex flex-column">
+                <label class="txt-green txt-group">First</label>
+                <input type="text" placeholder="Nickname" (ngModel)="nickname" name="nickname" class="txt txt-input">
+            </div>
 
-    </div>
-    <div class="add-student-button">
-      <button type="button" (click)="studentAdd(addStudentForm)" class="btn btn-primary">Next</button>
-    </div>
-  </form>
+        </div>
+        <div class="add-student-button">
+            <button type="button" (click)="studentAdd(addStudentForm)" class="btn btn-primary">Next</button>
+        </div>
+    </form>
 </div>
