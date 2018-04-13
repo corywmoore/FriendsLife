@@ -69,14 +69,21 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row mt-3" *ngIf="warning">
     <div class="col-12">
-      <div class="btn btn-primary" (click)="submitActivities()">Next</div>
+      <div class="alert alert-warning">
+        Please complete the page before moving forward.
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <div (click)="resetActivities()">Reset</div>
+      <div class="btn btn-primary mt-5" (click)="submitActivities()">Next</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="mt-2" (click)="resetActivities()">Reset</div>
     </div>
   </div>
 </div>
