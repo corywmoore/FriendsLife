@@ -13,9 +13,4 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
 
-  goToUsers() {
-    console.log("this", this);
-    this.router.navigate(['friends-life-management/users']);
-  }
-
 }
