@@ -48,32 +48,23 @@
   </div>
   <div class="row">
     <div class="col-4">
-      <div class="card">
-        <div class="card-heading">
+      <div class="card skills" (click)="skillClicked($event, 'Beginner')">
+        <div class="card-block">
           Beginner
         </div>
-        <div class="card-block">
-          <img src="">
-        </div>
       </div>
     </div>
     <div class="col-4">
-      <div class="card">
-        <div class="card-heading">
+      <div class="card skills" (click)="skillClicked($event, 'Intermediate')">
+        <div class="card-block">
           Intermediate
         </div>
-        <div class="card-block">
-          <img src="">
-        </div>
       </div>
     </div>
     <div class="col-4">
-      <div class="card">
-        <div class="card-heading">
-          Advanced
-        </div>
+      <div class="card skills" (click)="skillClicked($event, 'Advanced')">
         <div class="card-block">
-          <img src="">
+          Advanced
         </div>
       </div>
     </div>
