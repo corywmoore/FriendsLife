@@ -9,10 +9,9 @@ export class AdminService {
 
   getHeaders() {
     const headers = new HttpHeaders()
-        .set('Authorization','B37C60B6C25DC12E3809D89D85A75E92')
+        .set('Authorization','405F3E83BE6F8B217F8D33613897F74C')
         .set('Content-Type',  'application/json');
 
-    console.log("headers", headers);
     return headers;
   }
 
@@ -29,5 +28,14 @@ export class AdminService {
         console.log(data);
       });
   }
+
+  getFriends() {
+    this.http.get('https://mighty-hollows-34327.herokuapp.com/fl/friends', {headers: this.getHeaders()}).subscribe(
+      data => {
+        console.log(data);
+      });
+  }
+
+
 
 }

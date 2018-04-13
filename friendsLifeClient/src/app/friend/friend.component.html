@@ -8,11 +8,11 @@
         </div>
         <div class="center input-username">
             <select class="select-student" id="student" [(ngModel)]="student" [ngModelOptions]="{standalone: true}">
-        <option *ngFor="let student of students" [ngValue]="student">{{student.name}}</option>
+        <option *ngFor="let student of students" [ngValue]="friend">{{friend.name}}</option>
       </select>
         </div>
         <div>
-            <button type="button" (click)="studentSelect(selectStudentForm)" class="btn btn-primary">Next</button>
+            <button type="button" (click)="friendSelect(selectStudentForm)" class="btn btn-primary">Next</button>
         </div>
     </form>
 </div>
@@ -41,7 +41,7 @@
 
         </div>
         <div class="add-student-button">
-            <button type="button" (click)="studentAdd(addStudentForm)" class="btn btn-primary">Next</button>
+            <button type="button" (click)="friendAdd(addStudentForm)" class="btn btn-primary">Next</button>
         </div>
     </form>
 </div>
