@@ -3,7 +3,7 @@
         <div>
             <input type="hidden" name="id" #id="ngModel" [(ngModel)]="selectedFriend.id">
             <div>
-                <label class="txt-green add-text-height">Friends:</label>
+                <label class="txt-green add-text-height"><h1 class="txt-blue">Friends</h1></label>
             </div>
             <div class="row input-div">
                 <div class="form-group col-xs-4 d-flex flex-column">
@@ -29,21 +29,19 @@
         <tr>
             <th>Name</th>
             <th>Nickname</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         <tr class="table-striped" *ngFor="let friend of friends" (click)="onFriendClick(friend)">
             <td>{{friend.firstname}} {{friend.lastname}}</td>
             <td>{{friend.nickname}}</td>
             <td>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary" (click)="friendEdit(editFriendForm)">
-            <span class="fa fa-floppy-o"></span><i class="fas fa-pencil-alt"></i></button>
-                </div>
+                <button type="submit" class="btn btn-primary btn-edit" (click)="friendEdit(editFriendForm)">
+          <i class="fa fa-pencil-alt"></i></button>
             </td>
             <td>
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-danger" (click)="friendDelete(editFriendForm)">
-            <span class="fa fa-trash"></span><i class="fa-trash"></i></button>
-                </div>
+                <button type="button" class="btn btn-danger btn-delete" (click)="friendDelete(editFriendForm)">
+          <i class="fa fa-trash"></i></button>
             </td>
         </tr>
     </table>
