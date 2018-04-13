@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'friends-life-management', component: AdminComponent },
   { path: 'availability', component: AvailabilityComponent },
   { path: 'friends-life-management/categories', component: CategoriesComponent },
-  { path: 'activities', component: ActivitiesComponent }
+  { path: 'activities', component: ActivitiesComponent },
   { path: 'friends-life-management/users', component: UsersComponent }
 ];
 
