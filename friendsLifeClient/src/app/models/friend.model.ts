@@ -1,3 +1,7 @@
-/**
- * Created by micahwells on 4/13/18.
- */
+
+export class Friend {
+  id: '';
+  firstname: string = '';
+  lastname: string = '';
+  nickname: string = '';
+}

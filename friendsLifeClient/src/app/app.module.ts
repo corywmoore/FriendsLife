@@ -15,6 +15,7 @@ import { CategoriesComponent } from './admin/categories/categories.component';
 import { UsersComponent } from './admin/users/users.component';
 import { ProfileComponent } from './admin/profile/profile.component';
 import { ActivitiesComponent } from './activities/activities.component';
+import { FriendsComponent } from './admin/friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ActivitiesComponent } from './activities/activities.component';
     UsersComponent,
     ProfileComponent,
     ActivitiesComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,
