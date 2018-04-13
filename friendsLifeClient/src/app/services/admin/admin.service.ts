@@ -36,4 +36,10 @@ export class AdminService {
       });
   }
 
+  logOut() {
+    localStorage.clear();
+    sessionStorage.clear();
+    this.router.navigate(['']);
+  }
+
 }
