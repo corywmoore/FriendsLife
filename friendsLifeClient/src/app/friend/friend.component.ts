@@ -16,9 +16,9 @@ export class FriendComponent implements OnInit {
   friends;
   userName: string;
   friend: string;
-  firstname: string;
-  lastname: string;
-  nickname: string;
+  firstName: string;
+  lastName: string;
+  nickName: string;
 
   constructor(private router: Router, private selection: SelectionService, private adminService : AdminService) { }
 
