@@ -9,10 +9,9 @@ export class AdminService {
 
   getHeaders() {
     const headers = new HttpHeaders()
-        .set('Authorization','B37C60B6C25DC12E3809D89D85A75E92')
+        .set('Authorization','405F3E83BE6F8B217F8D33613897F74C')
         .set('Content-Type',  'application/json');
 
-    console.log("headers", headers);
     return headers;
   }
 

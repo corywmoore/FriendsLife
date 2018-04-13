@@ -3,6 +3,7 @@ import { Router  } from '@angular/router';
 import { SelectionService } from '../services/selection/selection.service';
 import { Friend } from '../models/friend.model';
 
+import { AdminService } from '../services/admin/admin.service';
 @Component({
   selector: 'app-friend',
   templateUrl: './friend.component.html',
@@ -12,21 +13,21 @@ export class FriendComponent implements OnInit {
 
   state: string = '';
   error: any;
-  students = [];
+  friends;
   userName: string;
-  student: string;
+  friend: string;
   firstname: string;
   lastname: string;
   nickname: string;
 
-  constructor(private router: Router, private selection: SelectionService) { }
+  constructor(private router: Router, private selection: SelectionService, private adminService : AdminService) { }
 
   ngOnInit() {
+    this.friends = this.adminService.getFriends();
   }
 
-  studentSelect(formData) {
-    console.log("formData", formData.value);
-    console.log("this", this);
+  friendSelect(formData) {
+    localStorage.setItem('selectedFriend', JSON.stringify(formData.value));
     this.router.navigate(['availability']);
   }
 
