@@ -13,7 +13,6 @@ import { FriendComponent } from './friend/friend.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { CategoriesComponent } from './admin/categories/categories.component';
 import { UsersComponent } from './admin/users/users.component';
-import { ProfileComponent } from './admin/profile/profile.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { SelectionsComponent } from './selections/selections.component';
 import { FriendsComponent } from './admin/friends/friends.component';
@@ -29,7 +28,6 @@ import { AdminService } from './services/admin/admin.service';
     AvailabilityComponent,
     CategoriesComponent,
     UsersComponent,
-    ProfileComponent,
     ActivitiesComponent,
     SelectionsComponent,
     FriendsComponent
