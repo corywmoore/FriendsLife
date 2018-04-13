@@ -16,22 +16,27 @@ export class FriendComponent implements OnInit {
   friends;
   userName: string;
   friend: string;
-  firstname: string;
-  lastname: string;
-  nickname: string;
+  firstName: string;
+  lastName: string;
+  nickName: string;
 
   constructor(private router: Router, private selection: SelectionService, private adminService : AdminService) { }
 
   ngOnInit() {
-    this.friends = this.adminService.getFriends();
+    let user =JSON.parse(localStorage.getItem('user'));
+    this.userName = user.username;
+    this.adminService.getFriends().subscribe(
+      data => {
+        this.friends = data;
+      });
   }
 
-  friendSelect(formData) {
-    localStorage.setItem('selectedFriend', JSON.stringify(formData.value));
+  friendSelect() {
+    localStorage.setItem('selectedFriend', JSON.stringify(this.friend));
     this.router.navigate(['availability']);
   }
 
-  studentAdd(formData) {
+  friendAdd(formData) {
     const friend: Friend = formData.value;
     console.log("formData", formData.value);
     console.log("this", this);
@@ -40,6 +45,6 @@ export class FriendComponent implements OnInit {
       console.log(data);
     });
 
-    this.router.navigate(['availability']);    
+    this.router.navigate(['availability']);
   }
 }

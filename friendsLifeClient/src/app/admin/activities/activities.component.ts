@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminActivitiesComponent implements OnInit {
 
+  public selectedFriend;
+  public addCategoryView;
+
   constructor() { }
 
   ngOnInit() {
+
   }
+
+  addCategory(){}
 
 }

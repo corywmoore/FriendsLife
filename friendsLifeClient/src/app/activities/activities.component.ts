@@ -13,6 +13,7 @@ export class ActivitiesComponent implements OnInit {
   public currentRank = 1;
   public currentSkill: string;
   public warning = false;
+  public selectedFriend;
   public activity: ActivityModel[] = [];
 
   private colors = ['green-activity', 'yellow-activity', 'red-activity'];
@@ -20,6 +21,8 @@ export class ActivitiesComponent implements OnInit {
   constructor(private renderer: Renderer, private ref: ElementRef, private router: Router) { }
 
   ngOnInit() {
+    let friend =JSON.parse(localStorage.getItem('selectedFriend'));
+    this.selectedFriend = friend;
     const imgArr = ['../../assets/cooking-foodprep.png', '../../assets/cooking-kitchentools.png', '../../assets/cooking-shopping.png'];
     let act;
     for (let i = 1; i <= 3; i++) {
@@ -29,7 +32,6 @@ export class ActivitiesComponent implements OnInit {
       act.imgUrl = imgArr[i - 1];
       this.activity.push(act);
     }
-    console.log(this.activity);
   }
 
   public submitActivities() {

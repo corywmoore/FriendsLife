@@ -20,11 +20,7 @@ export class HomeComponent implements OnInit {
   }
 
   next(formData) {
-    console.log("formData", formData.value);
-    console.log("this", this);
-    // debugger;
     this.adminService.logIn(formData.value.username, formData.value.password);
-    // this.router.navigate(['friend']);
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Friend } from '../../models/friend.model';
+import { AdminService } from '../../services/admin/admin.service';
 
 @Component({
   selector: 'app-friends',
@@ -8,14 +9,14 @@ import { Friend } from '../../models/friend.model';
 })
 export class FriendsComponent implements OnInit {
   selectedFriend : Friend = new Friend();
-  friends = [];
-  constructor() { }
+  public friends;
+  constructor(private adminService : AdminService) { }
 
   ngOnInit() {
-    this.friends=[{id: 1,
-      firstname: 'fasfsd',
-      lastname: 'fsdfdsdf',
-      nickname: 'fsafsdfs'}];
+    this.adminService.getFriends().subscribe(
+      data => {
+        this.friends = data;
+      });
   }
 
   onFriendClick(friend) {

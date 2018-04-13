@@ -1,10 +1,10 @@
 <div class="container-fluid">
-  
+
   <h3 class="txt-blue home-header">
     Manage Activities
     <span class="btn btn-primary float-right pointer" (click)="addCategory()">Add Category</span>
   </h3>
-  
+
   <div *ngIf="!addCategoryView">
     <table class="table">
       <thead>
@@ -52,7 +52,7 @@
         <div class="center input-username">
           <input type="text" placeholder="Category" (ngModel)="name" name="name" class="txt">
         </div>
-  
+
         <div>
           <label class="txt-green txt-password">Description</label>
         </div>

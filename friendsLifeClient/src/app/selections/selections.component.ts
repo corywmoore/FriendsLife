@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectionsComponent implements OnInit {
 
+  public selectedFriend;
+
   constructor() { }
 
   ngOnInit() {
+    let friend =JSON.parse(localStorage.getItem('selectedFriend'));
+    this.selectedFriend = friend;
   }
 
 }
