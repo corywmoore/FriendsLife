@@ -10,6 +10,7 @@ export class ActivitiesComponent implements OnInit {
   public activitiesSelection: ActivitySelectionModel[] = [];
   public activities: ActivityModel[] = [];
   public currentRank = 1;
+  public currentSkill: string;
 
   private colors = ['green-activity', 'yellow-activity', 'red-activity'];
   private warning = false;
@@ -55,6 +56,21 @@ export class ActivitiesComponent implements OnInit {
     } 
   }
 
+  public skillClicked($event: any, skill: string) {
+    var els = document.getElementsByClassName('skills');
+    
+    for(var i=els.length-1; i>=0; i--) {
+      for(var j=this.colors.length-1; j>=0; j--) {
+        els[i].classList.remove(this.colors[0]);
+      }
+    }
+
+    var el = ($event.target.classList.contains('card')) ? $event.target : $event.target.parentElement;
+
+    this.currentSkill = skill;
+    this.renderer.setElementClass(el, this.colors[0], true);
+    
+  }
 }
 
 export class ActivityModel {
