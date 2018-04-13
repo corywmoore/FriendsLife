@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdminService } from '../services/admin/admin.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
   username: string = '';
   password: string = '';
 
-  constructor( private router: Router) { }
+  constructor( private router: Router, private adminService : AdminService) { }
 
   ngOnInit() {
   }
@@ -21,7 +22,9 @@ export class HomeComponent implements OnInit {
   next(formData) {
     console.log("formData", formData.value);
     console.log("this", this);
-    this.router.navigate(['friend']);
+    // debugger;
+    this.adminService.logIn(formData.value.username, formData.value.password);
+    // this.router.navigate(['friend']);
   }
 
 }
