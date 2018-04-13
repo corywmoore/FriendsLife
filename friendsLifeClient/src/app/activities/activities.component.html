@@ -1,4 +1,5 @@
-<h3 class="txt-blue home-header">Availability for NAME</h3>
+<h3 class="txt-blue home-header">
+  Availability for NAME</h3>
 <div class="form-container">
   <h4>
     Thank you for choosing Performing Arts.
@@ -14,31 +15,26 @@
   </div>
   <div class="row">
     <div class="col-4">
-      <div class="card">
-        <div class="card-heading">
-          Title
-        </div>
+      <div class="card activity" (click)="activityClicked($event, 1)">
         <div class="card-block">
+          Title
+
           <img src="">
         </div>
       </div>
     </div>
     <div class="col-4">
-      <div class="card">
-        <div class="card-heading">
-          Title
-        </div>
+      <div class="card activity" (click)="activityClicked($event, 2)">
         <div class="card-block">
+          Title
           <img src="">
         </div>
       </div>
     </div>
     <div class="col-4">
-      <div class="card">
-        <div class="card-heading">
-          Title
-        </div>
+      <div class="card activity" (click)="activityClicked($event, 3)">
         <div class="card-block">
+          Title
           <img src="">
         </div>
       </div>
@@ -88,8 +84,8 @@
     </div>
   </div>
   <div class="row">
-      <div class="col-12">
-        <div (click)="resetActivities()">Reset</div>
-      </div>
-    </div>  
+    <div class="col-12">
+      <div (click)="resetActivities()">Reset</div>
+    </div>
+  </div>
 </div>

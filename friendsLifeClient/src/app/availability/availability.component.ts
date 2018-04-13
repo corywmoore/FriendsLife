@@ -35,6 +35,8 @@ export class AvailabilityComponent implements OnInit {
       this.selection.splice(index, 1);
       this.renderer.setElementClass(el, 'green-bg', false);      
     }
+
+    console.log(this.selection);
   }
 
   public validateAndRoute() {
