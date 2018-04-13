@@ -22,20 +22,18 @@ export class AdminService {
       });
   }
 
+  getFriends() {
+    this.http.get('https://mighty-hollows-34327.herokuapp.com/fl/category', {headers: this.getHeaders()}).subscribe(
+      data => {
+        console.log(data);
+      });
+  }
+
   logIn(userId, pw) {
     this.http.get(`https://mighty-hollows-34327.herokuapp.com/login?loginId=${userId}&password=${pw}`, {}).subscribe(
       data => {
         console.log(data);
       });
   }
-
-  getFriends() {
-    this.http.get('https://mighty-hollows-34327.herokuapp.com/fl/friends', {headers: this.getHeaders()}).subscribe(
-      data => {
-        console.log(data);
-      });
-  }
-
-
 
 }
