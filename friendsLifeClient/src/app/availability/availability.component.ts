@@ -41,7 +41,7 @@ export class AvailabilityComponent implements OnInit {
     if(this.selection.length < 1) {
       this.warning = true;
     } else {
-      console.log('route');
+      this.router.navigate(['activities']);
     }
   }
 }

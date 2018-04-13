@@ -14,6 +14,7 @@ import { AvailabilityComponent } from './availability/availability.component';
 import { CategoriesComponent } from './admin/categories/categories.component';
 import { UsersComponent } from './admin/users/users.component';
 import { ProfileComponent } from './admin/profile/profile.component';
+import { ActivitiesComponent } from './activities/activities.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ProfileComponent } from './admin/profile/profile.component';
     CategoriesComponent,
     UsersComponent,
     ProfileComponent,
+    ActivitiesComponent,
   ],
   imports: [
     BrowserModule,

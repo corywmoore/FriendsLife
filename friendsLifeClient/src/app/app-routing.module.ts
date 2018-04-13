@@ -6,13 +6,15 @@ import { FriendComponent } from './friend/friend.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { CategoriesComponent } from './admin/categories/categories.component';
+import { ActivitiesComponent } from './activities/activities.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'friend', component: FriendComponent },
   { path: 'friends-life-management', component: AdminComponent },
   { path: 'availability', component: AvailabilityComponent },
-  { path: 'friends-life-management/categories', component: CategoriesComponent }
+  { path: 'friends-life-management/categories', component: CategoriesComponent },
+  { path: 'activities', component: ActivitiesComponent }
 ];
 
 @NgModule({
