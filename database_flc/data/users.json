@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "username": "test",
+      "password": "3556498",
+      "expiry_date": "10/7/2018"
+    },
+    {
+      "username": "admin1",
+      "password": "-1175873532",
+      "expiry_date": "10/7/2018"
+    },
+    {
+      "username": "admin2",
+      "password": "-1175873532",
+      "expiry_date": "10/7/2018"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ let { categories } = require('./data/categories');
 let { classes } = require('./data/classes');
 let { activities } = require('./data/activities');
 let { days } = require('./data/days');
+let { users } = require('./data/users');
 let { class_days } = require('./data/class_day');
 
 models.sequelize.sync({ force: true }).then(() => {
@@ -22,5 +23,8 @@ models.sequelize.sync({ force: true }).then(() => {
     })
     .then(() => {
       return models.class_days.bulkCreate(class_days);
+    })
+    .then(() => {
+      return models.users.bulkCreate(users);
     });
 });
