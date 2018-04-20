@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Friend } from '../../models/friend.model';
-import { AdminService } from '../../services/admin/admin.service';
+import { FriendService } from '../../services/friend/friend.service';
 
 @Component({
   selector: 'app-friends',
@@ -10,37 +10,47 @@ import { AdminService } from '../../services/admin/admin.service';
 export class FriendsComponent implements OnInit {
   selectedFriend : Friend = new Friend();
   public friends;
-  constructor(private adminService : AdminService) { }
+  constructor(private fs : FriendService) { }
 
   ngOnInit() {
-    // this.adminService.getFriends().subscribe(
-    //   data => {
-    //     this.friends = data;
-    //   });
+    this.fs.getFriends((data)=>{
+      this.friends = data;
+    });
   }
 
   onFriendClick(friend) {
     this.selectedFriend = friend;
   }
 
-  friendEdit(editFriendForm) {
-    this.friends.map((f) => {
-      if (f.id === editFriendForm.value.id) f = editFriendForm.value;
-    });
-
-    this.resetForm();
+  friendEdit(friend) {
+    console.log("friend", friend);
+    this.selectedFriend = friend;
+    // this.friends.map((f) => {
+    //   if (f.id === editFriendForm.value.id) f = editFriendForm.value;
+    // });
+    //
+    // this.resetForm();
   }
 
-  friendDelete(editFriendForm) {
-    let tempArray = [];
-    this.friends.map((f) => {
-      if (f.id != editFriendForm.value.id) tempArray.push(f);
-    });
-    this.friends = tempArray;
-    this.resetForm();
+  friendDelete(friend) {
+    this.fs.deleteFriend(friend.id);
   }
 
   resetForm() {
     this.selectedFriend = new Friend();
+  }
+
+  friendAdd(formData) {
+    console.log("formData", formData.value);
+    this.fs.addFriend(formData.value);
+    // const friend: Friend = formData.value;
+    //
+    // console.log("this", this);
+    //
+    // this.selection.addFriend(friend).subscribe(data => {
+    //   console.log(data);
+    // });
+    //
+    // this.router.navigate(['availability']);
   }
 }
