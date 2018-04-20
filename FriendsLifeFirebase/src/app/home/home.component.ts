@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../services/admin/admin.service';
-import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth/auth.service';
 
 type UserFields = 'email' | 'password';
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
 
   state: string = '';
   error: any;
-  username: string = '';
+  email: string = '';
   password: string = '';
 
   constructor(

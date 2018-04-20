@@ -2,7 +2,7 @@
   Welcome to Friend's Life class selection!
 </h3>
 <div class="form-container">
-  <form #homeForm='ngForm'>
+  <form [formGroup]="userForm">
     <div>
       <label class="txt-green txt-email" for="email">Email</label>
     </div>
@@ -16,7 +16,7 @@
     </div>
     <div class="center input-password">
       <input type="password" placeholder="Password" id="password" formControlName="password" class="txt password">
-      <div *ngIf="formErrors.password" class="alert alert-warning">{{ formErrors.password }}</div>      
+      <div *ngIf="formErrors.password" class="alert alert-warning">{{ formErrors.password }}</div>
     </div>
     <div>
       <button type="button" (ngSubmit)="login()" class="btn btn-primary">Next</button>
