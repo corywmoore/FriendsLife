@@ -5,14 +5,14 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class FriendService {
-  friendsCollection: AngularFirestoreCollection<any>;
+  friendsCollection: AngularFirestoreCollection<any> = this.afs.collection('friends');
   friends: Observable<any[]>;
 
   constructor(private afs : AngularFirestore) { }
 
 
+
   getFriends(cb) {
-    this.friendsCollection = this.afs.collection('friends');
     this.friends = this.friendsCollection.snapshotChanges().map(actions => {
       return actions.map(a=> {
         const data = a.payload.doc.data();
@@ -24,7 +24,15 @@ export class FriendService {
   this.friends.subscribe(data => cb(data));
   }
 
-  addFriend() {
+  addFriend(friend) {
+    this.friendsCollection.add(friend);
+  }
+
+  deleteFriend(friend) {
+    this.friendsCollection.doc(friend).delete();
+  }
+
+  updateFriend(friend) {
 
   }
 }

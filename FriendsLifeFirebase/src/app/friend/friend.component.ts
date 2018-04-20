@@ -40,14 +40,16 @@ export class FriendComponent implements OnInit {
   }
 
   friendAdd(formData) {
-    const friend: Friend = formData.value;
     console.log("formData", formData.value);
-    console.log("this", this);
-
-    this.selection.addFriend(friend).subscribe(data => {
-      console.log(data);
-    });
-
-    this.router.navigate(['availability']);
+    this.fs.addFriend(formData.value);
+    // const friend: Friend = formData.value;
+    //
+    // console.log("this", this);
+    //
+    // this.selection.addFriend(friend).subscribe(data => {
+    //   console.log(data);
+    // });
+    //
+    // this.router.navigate(['availability']);
   }
 }
