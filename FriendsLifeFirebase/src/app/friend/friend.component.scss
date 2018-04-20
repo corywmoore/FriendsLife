@@ -1,0 +1,83 @@
+.center {
+    text-align: center;
+}
+
+.home-header {
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.txt-blue {
+    color: #386387;
+}
+
+.txt-green {
+    color: #65A542;
+}
+
+.btn {
+    background-color: #043967;
+    border-color: #043967;
+    font-color: white;
+    width: 125px;
+    margin-bottom: 30px;
+}
+
+.select-student {
+    margin-bottom: 25px;
+}
+
+.line {
+    width: 700px;
+}
+
+.add-text-height {
+    font-size: 22px;
+}
+
+.sub-student {
+    font-size: 12px;
+}
+
+.txt-input {
+    border: 1px solid grey;
+    border-radius: 6px;
+    width: 150px;
+    height: 40px;
+    margin-right: 15px;
+}
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    padding-left: 10px;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    padding-left: 10px;
+}
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    padding-left: 10px;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    padding-left: 10px;
+}
+
+.add-student-button {
+    margin-top: 30px;
+}
+
+.txt-group {
+    margin-right: 115px;
+    margin-bottom: 1px;
+}
+
+.input-div {
+    margin-left: 1px;
+    display: flex;
+    justify-content: center;
+}

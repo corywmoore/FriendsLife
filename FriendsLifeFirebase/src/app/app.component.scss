@@ -1,0 +1,23 @@
+$fl-green: #7ED321;
+$fl-blue: #003869;
+$fl-grey: #A4A4A4;
+.navbar {
+    padding: 30px;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #386387;
+    text-align: center;
+}
+
+.navbar-logo {
+    padding-left: 10%;
+}

@@ -1,0 +1,47 @@
+<h3 class="txt-blue home-header">
+    Welcome, {{ userName }}!
+</h3>
+<div class="form-container">
+    <form #selectStudentForm='ngForm'>
+        <div>
+            <label class="txt-green txt-student">Please select a student's name:</label>
+        </div>
+        <div class="center input-username">
+            <select class="select-student" id="student" [(ngModel)]="friend" [ngModelOptions]="{standalone: true}">
+        <option *ngFor="let friend of friends" [ngValue]="friend">{{friend.firstName}} {{friend.lastName}}</option>
+      </select>
+        </div>
+        <div>
+            <button type="button" (click)="friendSelect()" class="btn btn-primary">Next</button>
+        </div>
+    </form>
+</div>
+
+<hr class="line">
+
+<div class="form-container">
+    <form #addStudentForm='ngForm'>
+        <div>
+            <label class="txt-green add-text-height">Add a new student:</label>
+            <p class="txt-blue sub-student">Please enter their full name</p>
+        </div>
+        <div class="row input-div">
+            <div class="form-group col-xs-4 d-flex flex-column">
+                <label class="txt-green txt-group">First</label>
+                <input type="text" placeholder="First" (ngModel)="firstName" name="firstName" class="txt txt-input">
+            </div>
+            <div class="form-group col-xs-4 d-flex flex-column">
+                <label class="txt-green txt-group">Last</label>
+                <input type="text" placeholder="Last" (ngModel)="lastName" name="lastName" class="txt txt-input">
+            </div>
+            <div class="form-group col-xs-4 d-flex flex-column">
+                <label class="txt-green txt-group">First</label>
+                <input type="text" placeholder="Nickname" (ngModel)="nickName" name="nickName" class="txt txt-input">
+            </div>
+
+        </div>
+        <div class="add-student-button">
+            <button type="button" (click)="friendAdd(addStudentForm)" class="btn btn-primary">Next</button>
+        </div>
+    </form>
+</div>

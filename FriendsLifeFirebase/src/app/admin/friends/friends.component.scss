@@ -1,0 +1,27 @@
+.input-div {
+    margin-left: 1px;
+    display: flex;
+    justify-content: center;
+}
+
+.txt-group {
+    margin-right: 115px;
+    margin-bottom: 1px;
+}
+
+.txt-input {
+    border: 1px solid grey;
+    border-radius: 6px;
+    width: 150px;
+    height: 40px;
+    margin-right: 15px;
+}
+
+.btn-edit,
+.btn-delete {
+    width: 50px
+}
+
+.txt-blue {
+    color: #386387;
+}

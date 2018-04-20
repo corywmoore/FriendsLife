@@ -1,0 +1,48 @@
+$fl-green: #7ED321;
+$fl-blue: #003869;
+$fl-grey: #A4A4A4;
+$fl-red: #EF0000;
+$fl-yellow: #FFD100;
+
+.selection {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    [class^="col-"] {
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .card {
+        padding-top: 35px;
+        padding-bottom: 35px;
+        margin-bottom: 6px;
+        cursor: pointer;
+        border-radius: 6px; 
+    }
+}
+
+.green-bg {
+    background-color: $fl_green;
+    color: white;
+}
+
+.skills {
+    .card-block {
+        padding: 30px;
+
+        h3 {
+            color: $fl-green;
+            font-weight: 300;
+            small {
+                color: $fl-red;
+                font-size: 14px;
+                font-weight: 300;
+            }
+        }
+
+        ol {
+            padding-left: 18px;
+        }
+    }
+}

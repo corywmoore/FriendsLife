@@ -1,0 +1,67 @@
+<h3 class="txt-blue home-header">
+    Manage Categories
+    <span *ngIf="!addCategoryView" class="btn btn-primary float-right pointer" (click)="addCategory()">Add Category</span>
+</h3>
+
+<div *ngIf="!addCategoryView">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <!--<th scope="col">Description</th>-->
+                <th scope="col">Active</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let category of categories">
+            <tr>
+                <td>{{category.name}}</td>
+                <!--<td>Cook some stuff</td>-->
+                <td *ngIf="!category.active">
+                    <h2 class="red">X</h2>
+                </td>
+                <td *ngIf="category.active">
+                    <h2 class="green">✓</h2>
+                </td>
+            </tr>
+            <!--<tr>-->
+            <!--<td>Art</td>-->
+            <!--<td>Paint some stuff</td>-->
+            <!--<td>-->
+            <!--<h2 class="red">X</h2>-->
+            <!--</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td>Shop</td>-->
+            <!--<td>Build some stuff</td>-->
+            <!--<td>-->
+            <!--<h2 class="green">✓</h2>-->
+            <!--</td>-->
+            <!--</tr>-->
+        </tbody>
+    </table>
+</div>
+<div *ngIf="addCategoryView">
+    <div class="form-container input-main-div">
+        <form #homeForm='ngForm'>
+            <div class="input-div">
+                <label class="txt-green">Category Name</label>
+
+                <div class="center input-username">
+                    <input type="text" placeholder="Category" (ngModel)="name" name="name" class="txt">
+                </div>
+            </div>
+            <div class="input-div">
+                <label class="txt-green txt-password">Description</label>
+                <div class="center">
+                    <input type="text" placeholder="Description" (ngModel)="description" name="description" class="txt">
+                </div>
+            </div>
+            <div class="input-div">
+                <button type="button" class="btn btn-assertive" (click)="submitAddCategory()">Submit</button>
+            </div>
+            <div class="input-div">
+                <button type="reset" class="btn btn-link canc-btn" (click)="cancelAddCategory()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

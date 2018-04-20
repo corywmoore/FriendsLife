@@ -1,0 +1,69 @@
+<div class="container-fluid">
+
+  <h3 class="txt-blue home-header">
+    Manage Activities
+    <span class="btn btn-primary float-right pointer" (click)="addCategory()">Add Category</span>
+  </h3>
+
+  <div *ngIf="!addCategoryView">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Category</th>
+          <th scope="col">Active</th>
+        </tr>
+      </thead>
+      <tbody  >
+        <tr>
+          <td>Microwave</td>
+          <td>Cooking</td>
+          <h2 class="red">X</h2>
+          <!-- <td *ngIf="!category.active">
+            <h2 class="red">X</h2>
+          </td>
+          <td *ngIf="category.active">
+            <h2 class="green">✓</h2>
+          </td> -->
+        </tr>
+        <!--<tr>-->
+          <!--<td>Art</td>-->
+          <!--<td>Paint some stuff</td>-->
+          <!--<td>-->
+            <!--<h2 class="red">X</h2>-->
+          <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>Shop</td>-->
+          <!--<td>Build some stuff</td>-->
+          <!--<td>-->
+            <!--<h2 class="green">✓</h2>-->
+          <!--</td>-->
+        <!--</tr>-->
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="addCategoryView">
+    <div class="form-container">
+      <form #homeForm='ngForm'>
+        <div>
+          <label class="txt-green">Category Name</label>
+        </div>
+        <div class="center input-username">
+          <input type="text" placeholder="Category" (ngModel)="name" name="name" class="txt">
+        </div>
+
+        <div>
+          <label class="txt-green txt-password">Description</label>
+        </div>
+        <div class="center">
+          <input type="text" placeholder="Description" (ngModel)="description" name="description" class="txt">
+        </div>
+        <div>
+          <button type="button" class="btn btn-outline-secondary" (click)="cancelAddCategory()">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="submitAddCategory()">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
