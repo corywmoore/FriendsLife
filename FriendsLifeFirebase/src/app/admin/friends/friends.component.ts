@@ -13,10 +13,10 @@ export class FriendsComponent implements OnInit {
   constructor(private adminService : AdminService) { }
 
   ngOnInit() {
-    this.adminService.getFriends().subscribe(
-      data => {
-        this.friends = data;
-      });
+    // this.adminService.getFriends().subscribe(
+    //   data => {
+    //     this.friends = data;
+    //   });
   }
 
   onFriendClick(friend) {

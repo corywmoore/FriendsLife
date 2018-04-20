@@ -23,10 +23,6 @@ export class AdminService {
 
   }
 
-  getFriends(): Observable <any> {
-    return this.http.get('https://mighty-hollows-34327.herokuapp.com/fl/friends', {headers: this.getHeaders()});
-  }
-
   logIn(userId, pw) {
     this.http.post(`https://mighty-hollows-34327.herokuapp.com/login?loginId=${userId}&password=${pw}`, {}).subscribe(
       (data:any)=> {

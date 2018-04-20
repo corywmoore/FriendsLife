@@ -4,12 +4,12 @@
 <div class="form-container">
     <form #selectStudentForm='ngForm'>
         <div>
-            <label class="txt-green txt-student">Please select a student's name:</label>
+            <label class="txt-green txt-student add-text-height">Please select a student's name:</label>
         </div>
         <div class="center input-username">
-            <select class="select-student" id="student" [(ngModel)]="friend" [ngModelOptions]="{standalone: true}">
-        <option *ngFor="let friend of friends" [ngValue]="friend">{{friend.firstName}} {{friend.lastName}}</option>
-      </select>
+            <select class="select-student selectpicker" id="student" [(ngModel)]="friend" [ngModelOptions]="{standalone: true}">
+              <option *ngFor="let friend of friends" [ngValue]="friend">{{friend.firstName}} {{friend.lastName}}</option>
+            </select>
         </div>
         <div>
             <button type="button" (click)="friendSelect()" class="btn btn-primary">Next</button>

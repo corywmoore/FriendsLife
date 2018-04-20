@@ -20,6 +20,7 @@ import { AdminActivitiesComponent } from './admin/activities/activities.componen
 import { HttpClientModule } from '@angular/common/http';
 import { AdminService } from './services/admin/admin.service';
 import { SelectionService } from './services/selection/selection.service';
+import { FriendService } from './services/friend/friend.service';
 import { CategoriesComponent } from './categories/categories.component';
 import { AuthModule } from './services/auth/auth.module';
 import { NotificationModule } from './services/notification/notification.module';
@@ -55,7 +56,7 @@ export const firebaseConfig = environment.firebaseConfig;
     AngularFireModule.initializeApp(firebaseConfig),
     ReactiveFormsModule
   ],
-  providers: [AdminService, SelectionService],
+  providers: [AdminService, SelectionService, FriendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

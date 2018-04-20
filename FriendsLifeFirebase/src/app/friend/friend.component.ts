@@ -3,7 +3,7 @@ import { Router  } from '@angular/router';
 import { SelectionService } from '../services/selection/selection.service';
 import { Friend } from '../models/friend.model';
 
-import { AdminService } from '../services/admin/admin.service';
+import { FriendService } from '../services/friend/friend.service';
 @Component({
   selector: 'app-friend',
   templateUrl: './friend.component.html',
@@ -20,15 +20,18 @@ export class FriendComponent implements OnInit {
   lastName: string;
   nickName: string;
 
-  constructor(private router: Router, private selection: SelectionService, private adminService : AdminService) { }
+  constructor(private router: Router, private selection: SelectionService, private fs : FriendService) { }
 
   ngOnInit() {
-    let user =JSON.parse(localStorage.getItem('user'));
-    this.userName = user.username;
-    this.adminService.getFriends().subscribe(
-      data => {
-        this.friends = data;
-      });
+    // let user =JSON.parse(localStorage.getItem('user'));
+    // this.userName = user.username;
+    // this.adminService.getFriends().subscribe(
+    //   data => {
+    //     this.friends = data;
+    //   });
+    this.fs.getFriends((data)=>{
+      this.friends = data;
+    });
   }
 
   friendSelect() {
