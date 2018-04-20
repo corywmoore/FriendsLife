@@ -8,8 +8,12 @@ import { AdminService } from './services/admin/admin.service';
 })
 export class AppComponent {
   title = 'app';
-
+  public user;
+  public localStorage = localStorage;
   constructor(private adminService : AdminService) { }
+
+  ngOnInit() {
+  }
 
   logOut() {
     this.adminService.logOut();

@@ -10,14 +10,36 @@ $fl-grey: #A4A4A4;
 }
 
 .footer {
+    display: flex;
+    justify-content: center;
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
     color: #386387;
-    text-align: center;
+    text-align: right;
+    padding-top: 10px;
+    p {
+        padding-top: 10px;
+        width: 50%;
+        align-content: left;
+        padding-right: 10%;
+    }
+    button {
+        margin-right: 1%;
+        margin-left: 1%;
+        width: 10%;
+        height: 10%;
+    }
 }
 
 .navbar-logo {
     padding-left: 10%;
+}
+
+.link-btn {
+    color: #28a745;
+    background-color: transparent;
+    background-image: none;
+    border-color: #28a745;
 }

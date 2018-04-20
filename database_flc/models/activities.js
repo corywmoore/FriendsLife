@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   var activities = sequelize.define(
     'activities',
     {
-      picture: DataTypes.BLOB,
+      picture: DataTypes.STRING,
       name: DataTypes.STRING,
       description: DataTypes.STRING,
       active: DataTypes.BOOLEAN

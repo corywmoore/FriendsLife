@@ -1,24 +1,23 @@
 <h3 class="txt-blue home-header">
-  Welcome to Friend's Life class selection!
+    Welcome to Friend's Life preference assessment!
 </h3>
 <div class="form-container">
-  <form #homeForm='ngForm'>
-    <div>
-      <label class="txt-green txt-username">Username</label>
-    </div>
-    <div class="center input-username">
-      <input type="text" placeholder="Username" (ngModel)="username" name="username" class="txt username">
-    </div>
+    <form #homeForm='ngForm'>
+        <div>
+            <label class="txt-green txt-username">Username</label>
+        </div>
+        <div class="center input-username">
+            <input type="text" placeholder="Username" (ngModel)="username" name="username" class="txt username">
+        </div>
 
-    <div>
-      <label class="txt-green txt-password">Password</label>
-    </div>
-    <div class="center input-password">
-      <input type="text" placeholder="Password" (ngModel)="password" name="password" class="txt password">
-    </div>
-    <div>
-      <button type="button" (click)="next(homeForm)" class="btn btn-primary">Next</button>
-    </div>
-  </form>
+        <div>
+            <label class="txt-green txt-password">Password</label>
+        </div>
+        <div class="center input-password">
+            <input type="text" placeholder="Password" (ngModel)="password" name="password" class="txt password">
+        </div>
+        <div>
+            <button type="button" (click)="next(homeForm)" class="btn btn-primary">Next</button>
+        </div>
+    </form>
 </div>
-

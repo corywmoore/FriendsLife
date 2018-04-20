@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     'classes',
     {
       name: DataTypes.STRING,
-      picture: DataTypes.BLOB
+      picture: DataTypes.STRING
     },
     {}
   );
