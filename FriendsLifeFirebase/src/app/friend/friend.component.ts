@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router  } from '@angular/router';
 import { SelectionService } from '../services/selection/selection.service';
 import { Friend } from '../models/friend.model';
+import { NgForm } from '@angular/forms';
 
 import { FriendService } from '../services/friend/friend.service';
 @Component({
@@ -23,12 +24,6 @@ export class FriendComponent implements OnInit {
   constructor(private router: Router, private selection: SelectionService, private fs : FriendService) { }
 
   ngOnInit() {
-    // let user =JSON.parse(localStorage.getItem('user'));
-    // this.userName = user.username;
-    // this.adminService.getFriends().subscribe(
-    //   data => {
-    //     this.friends = data;
-    //   });
     this.fs.getFriends((data)=>{
       this.friends = data;
     });
@@ -39,5 +34,19 @@ export class FriendComponent implements OnInit {
     this.router.navigate(['availability']);
   }
 
+  friendAdd(friend) {
+    this.fs.addFriend(friend.value);
+    this.resetForm(friend);
+  }
+
+  resetForm(form? : NgForm) {
+    if (form != null) {
+      form.reset();
+    }
+
+    this.firstName = '';
+    this.lastName = '';
+    this.nickName = '';
+  }
 
 }
