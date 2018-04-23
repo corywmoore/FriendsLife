@@ -1,6 +1,6 @@
 
 export class Friend {
-  id: '';
+  id = null;
   firstName: string = '';
   lastName: string = '';
   nickName: string = '';

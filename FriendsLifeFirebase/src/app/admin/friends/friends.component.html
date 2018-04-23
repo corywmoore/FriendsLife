@@ -5,6 +5,7 @@
                 <label class="txt-green add-text-height"><h1 class="txt-blue">Friends</h1></label>
             </div>
             <div class="row input-div">
+              <input type="hidden" name="id" #id="ngModel" [(ngModel)]="selectedFriend.id">
                 <div class="form-group col-xs-4 d-flex flex-column">
                     <label class="txt-green txt-group">Firstname</label>
                     <input type="text" placeholder="Firstname" [(ngModel)]="selectedFriend.firstName" name="firstName" class="txt txt-input">
@@ -17,8 +18,11 @@
                     <label class="txt-green txt-group">Nickname</label>
                     <input type="text" placeholder="Nickname" [(ngModel)]="selectedFriend.nickName" name="nickName" class="txt txt-input">
                 </div>
-              <div class="add-student-button">
+              <div class="add-student-button" *ngIf ="selectedFriend.id == null">
                 <button type="button" (click)="friendAdd(editFriendForm)" class="btn btn-primary">Add Student</button>
+              </div>
+              <div class="add-student-button" *ngIf ="selectedFriend.id != null">
+                <button type="button" (click)="friendEdit(editFriendForm)" class="btn btn-success">Save Changes</button>
               </div>
             </div>
 
@@ -34,26 +38,13 @@
             <th>Edit</th>
             <th>Delete</th>
         </tr>
-        <tr class="table-striped" *ngFor="let friend of friends; let i = index">
+        <tr class="table-striped" *ngFor="let friend of friends;">
             <td>{{friend.firstName}} {{friend.lastName}}</td>
             <td>{{friend.nickName}}</td>
-          <td *ngIf ="selectedFriend.id != null">
-            <input type="text" placeholder="Firstname" [(ngModel)]="selectedFriend.firstName" name="firstName" class="txt txt-input">
-          </td>
-          <td *ngIf ="selectedFriend.id != null">
-            <input type="text" placeholder="Lastname" [(ngModel)]="selectedFriend.lastName" name="lastName" class="txt txt-input">
-          </td>
-          <td *ngIf ="selectedFriend.id != null">
-            <input type="text" placeholder="Nickname" [(ngModel)]="selectedFriend.nickName" name="nickName" class="txt txt-input">
-          </td>
-            <td *ngIf ="selectedFriend.id == null">
-                <button type="submit" class="btn btn-primary btn-edit" (click)="friendEdit(friend)">
+            <td>
+                <button type="submit" class="btn btn-primary btn-edit" (click)="onFriendClick(friend)">
           <i class="fa fa-pencil-alt"></i></button>
             </td>
-          <td *ngIf ="selectedFriend.id != null">
-            <button type="submit" class="btn btn-success btn-edit" (click)="saveChanges()">
-              <i class="fa fa-check-square"></i></button>
-          </td>
             <td>
                 <button type="button" class="btn btn-danger btn-delete" (click)="friendDelete(friend)">
           <i class="fa fa-trash"></i></button>

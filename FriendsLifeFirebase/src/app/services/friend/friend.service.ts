@@ -25,7 +25,11 @@ export class FriendService {
   }
 
   addFriend(friend) {
-    this.friendsCollection.add(friend);
+    this.friendsCollection.add({
+      firstName: friend.firstName,
+      lastName: friend.lastName,
+      nickName: friend.nickName
+    });
   }
 
   deleteFriend(friend) {
@@ -33,6 +37,10 @@ export class FriendService {
   }
 
   updateFriend(friend) {
-
+    this.friendsCollection.doc(friend.id).update({
+        "firstName": friend.firstName,
+        "lastName": friend.lastName,
+        "nickName": friend.nickName
+    });
   }
 }

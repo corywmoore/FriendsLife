@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Friend } from '../../models/friend.model';
 import { FriendService } from '../../services/friend/friend.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-friends',
@@ -19,38 +20,27 @@ export class FriendsComponent implements OnInit {
   }
 
   onFriendClick(friend) {
-    this.selectedFriend = friend;
+    this.selectedFriend = Object.assign({},friend);
   }
 
   friendEdit(friend) {
-    console.log("friend", friend);
-    this.selectedFriend = friend;
-    // this.friends.map((f) => {
-    //   if (f.id === editFriendForm.value.id) f = editFriendForm.value;
-    // });
-    //
-    // this.resetForm();
+    this.fs.updateFriend(friend.value);
+    this.resetForm(friend);
   }
 
   friendDelete(friend) {
     this.fs.deleteFriend(friend.id);
   }
 
-  resetForm() {
-    this.selectedFriend = new Friend();
+  friendAdd(friend) {
+    this.fs.addFriend(friend.value);
+    this.resetForm(friend);
   }
 
-  friendAdd(formData) {
-    console.log("formData", formData.value);
-    this.fs.addFriend(formData.value);
-    // const friend: Friend = formData.value;
-    //
-    // console.log("this", this);
-    //
-    // this.selection.addFriend(friend).subscribe(data => {
-    //   console.log(data);
-    // });
-    //
-    // this.router.navigate(['availability']);
+  resetForm(form? : NgForm) {
+    if (form != null) {
+      form.reset();
+    }
+    this.selectedFriend = Object.assign({},new Friend());
   }
 }
