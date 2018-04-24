@@ -8,6 +8,7 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
 import { NotificationService } from '../notification/notification.service';
+import { ReplaySubject } from 'rxjs';
 
 interface User {
   uid: string;
@@ -20,14 +21,17 @@ interface User {
 export class AuthService {
 
   user: Observable<User | null>;
+  isLoggedIn = false;
+  userUpdated = new ReplaySubject(1);
 
   constructor(private afAuth: AngularFireAuth,
-              private afs: AngularFirestore,
-              private router: Router,
-              private notify: NotificationService) {
+    private afs: AngularFirestore,
+    private router: Router,
+    private notify: NotificationService) {
 
     this.user = this.afAuth.authState
       .switchMap((user) => {
+        this.userUpdated.next(null);
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
@@ -44,7 +48,7 @@ export class AuthService {
         this.notify.update('Welcome to Firestarter!!!', 'success')
         return this.updateUserData(user); // if using firestore
       })
-      .catch((error) => this.handleError(error) );
+      .catch((error) => this.handleError(error));
   }
 
   // Sends email allowing user to reset password
@@ -58,7 +62,9 @@ export class AuthService {
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
-        this.router.navigate(['/']);
+      this.isLoggedIn = false;
+      this.userUpdated.next(this.isLoggedIn);
+      this.router.navigate(['/']);
     });
   }
 
@@ -70,6 +76,9 @@ export class AuthService {
 
   // Sets user data to firestore after succesful login
   private updateUserData(user: User) {
+
+    this.isLoggedIn = true;
+    this.userUpdated.next(this.isLoggedIn);
 
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 

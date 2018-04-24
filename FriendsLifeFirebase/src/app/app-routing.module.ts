@@ -11,22 +11,24 @@ import { ActivitiesComponent } from './activities/activities.component';
 import { SelectionsComponent } from './selections/selections.component';
 import { FriendsComponent } from './admin/friends/friends.component';
 import { AdminActivitiesComponent } from './admin/activities/activities.component';
-import { CategoriesComponent  } from './categories/categories.component';
+import { CategoriesComponent } from './categories/categories.component';
+
+import { AuthGuard } from './services/auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'friend', component: FriendComponent },
-  { path: 'friends-life-management', component: AdminComponent },
-  { path: 'availability', component: AvailabilityComponent },
-  { path: 'friends-life-management/categories', component: AdminCategoriesComponent },
-  { path: 'activities', component: ActivitiesComponent },
-  { path: 'friends-life-management/users', component: UsersComponent },
-  { path: 'selections', component: SelectionsComponent },
-  { path: 'friends-life-management/friends', component: FriendsComponent },
-  { path: 'friends-life-management/activities', component: AdminActivitiesComponent },
-  { path: 'categories', component: CategoriesComponent },
-  
-  
+  { path: 'friends-life-management', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'friend', component: FriendComponent, canActivate: [AuthGuard] },
+  { path: 'availability', component: AvailabilityComponent, canActivate: [AuthGuard] },
+  { path: 'activities', component: ActivitiesComponent, canActivate: [AuthGuard] },
+  { path: 'selections', component: SelectionsComponent, canActivate: [AuthGuard] },
+  { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
+  { path: 'friends-life-management/categories', component: AdminCategoriesComponent, canActivate: [AuthGuard] },
+  { path: 'friends-life-management/users', component: UsersComponent, canActivate: [AuthGuard] },
+  { path: 'friends-life-management/friends', component: FriendsComponent, canActivate: [AuthGuard] },
+  { path: 'friends-life-management/activities', component: AdminActivitiesComponent, canActivate: [AuthGuard] },
+
+
 ];
 
 @NgModule({

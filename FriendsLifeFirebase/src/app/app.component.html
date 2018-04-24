@@ -4,7 +4,7 @@
     <div class="navbar-logo mx-auto">
       <img src="/assets/FLC_Logo.png" width="140" height="109" alt="">
     </div>
-    <form class="form-inline float-right">
+    <form class="form-inline float-right" *ngIf="isLoggedIn">
       <button class="btn btn-outline-secondary my-2 my-sm-0" (click)="logOut()" type="submit">Logout</button>
     </form>
   </nav>

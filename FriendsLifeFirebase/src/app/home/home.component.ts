@@ -56,7 +56,15 @@ export class HomeComponent implements OnInit {
 
 
   login() {
-    this.auth.emailLogin(this.userForm.value['email'], this.userForm.value['password']);
+    console.log('start login');
+    this.auth.emailLogin(this.userForm.value['email'], this.userForm.value['password'])
+      .then(user => {
+        console.log('end login');
+        this.router.navigate(['friend']);
+      }).catch(err => {
+        console.log('end login');
+        console.log(err);
+      });
   }
 
   resetPassword() {

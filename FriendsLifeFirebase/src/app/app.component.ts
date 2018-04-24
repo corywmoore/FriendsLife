@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AdminService } from './services/admin/admin.service';
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +8,17 @@ import { AdminService } from './services/admin/admin.service';
 })
 export class AppComponent {
   title = 'app';
+  isLoggedIn = false;
 
-  constructor(private adminService : AdminService) { }
+  private onUserUpdated: any;
+
+  constructor(private auth: AuthService) { 
+    this.onUserUpdated = this.auth.userUpdated.subscribe(() => {
+      this.isLoggedIn = this.auth.isLoggedIn;
+    });
+  }
 
   logOut() {
-    this.adminService.logOut();
+    this.auth.signOut();
   }
 }
