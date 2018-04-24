@@ -19,25 +19,25 @@ export class FriendsComponent implements OnInit {
     });
   }
 
-  onFriendClick(friend) {
+  public onFriendClick(friend) {
     this.selectedFriend = Object.assign({},friend);
   }
 
-  friendEdit(friend) {
+  public friendEdit(friend) {
     this.fs.updateFriend(friend.value);
     this.resetForm(friend);
   }
 
-  friendDelete(friend) {
+  public friendDelete(friend) {
     this.fs.deleteFriend(friend.id);
   }
 
-  friendAdd(friend) {
+  public friendAdd(friend) {
     this.fs.addFriend(friend.value);
     this.resetForm(friend);
   }
 
-  resetForm(form? : NgForm) {
+  private resetForm(form? : NgForm) {
     if (form != null) {
       form.reset();
     }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../models/category.model';
-// import { AdminService } from '../../services/admin/admin.service';
-// import {Observable} from 'rxjs/Observble';
+import { CategoryService } from '../../services/category/category.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-categories',
@@ -14,29 +14,36 @@ export class AdminCategoriesComponent implements OnInit {
   selectedCategory : Category = new Category();
   public addCategoryView: boolean = false;
 
-  constructor() { }
+  constructor(private cs : CategoryService) { }
 
   ngOnInit() {
-    // this.addCategoryView = false;
-    // this.adminService.getCategories().subscribe(
-    //   data => {
-    //     this.categories = data;
-    //   });
+    this.cs.getFriends((data)=>{
+      this.categories = data;
+    });
   }
 
-  public addCategory() {
-    this.addCategoryView = true;
+  public onCategoryClick(category) {
+    this.selectedCategory = Object.assign({},category);
   }
 
-  public cancelAddCategory() {
-
-    this.addCategoryView = false;
-
+  public categoryAdd(category) {
+    this.cs.addCategory(category.value);
+    this.resetForm(category);
   }
 
-  public submitAddCategory() {
+  public categoryEdit(category) {
+    this.cs.updateCategory(category.value);
+    this.resetForm(category);
+  }
 
+  public categoryDelete(category) {
+    this.cs.deleteCategory(category.id);
+  }
 
-    this.addCategoryView = false;
+  private resetForm(form? : NgForm) {
+    if (form != null) {
+      form.reset();
+    }
+    this.selectedCategory = Object.assign({},new Category());
   }
 }
