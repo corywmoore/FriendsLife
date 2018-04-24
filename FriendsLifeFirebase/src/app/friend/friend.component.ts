@@ -21,7 +21,7 @@ export class FriendComponent implements OnInit {
   lastName: string;
   nickName: string;
 
-  constructor(private router: Router, private selection: SelectionService, private fs : FriendService) { }
+  constructor(private router: Router, private fs : FriendService) { }
 
   ngOnInit() {
     this.fs.getFriends((data)=>{

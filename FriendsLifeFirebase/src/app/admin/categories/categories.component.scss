@@ -20,3 +20,30 @@
     background-color: white;
     border-color: white;
 }
+
+.txt-group {
+  margin-right: 115px;
+  margin-bottom: 1px;
+}
+
+.txt-input {
+  border: 1px solid grey;
+  border-radius: 6px;
+  width: 150px;
+  height: 40px;
+  margin-right: 15px;
+  padding-left: 10px;
+}
+
+.btn-edit,
+.btn-delete {
+  width: 50px
+}
+
+.txt-blue {
+  color: #386387;
+}
+
+.add-cat-button {
+  margin-top: 25px;
+}
