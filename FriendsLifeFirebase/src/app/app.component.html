@@ -13,5 +13,18 @@
 </div>
 
 <footer class="footer bg-light">
-  <p>Friends Life Community</p>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 offset-sm-3 text-center">
+          Friends Life Community
+      </div>
+      <div class="col-sm-3 text-left" *ngIf="isLoggedIn">
+          <div class="float-right mr-5">
+            <a routerLink="/friends-life-management">Admin</a>
+            |
+            <a routerLink="/friend">Home</a>
+          </div>
+      </div>
+    </div>
+  </div>
 </footer>
