@@ -4,6 +4,8 @@
 /tmp
 /out-tsc
 /dist
+firebase-debug.log
+
 
 # dependencies
 /node_modules
