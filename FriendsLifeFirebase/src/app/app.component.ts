@@ -12,9 +12,9 @@ export class AppComponent {
 
   private onUserUpdated: any;
 
-  constructor(private auth: AuthService) { 
-    this.onUserUpdated = this.auth.userUpdated.subscribe(() => {
-      this.isLoggedIn = this.auth.isLoggedIn;
+  constructor(private auth: AuthService) {
+    this.auth.user.subscribe(user => {
+      this.isLoggedIn = !!user && !!user.uid;
     });
   }
 

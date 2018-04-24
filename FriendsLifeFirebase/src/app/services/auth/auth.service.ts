@@ -21,8 +21,6 @@ interface User {
 export class AuthService {
 
   user: Observable<User | null>;
-  isLoggedIn = false;
-  userUpdated = new ReplaySubject(1);
 
   constructor(private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -31,7 +29,6 @@ export class AuthService {
 
     this.user = this.afAuth.authState
       .switchMap((user) => {
-        this.userUpdated.next(null);
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
@@ -62,8 +59,6 @@ export class AuthService {
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
-      this.isLoggedIn = false;
-      this.userUpdated.next(this.isLoggedIn);
       this.router.navigate(['/']);
     });
   }
@@ -76,10 +71,6 @@ export class AuthService {
 
   // Sets user data to firestore after succesful login
   private updateUserData(user: User) {
-
-    this.isLoggedIn = true;
-    this.userUpdated.next(this.isLoggedIn);
-
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
     const data: User = {

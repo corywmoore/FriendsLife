@@ -1,13 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="container-fluid">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
-    <div class="navbar-logo mx-auto">
-      <img src="/assets/FLC_Logo.png" width="140" height="109" alt="">
-    </div>
-    <form class="form-inline float-right" *ngIf="isLoggedIn">
-      <button class="btn btn-outline-secondary my-2 my-sm-0" (click)="logOut()" type="submit">Logout</button>
-    </form>
+<div class="container-fluid header">
+  <nav class="navbar navbar-expand-lg navbar-light w-100 text-right">
+    <a *ngIf="isLoggedIn" class="nav-link pointer ml-auto" (click)="logOut()">Logout</a>
   </nav>
+  <div class="jumbotron text-center">
+    <img src="/assets/FLC_Logo.png" width="140" height="109" alt="">
+  </div>
 </div>
 
 <div style="text-align:center">
@@ -17,5 +15,3 @@
 <footer class="footer bg-light">
   <p>Friends Life Community</p>
 </footer>
-
-

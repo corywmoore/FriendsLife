@@ -1,3 +1,5 @@
+@import "../../scss/custom-variables";
+
 .center {
     text-align: center;
 }
@@ -16,9 +18,9 @@
 }
 
 .btn {
-    background-color: #043967;
-    border-color: #043967;
-    font-color: white;
+    background-color: $fl-blue;
+    border-color: $fl-blue;
+    color: white;
     width: 125px;
     margin-bottom: 30px;
 }
@@ -42,7 +44,7 @@
 }
 
 .txt-input {
-    border: 1px solid grey;
+    border: 1px solid $fl-grey;
     border-radius: 6px;
     width: 150px;
     height: 40px;

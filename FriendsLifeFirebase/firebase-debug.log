@@ -1,0 +1,64 @@
+[debug] [2018-04-24T21:03:51.312Z] ----------------------------------------------------------------------
+[debug] [2018-04-24T21:03:51.314Z] Command:       /Users/cory/.nvm/versions/node/v9.8.0/bin/node /Users/cory/.nvm/versions/node/v9.8.0/bin/firebase serve
+[debug] [2018-04-24T21:03:51.315Z] CLI Version:   3.18.4
+[debug] [2018-04-24T21:03:51.315Z] Platform:      darwin
+[debug] [2018-04-24T21:03:51.315Z] Node Version:  v9.8.0
+[debug] [2018-04-24T21:03:51.315Z] Time:          Tue Apr 24 2018 16:03:51 GMT-0500 (CDT)
+[debug] [2018-04-24T21:03:51.315Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-24T21:03:51.327Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-24T21:03:51.327Z] > authorizing via signed-in user
+[debug] [2018-04-24T21:03:51.329Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/friendslife-b3cda  
+  
+ Tue Apr 24 2018 16:03:51 GMT-0500 (CDT)
+[debug] [2018-04-24T21:03:51.660Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-24T21:03:51.660Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/friendslife-b3cda/tokens  
+  
+ Tue Apr 24 2018 16:03:51 GMT-0500 (CDT)
+[debug] [2018-04-24T21:03:52.086Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-24T21:03:52.088Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/friendslife-b3cda  
+  
+ Tue Apr 24 2018 16:03:52 GMT-0500 (CDT)
+[debug] [2018-04-24T21:03:52.373Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/cory/Development/FriendsLife/FriendsLifeFirebase'...
+[info] 
+[debug] [2018-04-24T21:03:52.375Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/631956229203/clients/_:getWebAppConfig  
+  
+ Tue Apr 24 2018 16:03:52 GMT-0500 (CDT)
+[debug] [2018-04-24T21:03:52.906Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist
+[info] ✔  hosting: Local server: http://localhost:5000
+
+[debug] [2018-04-24T21:08:12.626Z] ----------------------------------------------------------------------
+[debug] [2018-04-24T21:08:12.629Z] Command:       /Users/cory/.nvm/versions/node/v9.8.0/bin/node /Users/cory/.nvm/versions/node/v9.8.0/bin/firebase serve
+[debug] [2018-04-24T21:08:12.629Z] CLI Version:   3.18.4
+[debug] [2018-04-24T21:08:12.629Z] Platform:      darwin
+[debug] [2018-04-24T21:08:12.629Z] Node Version:  v9.8.0
+[debug] [2018-04-24T21:08:12.630Z] Time:          Tue Apr 24 2018 16:08:12 GMT-0500 (CDT)
+[debug] [2018-04-24T21:08:12.630Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-24T21:08:12.640Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-24T21:08:12.641Z] > authorizing via signed-in user
+[debug] [2018-04-24T21:08:12.643Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/friendslife-b3cda  
+  
+ Tue Apr 24 2018 16:08:12 GMT-0500 (CDT)
+[debug] [2018-04-24T21:08:12.994Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-24T21:08:12.995Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/friendslife-b3cda/tokens  
+  
+ Tue Apr 24 2018 16:08:12 GMT-0500 (CDT)
+[debug] [2018-04-24T21:08:13.517Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-24T21:08:13.518Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/friendslife-b3cda  
+  
+ Tue Apr 24 2018 16:08:13 GMT-0500 (CDT)
+[debug] [2018-04-24T21:08:13.809Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/cory/Development/FriendsLife/FriendsLifeFirebase'...
+[info] 
+[debug] [2018-04-24T21:08:13.811Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/631956229203/clients/_:getWebAppConfig  
+  
+ Tue Apr 24 2018 16:08:13 GMT-0500 (CDT)
+[debug] [2018-04-24T21:08:14.142Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist
+[info] ✔  hosting: Local server: http://localhost:5000
+

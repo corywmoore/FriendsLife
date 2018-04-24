@@ -1,8 +1,5 @@
-$fl-green: #7ED321;
-$fl-blue: #003869;
-$fl-grey: #A4A4A4;
-$fl-red: #EF0000;
-$fl-yellow: #FFD100;
+@import "../../scss/custom-variables";
+
 .green-activity {
     background-color: $fl-green;
     color: #fff;
