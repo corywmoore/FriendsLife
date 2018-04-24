@@ -1,4 +1,4 @@
-<h3 class="txt-blue home-header">Availability for {{selectedFriend.firstName}} {{selectedFriend.lastName}}</h3>
+<h3 class="txt-blue home-header" *ngIf="selectedFriend && selectedFriend.firstName && selectedFriend.lastName">Availability for {{selectedFriend.firstName}} {{selectedFriend.lastName}}</h3>
 <div class="form-container">
   <h4>Please select the availability days and times:</h4>
 </div>

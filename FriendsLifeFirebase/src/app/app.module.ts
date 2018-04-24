@@ -51,7 +51,7 @@ export const firebaseConfig = environment.firebaseConfig;
     FormsModule,
     NgbModule.forRoot(),
     HttpClientModule,
-    AuthModule,
+    AuthModule.forRoot(),
     NotificationModule,
     AngularFireModule.initializeApp(firebaseConfig),
     ReactiveFormsModule
