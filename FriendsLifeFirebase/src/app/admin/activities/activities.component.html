@@ -15,7 +15,7 @@
         <!--</div>-->
         <div class="center input-username">
           <label for="category" class="txt-green cat-select">Select Category</label>
-            <select class="select-student selectpicker" id="category" [(ngModel)]="selectedCategory" [ngModelOptions]="{standalone: true}">
+            <select class="select-student selectpicker" id="category" [(ngModel)]="selectedCategory" [ngModelOptions]="{standalone: true}" (ngModelChange)="categoryChange($event)">
               <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
             </select>
         </div>

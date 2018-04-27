@@ -27,6 +27,10 @@ export class AdminActivitiesComponent implements OnInit {
     this.selectedActivity = Object.assign({},act);
   }
 
+  public categoryChange(e) {
+    this.resetForm();
+  }
+
   public  activityAdd(cat, act){
     if (cat.activities == undefined ) {
       cat.activities = [];
