@@ -10,14 +10,14 @@ import { NgForm } from '@angular/forms';
 })
 export class AdminCategoriesComponent implements OnInit {
 
-  categories;
-  selectedCategory : Category = new Category();
+  public categories;
+  public selectedCategory : Category = new Category();
   public addCategoryView: boolean = false;
 
   constructor(private cs : CategoryService) { }
 
   ngOnInit() {
-    this.cs.getFriends((data)=>{
+    this.cs.getCategories((data)=>{
       this.categories = data;
     });
   }

@@ -11,7 +11,7 @@ export class CategoryService {
 
   constructor(private afs : AngularFirestore) { }
 
-  getFriends(cb) {
+  getCategories(cb) {
     this.categories = this.categoriesCollection.snapshotChanges().map(actions => {
       return actions.map(a=> {
         const data = a.payload.doc.data();
@@ -37,7 +37,21 @@ export class CategoryService {
   updateCategory(category) {
     this.categoriesCollection.doc(category.id).update({
       "name": category.name,
-      "description": category.description
+      "description": category.description,
+      "activities": (category.activities.length > 0) ? category.activities : []
+    });
+  }
+
+  getActivityCategories(cb) {
+    let tempArray = [];
+    this.categoriesCollection.ref.get().then((qs)=> {
+      qs.forEach((doc)=> {
+        const data = doc.data();
+        const id = doc.id;
+        tempArray.push({id, ...data});
+      });
+
+      cb(tempArray);
     });
   }
 

@@ -8,7 +8,7 @@
 
 .yellow-activity {
     background-color: $fl-yellow;
-    color: #fff;    
+    color: #fff;
 }
 
 .red-activity {
@@ -19,5 +19,62 @@
 .card {
     padding-top: 35px;
     padding-bottom: 35px;
-    
+
+}
+
+.input-main-div {
+  padding: 2%;
+  text-align: left
+}
+
+.canc-btn {
+  color: $fl-red;
+  background-color: white;
+  border-color: white;
+}
+
+.txt-group {
+  margin-right: 115px;
+  margin-bottom: 1px;
+}
+
+.txt-input {
+  border: 1px solid $fl-grey;
+  border-radius: 6px;
+  width: 150px;
+  height: 40px;
+  margin-right: 15px;
+  padding-left: 10px;
+}
+
+.btn-edit,
+.btn-delete {
+  width: 50px
+}
+
+.txt-blue {
+  color: $fl-blue;
+}
+
+.add-cat-button {
+  margin-top: 25px;
+}
+
+.cat-select {
+  display: block;
+  margin-right: 60px;
+  margin-bottom: 1px;
+}
+
+select {
+  display: block;
+  width: 150px;
+  height: 39px;
+  margin-right: 20px;
+}
+
+.input-div {
+  margin-left: 1px;
+  display: flex;
+  justify-content: center;
 }

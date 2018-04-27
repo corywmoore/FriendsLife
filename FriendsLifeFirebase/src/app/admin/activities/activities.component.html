@@ -1,69 +1,61 @@
-<div class="container-fluid">
 
-  <h3 class="txt-blue home-header">
-    Manage Activities
-    <span class="btn btn-primary float-right pointer" (click)="addCategory()">Add Category</span>
-  </h3>
-
-  <div *ngIf="!addCategoryView">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Category</th>
-          <th scope="col">Active</th>
-        </tr>
-      </thead>
-      <tbody  >
-        <tr>
-          <td>Microwave</td>
-          <td>Cooking</td>
-          <h2 class="red">X</h2>
-          <!-- <td *ngIf="!category.active">
-            <h2 class="red">X</h2>
-          </td>
-          <td *ngIf="category.active">
-            <h2 class="green">✓</h2>
-          </td> -->
-        </tr>
-        <!--<tr>-->
-          <!--<td>Art</td>-->
-          <!--<td>Paint some stuff</td>-->
-          <!--<td>-->
-            <!--<h2 class="red">X</h2>-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-          <!--<td>Shop</td>-->
-          <!--<td>Build some stuff</td>-->
-          <!--<td>-->
-            <!--<h2 class="green">✓</h2>-->
-          <!--</td>-->
-        <!--</tr>-->
-      </tbody>
-    </table>
-  </div>
-  <div *ngIf="addCategoryView">
-    <div class="form-container">
-      <form #homeForm='ngForm'>
+<div class="form-container">
+  <!--<form #activityForm='ngForm'>-->
+    <div>
+      <div>
+        <label class="txt-green add-text-height"><h1 class="txt-blue">Manage Activities</h1></label>
         <div>
-          <label class="txt-green">Category Name</label>
+          <label class="txt-green txt-student add-text-height">Select Category to see Activities</label>
         </div>
+      </div>
+      <div class="row input-div">
+        <!--<div class="form-group col-xs-4 d-flex flex-column">-->
+          <!--<label class="txt-green txt-group">Name</label>-->
+          <!--<input type="text" placeholder="Name" [(ngModel)]="selectedCategory.name" name="name" class="txt txt-input">-->
+        <!--</div>-->
         <div class="center input-username">
-          <input type="text" placeholder="Category" (ngModel)="name" name="name" class="txt">
+          <label for="category" class="txt-green cat-select">Select Category</label>
+            <select class="select-student selectpicker" id="category" [(ngModel)]="selectedCategory" [ngModelOptions]="{standalone: true}">
+              <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+            </select>
         </div>
+        <div class="form-group col-xs-4 d-flex flex-column">
+          <label class="txt-green txt-group">Activity</label>
+          <input type="text" placeholder="Activity" [(ngModel)]="selectedActivity.name" class="txt txt-input">
+        </div>
+        <div class="add-cat-button" *ngIf ="selectedActivity.id == null">
+          <button type="button" (click)="activityAdd(selectedCategory, selectedActivity)" class="btn btn-primary">Add Activity</button>
+        </div>
+        <div class="add-cat-button" *ngIf ="selectedActivity.id != null">
+          <button type="button" (click)="activityEdit(selectedCategory, selectedActivity)" class="btn btn-success">Save Changes</button>
+        </div>
+      </div>
 
-        <div>
-          <label class="txt-green txt-password">Description</label>
-        </div>
-        <div class="center">
-          <input type="text" placeholder="Description" (ngModel)="description" name="description" class="txt">
-        </div>
-        <div>
-          <button type="button" class="btn btn-outline-secondary" (click)="cancelAddCategory()">Cancel</button>
-          <button type="button" class="btn btn-primary" (click)="submitAddCategory()">Submit</button>
-        </div>
-      </form>
     </div>
-  </div>
+  <!--</form>-->
+</div>
+<div>
+  <!--Show image of activity here-->
+</div>
+<div class="container">
+  <table class="table table-hover">
+    <tr>
+      <th scope="col">Category</th>
+      <th scope="col">Activity</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+    <tr class="table-striped" *ngFor="let activity of selectedCategory.activities;">
+      <td>{{selectedCategory.name}}</td>
+      <td>{{activity.name}}</td>
+      <td>
+        <button type="submit" class="btn btn-primary btn-edit" (click)="onActivityClick(activity)">
+          <i class="fa fa-pencil-alt"></i></button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-danger btn-delete" (click)="activityDelete(selectedCategory, activity)">
+          <i class="fa fa-trash"></i></button>
+      </td>
+    </tr>
+  </table>
 </div>
