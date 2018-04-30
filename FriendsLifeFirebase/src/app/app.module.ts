@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -12,10 +13,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FriendComponent } from './friend/friend.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { AdminCategoriesComponent } from './admin/categories/categories.component';
-import { UsersComponent } from './admin/users/users.component';
+import { AdminUsersComponent } from './admin/users/users.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { SelectionsComponent } from './selections/selections.component';
-import { FriendsComponent } from './admin/friends/friends.component';
+import { AdminFriendsComponent } from './admin/friends/friends.component';
 import { AdminActivitiesComponent } from './admin/activities/activities.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminService } from './services/admin/admin.service';
@@ -27,6 +28,7 @@ import { AuthModule } from './services/auth/auth.module';
 import { NotificationModule } from './services/notification/notification.module';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
+import { AdminClassesComponent } from './admin/classes/classes.component';
 
 export const firebaseConfig = environment.firebaseConfig;
 
@@ -38,12 +40,13 @@ export const firebaseConfig = environment.firebaseConfig;
     FriendComponent,
     AvailabilityComponent,
     AdminCategoriesComponent,
-    UsersComponent,
+    AdminUsersComponent,
     ActivitiesComponent,
     SelectionsComponent,
-    FriendsComponent,
+    AdminFriendsComponent,
     AdminActivitiesComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    AdminClassesComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ export const firebaseConfig = environment.firebaseConfig;
     AuthModule.forRoot(),
     NotificationModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularMultiSelectModule
   ],
   providers: [AdminService, SelectionService, FriendService, CategoryService],
   bootstrap: [AppComponent]

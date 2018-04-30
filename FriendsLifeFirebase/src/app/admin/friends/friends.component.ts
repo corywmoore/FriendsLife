@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.scss']
 })
-export class FriendsComponent implements OnInit {
+export class AdminFriendsComponent implements OnInit {
   selectedFriend : Friend = new Friend();
   public friends;
   constructor(private fs : FriendService) { }

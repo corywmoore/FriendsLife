@@ -1,0 +1,30 @@
+<form [formGroup]="classesAddForm">
+  <div class="input-div">
+    <div class="center category-select-div">
+      <label for="category" class="txt-green cat-select">Select Category</label>
+      <select class="" id="category" formControlName="category">
+        <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+      </select>
+    </div>
+    <div class="center dow-select-div">
+      <label for="day" class="txt-green day-select-label">Select Day of Week</label>
+      <angular2-multiselect class="day-select" id="day" [data]="daysOfWeek" [(ngModel)]="selectedDays"
+                            [settings]="settings"
+                            formControlName="days">
+      </angular2-multiselect>
+    </div>
+    <div class="btn-group-toggle time-of-day" >
+      <label class="btn-info btn-space" ngbButtonLabel>
+        <input type="checkbox" formControlName="morning" ngbButton> Morning
+      </label>
+      <label class="btn-info btn-space" ngbButtonLabel>
+        <input type="checkbox" formControlName="afternoon" ngbButton> Afternoon
+      </label>
+
+    </div>
+    <div class="add-cat-button">
+      <button type="button" (click)="classAdd(classesAddForm)" class="btn btn-success">Save Changes</button>
+    </div>
+  </div>
+</form>
+

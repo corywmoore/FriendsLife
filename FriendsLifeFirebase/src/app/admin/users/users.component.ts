@@ -6,7 +6,7 @@ import { User } from '../../models/user.model';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class AdminUsersComponent implements OnInit {
   selectedUser : User = new User();
   users = [];
   constructor() { }
