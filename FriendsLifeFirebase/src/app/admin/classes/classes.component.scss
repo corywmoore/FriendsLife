@@ -1,4 +1,4 @@
-
+@import "../../../scss/custom-variables";
 .btn-space {
   margin-right: 15px;
   border-radius: 5px
@@ -17,9 +17,9 @@ select {
   margin-right: 20px;
 }
 
-.input-div {
-  margin-top: 20px;
-  margin-left: 1px;
+.select-div {
+  //margin-top: 20px;
+  //margin-left: 1px;
   display: flex;
   justify-content: center;
 }
@@ -33,3 +33,61 @@ select {
   margin-bottom: 1px;
 }
 
+.add-edit-div {
+  display: inline-flex;
+}
+
+.or {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.new {
+  width: 200px;
+}
+
+.existing {
+  width: 200px;
+}
+
+.input-div {
+  display: flex;
+  justify-content: center;
+  padding: 1%;
+  div {
+    align-content: right;
+  }
+  label {
+    width: 15%;
+  }
+}
+
+.txt-input {
+  border: 1px solid $fl-grey;
+  border-radius: 6px;
+  width: 150px;
+  height: 40px;
+  margin-right: 15px;
+  padding-left: 10px;
+}
+
+.create-button {
+  width: 200px;
+  margin-top: 33px;
+}
+
+.existing-button {
+  width: 200px;
+  margin-top: 33px;
+}
+
+.cat-select {
+  display: inline-flex;
+  margin-right: 60px;
+  margin-bottom: 1px;
+}
+
+.select-class-label {
+  text-align: left;
+}

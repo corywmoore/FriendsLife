@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Class } from '../../models/class.model';
 import { CategoryService } from '../../services/category/category.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
@@ -9,6 +10,9 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class AdminClassesComponent implements OnInit {
 
+  public selectedClass : Class = new Class();
+  public classSelectView : boolean = true;
+  public existingClassView : boolean = false;
   public categories;
   public selectedDays;
   public daysOfWeek = [
@@ -35,10 +39,22 @@ export class AdminClassesComponent implements OnInit {
     });
   }
 
-
-
   classAdd(form) {
     console.log("form", form);
+  }
+
+  newClass() {
+    this.classSelectView = false;
+  }
+
+  existingClass() {
+    this.classSelectView = false;
+    this.existingClassView = true;
+  }
+
+  createClass() {
+    console.log("this", this);
+    this.selectedClass.id = Date.now();
   }
 
 }
