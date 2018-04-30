@@ -1,7 +1,8 @@
 @import "../../../scss/custom-variables";
 .btn-space {
   margin-right: 15px;
-  border-radius: 5px
+  margin-bottom: 50px;
+  border-radius: 5px;
 }
 
 .cat-select {
@@ -18,14 +19,11 @@ select {
 }
 
 .select-div {
-  //margin-top: 20px;
-  //margin-left: 1px;
   display: flex;
   justify-content: center;
 }
 
 .time-of-day {
-  margin-top: 25px;
   margin-left: 20px;
 }
 
@@ -90,4 +88,16 @@ select {
 
 .select-class-label {
   text-align: left;
+}
+
+.tod-group {
+  height: 19px;
+}
+
+.add-button {
+  margin-top: 27px;
+}
+
+.edit-button {
+  margin-top: 27px;
 }

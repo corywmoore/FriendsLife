@@ -1,7 +1,8 @@
 
   <div>
     <div class="">
-      <label class="txt-green add-text-height"><h1 class="txt-blue">Manage Classes</h1></label>
+      <label *ngIf="!classSelected" class="txt-green add-text-height"><h1 class="txt-blue">Manage Classes</h1></label>
+      <label *ngIf="classSelected" class="txt-green add-text-height"><h1 class="txt-blue">Select Categories for {{selectedClass.name}} Class</h1></label>
     </div>
     <div class="add-edit-div" *ngIf="classSelectView">
       <button type="button" (click)="newClass()" class="btn btn-primary new">Create New Class</button>
@@ -9,16 +10,16 @@
       <button type="button" (click)="existingClass()" class="btn btn-primary existing">View Existing Class</button>
     </div>
 
-    <div class="input-div" *ngIf="!classSelectView && !existingClassView">
+    <div class="input-div" *ngIf="!classSelectView && !existingClassView && !classSelected">
       <div class="form-group col-xs-4 d-flex flex-column">
         <label class="txt-green txt-group">Name</label>
         <input type="text" placeholder="Ex. 2Q2018" [(ngModel)]="selectedClass.name" class="txt txt-input">
       </div>
       <div class="">
-        <button type="button" (click)="createClass()" class="btn btn-primary create-button">Create New Class</button>
+        <button type="submit" [disabled] = "selectedClass.name == ''" (click)="createClass()" class="btn btn-primary create-button">Create New Class</button>
       </div>
     </div>
-    <div class="select-div" *ngIf="!classSelectView && existingClassView">
+    <div class="select-div" *ngIf="!classSelectView && existingClassView && !classSelected">
       <div class="form-group col-xs-4 d-flex flex-column">
         <label class="txt-green select-class-label">Select Class</label>
         <select class="select-class" id="student" [(ngModel)]="class" [ngModelOptions]="{standalone: true}">
@@ -30,7 +31,7 @@
       </div>
     </div>
   </div>
-  <form [formGroup]="classesAddForm" *ngIf="selectedClass.id != null">
+  <form [formGroup]="classesAddForm" *ngIf="classSelected">
     <div class="select-div">
       <div class="center category-select-div">
         <label for="category" class="txt-green cat-select">Select Category</label>
@@ -46,6 +47,9 @@
         </angular2-multiselect>
       </div>
       <div class="btn-group-toggle time-of-day" >
+        <div>
+          <label class="txt-green tod-group">Select Time of Day</label>
+        </div>
         <label class="btn-info btn-space" ngbButtonLabel>
           <input type="checkbox" formControlName="morning" ngbButton> Morning
         </label>
@@ -54,8 +58,11 @@
         </label>
 
       </div>
-      <div class="add-cat-button">
-        <button type="button" (click)="classAdd(classesAddForm)" class="btn btn-success">Save Changes</button>
+      <div class="add-button" *ngIf ="selection.id == null">
+        <button type="button" (click)="categoryAdd(classesAddForm)" class="btn btn-primary">Add Category</button>
+      </div>
+      <div class="edit-button"*ngIf="selection.id != null">>
+        <button type="button" (click)="categoryEdit(classesAddForm)" class="btn btn-success">Save Changes</button>
       </div>
     </div>
   </form>

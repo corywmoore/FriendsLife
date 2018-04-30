@@ -13,6 +13,8 @@ export class AdminClassesComponent implements OnInit {
   public selectedClass : Class = new Class();
   public classSelectView : boolean = true;
   public existingClassView : boolean = false;
+  public classSelected : boolean = false;
+  public selection = {id: null};
   public categories;
   public selectedDays;
   public daysOfWeek = [
@@ -32,6 +34,7 @@ export class AdminClassesComponent implements OnInit {
       this.categories = data;
     });
     this.classesAddForm = this.formBuilder.group({
+      id: null,
       category: '',
       days: [],
       morning: false,
@@ -54,7 +57,7 @@ export class AdminClassesComponent implements OnInit {
 
   createClass() {
     console.log("this", this);
-    this.selectedClass.id = Date.now();
+    this.classSelected = true;
   }
 
 }
