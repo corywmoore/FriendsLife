@@ -29,6 +29,7 @@ import { NotificationModule } from './services/notification/notification.module'
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AdminClassesComponent } from './admin/classes/classes.component';
+import { ClassService } from './services/class/class.service';
 
 export const firebaseConfig = environment.firebaseConfig;
 
@@ -61,7 +62,7 @@ export const firebaseConfig = environment.firebaseConfig;
     ReactiveFormsModule,
     AngularMultiSelectModule
   ],
-  providers: [AdminService, SelectionService, FriendService, CategoryService],
+  providers: [AdminService, SelectionService, FriendService, CategoryService, ClassService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

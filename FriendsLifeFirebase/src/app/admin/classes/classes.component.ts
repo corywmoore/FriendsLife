@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Class } from '../../models/class.model';
-import { CategoryService } from '../../services/category/category.service';
+import { ClassService } from '../../services/class/class.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
@@ -16,6 +16,7 @@ export class AdminClassesComponent implements OnInit {
   public classSelected : boolean = false;
   public selection = {id: null};
   public categories;
+  public classes;
   public selectedDays;
   public daysOfWeek = [
     {"id":1,"itemName":"Monday"},
@@ -27,10 +28,10 @@ export class AdminClassesComponent implements OnInit {
 
   public classesAddForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private cs : CategoryService) { }
+  constructor(private formBuilder: FormBuilder, private cs : ClassService) { }
 
   ngOnInit() {
-    this.cs.getActivityCategories((data)=>{
+    this.cs.getCategories((data)=>{
       this.categories = data;
     });
     this.classesAddForm = this.formBuilder.group({
@@ -51,13 +52,32 @@ export class AdminClassesComponent implements OnInit {
   }
 
   existingClass() {
-    this.classSelectView = false;
-    this.existingClassView = true;
+    this.cs.getClasses((data)=>{
+      this.classes = data;
+      this.classSelectView = false;
+      this.existingClassView = true;
+    });
   }
 
   createClass() {
     console.log("this", this);
     this.classSelected = true;
+  }
+
+  categoryAdd(form) {
+
+  }
+
+  categoryEdit(form) {
+
+  }
+
+  onCategoryClick(category) {
+    this.selection = category;
+  }
+
+  categoryDelete(category) {
+
   }
 
 }
