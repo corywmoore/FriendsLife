@@ -36,4 +36,36 @@ export class ClassService {
     this.classes.subscribe(data => cb(data));
   }
 
+  addClass(cl) {
+    this.classesCollection.add({
+      name: cl.name,
+    });
+  }
+
+  updateClass(cl) {
+    this.classesCollection.doc(cl.id).update({
+      "name": cl.name,
+      "categories": (cl.categories.length > 0) ? cl.categories : []
+    });
+  }
+
+  formatDaysforDisplay(days) {
+    let tempArray = [];
+    days.map(d=>{
+      tempArray.push(d.abr);
+    });
+
+    return tempArray.join(',');
+  }
+
+  formatTimesforDisplay(morn, aft) {
+    if (morn && aft) {
+      return 'AM/PM'
+    } else if (morn && !aft) {
+      return 'AM'
+    } else if (!morn && aft) {
+      return 'PM'
+    }
+  }
+
 }
