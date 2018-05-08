@@ -54,7 +54,6 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   public addImage(category) {
-    console.log('here');
     let catFile = _.find(this.categoryFiles, item => {
       return item.catId === category.id;
     });

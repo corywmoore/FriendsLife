@@ -47,38 +47,21 @@ export class CategoryService {
   }
 
   addImage(upload: Upload, category) {
-    try {
-      console.log(0);
-      console.log('upload', upload);
-      const storageRef = firebase.storage().ref();
-      console.log(0.1);
-      const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
-      console.log(0.2);
-      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot: firebase.storage.UploadTaskSnapshot) => {
-          const snap = snapshot;
-          console.log(1);
-        }, (error) => {
-          console.log(2);
-
-          console.log(error);
-        }, () => {
-          //success
-          console.log(3);
-
-          if (uploadTask.snapshot.downloadURL) {
-            console.log(4);
-
-            category.imageUrl = uploadTask.snapshot.downloadURL;
-            this.updateCategory(category);
-          }
+    const storageRef = firebase.storage().ref();
+    const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot: firebase.storage.UploadTaskSnapshot) => {
+        const snap = snapshot;
+      }, (error) => {
+        console.error(error);
+      }, () => {
+        //success
+        if (uploadTask.snapshot.downloadURL) {
+          category.imageUrl = uploadTask.snapshot.downloadURL;
+          this.updateCategory(category);
         }
-      )
-
-    } catch (err) {
-      console.log(100);
-      console.log(err);
-    }
+      }
+    );
   }
 
   deleteImage(category) {
