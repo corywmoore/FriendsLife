@@ -49,3 +49,12 @@
 .add-cat-button {
   margin-top: 25px;
 }
+
+$custom-file-text: (
+  placeholder: (
+    en: "Choose file..."
+  ),
+  button-label: (
+    en: "Browse"
+  )
+);

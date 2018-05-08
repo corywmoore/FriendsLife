@@ -44,7 +44,16 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private fb: FormBuilder
-  ) { }
+  ) {
+    this.auth.user.subscribe(user => {
+      console.log(user);
+      if (!!user && !!user.uid) {
+        this.router.navigate(['/friend']);
+      }
+    });
+
+  }
+
 
   ngOnInit() {
     this.buildForm();

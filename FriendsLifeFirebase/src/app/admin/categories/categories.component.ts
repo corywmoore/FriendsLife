@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../../models/category.model';
 import { CategoryService } from '../../services/category/category.service';
 import { NgForm } from '@angular/forms';
-
+import { Upload } from '../../models/upload/upload';
+import * as _ from 'underscore';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -13,8 +14,12 @@ export class AdminCategoriesComponent implements OnInit {
   public categories;
   public selectedCategory : Category = new Category();
   public addCategoryView: boolean = false;
+  public categoryFiles: any[] = [];
 
-  constructor(private cs : CategoryService) { }
+
+  constructor(
+    private cs : CategoryService
+  ) { }
 
   ngOnInit() {
     this.cs.getCategories((data)=>{
@@ -38,6 +43,22 @@ export class AdminCategoriesComponent implements OnInit {
 
   public categoryDelete(category) {
     this.cs.deleteCategory(category.id);
+  }
+
+  public detectFile($event, category) {
+    category.imageUpload = true;
+    this.categoryFiles.push({ 
+      file: ($event.target as HTMLInputElement).files[0],
+      catId: category.id
+    });
+  }
+
+  public addImage(category) {
+    let catFile = _.find(this.categoryFiles, item => {
+      return item.catId === category.id;
+    });
+
+    this.cs.addImage(new Upload(catFile.file), category);
   }
 
   private resetForm(form? : NgForm) {
