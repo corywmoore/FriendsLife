@@ -11,7 +11,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class AdminClassesComponent implements OnInit {
 
   public selectedClass : Class = new Class();
-  public category : Category = new Category();
+  public category;
   public classSelectView : boolean = true;
   public existingClassView : boolean = false;
   public classSelected : boolean = false;
@@ -20,6 +20,8 @@ export class AdminClassesComponent implements OnInit {
   public classes;
   public class;
   public selectedDays;
+  public afternoon : boolean = false;
+  public morning : boolean = false;
   public daysOfWeek = [
     {"id":1,"itemName":"Monday", "abr":"M"},
     {"id":2,"itemName":"Tuesday","abr":"Tu"},
@@ -148,6 +150,6 @@ export class AdminClassesComponent implements OnInit {
       timesDisplay: form.value.timesDisplay
     };
 
-    return obj;
+    return Object.assign({obj}, new Category());
   }
 }

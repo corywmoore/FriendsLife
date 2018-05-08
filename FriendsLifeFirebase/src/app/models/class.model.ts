@@ -5,13 +5,13 @@ export class Class {
 }
 
 export class Category {
-  id = null;
-  name: string = '';
-  description: string = '';
-  activities = null;
-  days = null;
-  daysDisplay: string = '';
-  morning: boolean = false;
-  afternoon: boolean = false;
-  timesDisplay: string = '';
+  id;
+  name;
+  description;
+  activities;
+  days;
+  daysDisplay;
+  morning;
+  afternoon;
+  timesDisplay;
 }
