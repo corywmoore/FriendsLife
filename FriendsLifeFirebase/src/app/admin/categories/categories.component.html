@@ -52,7 +52,7 @@
       </td>
       <td *ngIf="category.imageUrl">
         <img [src]="category.imageUrl" class="thumb-img">
-        <button class="is-primary">
+        <button class="is-primary" (click)="deleteImage(category)">
           <i class="fas fa-minus-circle"></i>
         </button>
       </td>
