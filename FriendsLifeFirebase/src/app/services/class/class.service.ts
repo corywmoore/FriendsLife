@@ -17,7 +17,7 @@ export class ClassService {
       qs.forEach((doc)=> {
         const data = doc.data();
         const id = doc.id;
-        tempArray.push({id, ...data});
+        tempArray.push(Object.assign({id, ...data}));
       });
 
       cb(tempArray);

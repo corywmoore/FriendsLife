@@ -37,8 +37,10 @@
       <div class="form-group center category-select-div" >
         <label for="category" class="txt-green cat-select">Select Category</label>
         <select class="" id="category" [(ngModel)]="category" [ngModelOptions]="{standalone: true}">
-          <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+          <option *ngFor="let category of selectedClass.categories" [ngValue]="category.id">{{category.name}}</option>
         </select>
+        {{selectedClass.categories}}
+        <p>{{category}}</p>
       </div>
       <div class="center dow-select-div form-group">
         <label for="day" class="txt-green day-select-label">Select Day of Week</label>

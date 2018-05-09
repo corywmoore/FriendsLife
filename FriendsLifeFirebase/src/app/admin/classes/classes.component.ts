@@ -35,9 +35,10 @@ export class AdminClassesComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private cs : ClassService) { }
 
   ngOnInit() {
-    this.cs.getCategories((data)=>{
-      this.categories = data;
-    });
+    // this.cs.getCategories((data)=>{
+    //   console.log("data", data);
+    //   this.categories = data;
+    // });
     this.classesAddForm = this.formBuilder.group({
       id: null,
       category: '',
@@ -69,6 +70,7 @@ export class AdminClassesComponent implements OnInit {
   }
 
   public classSelect() {
+    console.log("this", this);
     this.selectedClass = this.class;
     this.classSelected = true;
   }
@@ -94,12 +96,14 @@ export class AdminClassesComponent implements OnInit {
 
   public onCategoryClick(category) {
     console.log("category", category);
-    console.log("this", this);
-    debugger;
     this.selection = category;
     this.afternoon = category.afternoon;
     this.morning = category.morning;
-    this.category = {"id": category.id, "name": category.name, "description": category.description, "activities": category.activities};
+    this.category = Object.assign({"id": category.id, "name": category.name, "description": category.description, "activities": category.activities}, this.category);
+
+    // {"id": category.id, "name": category.name, "description": category.description, "activities": category.activities};
+    console.log("this", this);
+    debugger;
     this.selectedDays = category.days;
   }
 
