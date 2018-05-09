@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Class } from '../../models/class.model';
+import { Class, Category } from '../../models/class.model';
 import { ClassService } from '../../services/class/class.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
@@ -11,19 +11,23 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class AdminClassesComponent implements OnInit {
 
   public selectedClass : Class = new Class();
+  public category;
   public classSelectView : boolean = true;
   public existingClassView : boolean = false;
   public classSelected : boolean = false;
   public selection = {id: null};
   public categories;
   public classes;
+  public class;
   public selectedDays;
+  public afternoon : boolean = false;
+  public morning : boolean = false;
   public daysOfWeek = [
-    {"id":1,"itemName":"Monday"},
-    {"id":2,"itemName":"Tuesday"},
-    {"id":3,"itemName":"Wednesday"},
-    {"id":4,"itemName":"Thursday"},
-    {"id":5,"itemName":"Friday"}
+    {"id":1,"itemName":"Monday", "abr":"M"},
+    {"id":2,"itemName":"Tuesday","abr":"Tu"},
+    {"id":3,"itemName":"Wednesday","abr":"W"},
+    {"id":4,"itemName":"Thursday","abr":"Th"},
+    {"id":5,"itemName":"Friday","abr":"F"}
   ];
 
   public classesAddForm: FormGroup;
@@ -43,15 +47,15 @@ export class AdminClassesComponent implements OnInit {
     });
   }
 
-  classAdd(form) {
+  public classAdd(form) {
     console.log("form", form);
   }
 
-  newClass() {
+  public newClass() {
     this.classSelectView = false;
   }
 
-  existingClass() {
+  public existingClass() {
     this.cs.getClasses((data)=>{
       this.classes = data;
       this.classSelectView = false;
@@ -59,25 +63,93 @@ export class AdminClassesComponent implements OnInit {
     });
   }
 
-  createClass() {
-    console.log("this", this);
+  public createClass() {
+    this.classSelected = true;
+    this.cs.addClass(this.selectedClass);
+  }
+
+  public classSelect() {
+    this.selectedClass = this.class;
     this.classSelected = true;
   }
 
-  categoryAdd(form) {
+  public categoryAdd(form) {
+    // console.log("this", this);
+    // console.log("form", form);
+    // debugger;
+    form.value.category = this.category;
+    form.value.daysDisplay = this.cs.formatDaysforDisplay(form.value.days);
+    form.value.timesDisplay = this.cs.formatTimesforDisplay(form.value.morning, form.value.afternoon);
+    let category = this.categoryFormat(form);
 
+    if (this.selectedClass.categories == undefined) {
+      this.selectedClass.categories = [];
+    }
+
+    this.selectedClass.categories.push(category);
+    this.cs.updateClass(this.selectedClass);
+    this.selectedClass = null;
+    this.resetForm(form);
   }
 
-  categoryEdit(form) {
-
-  }
-
-  onCategoryClick(category) {
+  public onCategoryClick(category) {
+    console.log("category", category);
+    console.log("this", this);
+    debugger;
     this.selection = category;
+    this.afternoon = category.afternoon;
+    this.morning = category.morning;
+    this.category = {"id": category.id, "name": category.name, "description": category.description, "activities": category.activities};
+    this.selectedDays = category.days;
   }
 
-  categoryDelete(category) {
+  public categoryEdit(form) {
+    form.value.daysDisplay = this.cs.formatDaysforDisplay(form.value.days);
+    form.value.timesDisplay = this.cs.formatTimesforDisplay(form.value.morning, form.value.afternoon);
+    let category = this.categoryFormat(form);
+    for (let i=0; i < this.selectedClass.categories.length; i++) {
+      if (this.selectedClass.categories[i].id === category.id) {
+        this.selectedClass.categories[i] = category;
+        break;
+      }
+    }
 
+    this.cs.updateClass(this.selectedClass);
+    this.resetForm(form);
   }
 
+  public categoryDelete(category) {
+    console.log("category", category);
+    // let tempArray = [];
+    // cat.activities.map(a=> {
+    //   if (a.id != act.id) {
+    //     tempArray.push(a);
+    //   }
+    // });
+    // cat.activities = tempArray;
+    // this.cs.updateCategory(cat);
+  }
+
+  private resetForm(form) {
+    if (form != null) {
+      form.reset();
+    }
+  }
+
+  private categoryFormat(form) {
+
+    let obj = {
+      id: form.value.category.id,
+      name: form.value.category.name,
+      description: form.value.category.description,
+      activities: form.value.category.activities,
+      days: form.value.days,
+      daysDisplay: form.value.daysDisplay,
+      morning: form.value.morning,
+      afternoon: form.value.afternoon,
+      timesDisplay: form.value.timesDisplay
+    };
+
+    return Object.assign({obj}, new Category());
+  }
 }

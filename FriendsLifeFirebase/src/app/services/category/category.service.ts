@@ -42,7 +42,7 @@ export class CategoryService {
     this.categoriesCollection.doc(category.id).update({
       "name": category.name,
       "description": category.description,
-      "activities": (category.activities.length > 0) ? category.activities : [],
+      "activities": (category.activities === "undefined" || category.activities === null || category.activities.length > 0) ? category.activities : [],
       "imageUrl": (!!category.imageUrl) ? category.imageUrl : ''
     });
   }
