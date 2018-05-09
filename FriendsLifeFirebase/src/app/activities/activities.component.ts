@@ -21,7 +21,7 @@ export class ActivitiesComponent implements OnInit {
   constructor(private renderer: Renderer, private ref: ElementRef, private router: Router) { }
 
   ngOnInit() {
-    let friend =JSON.parse(localStorage.getItem('selectedFriend'));
+    let friend = JSON.parse(localStorage.getItem('selectedFriend'));
     this.selectedFriend = friend;
     const imgArr = ['../../assets/cooking-foodprep.png', '../../assets/cooking-kitchentools.png', '../../assets/cooking-shopping.png'];
     let act;
@@ -36,7 +36,7 @@ export class ActivitiesComponent implements OnInit {
 
   public submitActivities() {
 
-      this.router.navigate(['selections']);
+    this.router.navigate(['selections']);
 
   }
 
@@ -44,10 +44,10 @@ export class ActivitiesComponent implements OnInit {
     this.currentRank = 1;
     this.activitiesSelection = [];
 
-    const  els = document.getElementsByClassName('activity');
+    const els = document.getElementsByClassName('activity');
 
-    for(let i=els.length-1; i>=0; i--) {
-      for(let j=this.colors.length-1; j>=0; j--) {
+    for (let i = els.length - 1; i >= 0; i--) {
+      for (let j = this.colors.length - 1; j >= 0; j--) {
         els[i].classList.remove(this.colors[j]);
       }
     }
@@ -56,17 +56,16 @@ export class ActivitiesComponent implements OnInit {
   }
 
   public activityClicked($event: any, id: number) {
-    console.log(id)
-      this.activity[id].rank = this.currentRank;
+    this.activity[id].rank = this.currentRank;
     this.currentRank++;
-      this.warning = false;
+    this.warning = false;
   }
 
   public skillClicked($event: any, skill: string) {
     let els = document.getElementsByClassName('skills');
 
-    for(let i=els.length-1; i>=0; i--) {
-      for(let j=this.colors.length-1; j>=0; j--) {
+    for (let i = els.length - 1; i >= 0; i--) {
+      for (let j = this.colors.length - 1; j >= 0; j--) {
         els[i].classList.remove(this.colors[0]);
       }
     }

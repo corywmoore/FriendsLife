@@ -35,12 +35,29 @@
     <tr>
       <th scope="col">Category</th>
       <th scope="col">Activity</th>
+      <th scope="col">Image</th>
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
     </tr>
     <tr class="table-striped" *ngFor="let activity of selectedCategory.activities;">
       <td>{{selectedCategory.name}}</td>
       <td>{{activity.name}}</td>
+      <td *ngIf="!activity.imageUrl">
+        <label>
+          <input type="file" class="button" (change)="detectFile($event, activity)">
+        </label>
+        <button class="button is-primary" [disabled]="!activity.imageUpload" (click)="addImage(selectedCategory, activity)">
+          <i class="fas fa-upload"></i>
+        </button>
+
+      </td>
+      <td *ngIf="activity.imageUrl">
+        <img [src]="activity.imageUrl" class="thumb-img">
+        <button class="is-primary" (click)="deleteImage(selectedCategory, activity)">
+          <i class="fas fa-minus-circle"></i>
+        </button>
+      </td>
+
       <td>
         <button type="submit" class="btn btn-primary btn-edit" (click)="onActivityClick(activity)">
           <i class="fa fa-pencil-alt"></i></button>

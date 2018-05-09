@@ -46,7 +46,6 @@ export class HomeComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.auth.user.subscribe(user => {
-      console.log(user);
       if (!!user && !!user.uid) {
         this.router.navigate(['/friend']);
       }
@@ -65,14 +64,11 @@ export class HomeComponent implements OnInit {
 
 
   login() {
-    console.log('start login');
     this.auth.emailLogin(this.userForm.value['email'], this.userForm.value['password'])
       .then(user => {
-        console.log('end login');
         this.router.navigate(['friend']);
       }).catch(err => {
-        console.log('end login');
-        console.log(err);
+        console.error(err);
       });
   }
 
