@@ -12,16 +12,17 @@ export class AdminClassesComponent implements OnInit {
 
   public selectedClass : Class = new Class();
   public category;
-  public classSelectView : boolean = true;
-  public existingClassView : boolean = false;
-  public classSelected : boolean = false;
   public selection = {id: null};
   public categories;
   public classes;
   public class;
   public selectedDays;
+  public classSelected : boolean = false;
   public afternoon : boolean = false;
   public morning : boolean = false;
+  public editingCLass : boolean = false;
+  public showClasses : boolean = true;
+  public showCategories : boolean = false;
   public daysOfWeek = [
     {"id":1,"itemName":"Monday", "abr":"M"},
     {"id":2,"itemName":"Tuesday","abr":"Tu"},
@@ -35,10 +36,9 @@ export class AdminClassesComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private cs : ClassService) { }
 
   ngOnInit() {
-    // this.cs.getCategories((data)=>{
-    //   console.log("data", data);
-    //   this.categories = data;
-    // });
+    this.cs.getClasses((data)=>{
+      this.classes = data;
+    });
     this.classesAddForm = this.formBuilder.group({
       id: null,
       category: '',
@@ -48,37 +48,12 @@ export class AdminClassesComponent implements OnInit {
     });
   }
 
-  public classAdd(form) {
-    console.log("form", form);
-  }
-
-  public newClass() {
-    this.classSelectView = false;
-  }
-
-  public existingClass() {
-    this.cs.getClasses((data)=>{
-      this.classes = data;
-      this.classSelectView = false;
-      this.existingClassView = true;
-    });
-  }
-
   public createClass() {
     this.classSelected = true;
     this.cs.addClass(this.selectedClass);
   }
 
-  public classSelect() {
-    console.log("this", this);
-    this.selectedClass = this.class;
-    this.classSelected = true;
-  }
-
   public categoryAdd(form) {
-    // console.log("this", this);
-    // console.log("form", form);
-    // debugger;
     form.value.category = this.category;
     form.value.daysDisplay = this.cs.formatDaysforDisplay(form.value.days);
     form.value.timesDisplay = this.cs.formatTimesforDisplay(form.value.morning, form.value.afternoon);
@@ -95,15 +70,10 @@ export class AdminClassesComponent implements OnInit {
   }
 
   public onCategoryClick(category) {
-    console.log("category", category);
     this.selection = category;
     this.afternoon = category.afternoon;
     this.morning = category.morning;
-    this.category = Object.assign({"id": category.id, "name": category.name, "description": category.description, "activities": category.activities}, this.category);
-
-    // {"id": category.id, "name": category.name, "description": category.description, "activities": category.activities};
-    console.log("this", this);
-    debugger;
+    this.category = {"id": category.id, "name": category.name, "description": category.description, "activities": category.activities};
     this.selectedDays = category.days;
   }
 
@@ -132,6 +102,29 @@ export class AdminClassesComponent implements OnInit {
     // });
     // cat.activities = tempArray;
     // this.cs.updateCategory(cat);
+  }
+
+  public onClassClick(cl) {
+    this.selectedClass = Object.assign({}, cl);
+    this.editingCLass = true;
+  }
+
+  public viewCategories(cl) {
+    this.selectedClass = cl;
+    this.showCategories = true;
+    this.showClasses = false;
+  }
+
+  public editClass() {
+    this.cs.updateClass(this.selectedClass);
+    this.editingCLass = false;
+    this.selectedClass = new Class();
+  }
+
+  showClass() {
+    this.selectedClass = new Class();
+    this.showCategories = false;
+    this.showClasses = true;
   }
 
   private resetForm(form) {

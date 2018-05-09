@@ -1,97 +1,128 @@
 
-<div>
-  <div class="">
-    <label *ngIf="!classSelected" class="txt-green add-text-height"><h1 class="txt-blue">Manage Classes</h1></label>
-    <label *ngIf="classSelected" class="txt-green add-text-height"><h1 class="txt-blue">Select Categories for {{selectedClass.name}} Class</h1></label>
-  </div>
-  <div class="add-edit-div" *ngIf="classSelectView">
-    <button type="button" (click)="newClass()" class="btn btn-primary new">Create New Class</button>
-    <h5 class="txt-green or"> or </h5>
-    <button type="button" (click)="existingClass()" class="btn btn-primary existing">View Existing Class</button>
-  </div>
 
-  <div class="input-div" *ngIf="!classSelectView && !existingClassView && !classSelected">
+<div class="">
+  <label *ngIf="!classSelected" class="txt-green add-text-height"><h1 class="txt-blue">Manage Classes</h1></label>
+  <label *ngIf="classSelected" class="txt-green add-text-height"><h1 class="txt-blue">Select Categories for {{selectedClass.name}} Class</h1></label>
+</div>
+<div *ngIf="showClasses">
+  <div class="input-div">
     <div class="form-group col-xs-4 d-flex flex-column">
       <label class="txt-green txt-group">Name</label>
-      <input type="text" placeholder="Ex. 2Q2018" [(ngModel)]="selectedClass.name" class="txt txt-input">
+      <input type="text" placeholder="Ex. 2Q18" [(ngModel)]="selectedClass.name" class="txt txt-input">
     </div>
-    <div class="">
+    <div class="" *ngIf="!editingCLass">
       <button type="submit" [disabled] = "selectedClass.name == ''" (click)="createClass()" class="btn btn-primary create-button">Create New Class</button>
     </div>
+    <div class="" *ngIf="editingCLass">
+      <button type="submit" [disabled] = "selectedClass.name == ''" (click)="editClass()" class="btn btn-primary create-button">Change Class Name</button>
+    </div>
   </div>
-  <div class="select-div" *ngIf="!classSelectView && existingClassView && !classSelected">
-    <div class="form-group col-xs-4 d-flex flex-column">
-      <label class="txt-green select-class-label">Select Class</label>
-      <select class="select-class" id="class" [(ngModel)]="class" [ngModelOptions]="{standalone: true}">
-        <option *ngFor="let class of classes" [ngValue]="class">{{class.name}}</option>
-      </select>
-    </div>
-    <div class="">
-      <button type="button" (click)="classSelect()" class="btn btn-primary existing-button">View Existing Class</button>
-    </div>
+  <div class="container">
+    <table class="table table-hover">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Change Class Name</th>
+        <th scope="col">View/Edit Categories</th>
+        <th scope="col">Delete</th>
+      </tr>
+      <tr class="table-striped" *ngFor="let class of classes; let idx = index">
+        <td>{{class.name}}</td>
+        <td>
+          <button type="submit" class="btn btn-primary btn-edit" (click)="onClassClick(class)">
+            <i class="fa fa-pencil-alt"></i>
+          </button>
+        </td>
+        <td>
+          <button type="submit" class="btn btn-primary btn-edit" (click)="viewCategories(class)">
+            <i class="fa fa-pencil-alt"></i>
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger btn-delete" (click)="classDelete(class)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
-<div class="form-container" *ngIf="classSelected">
-  <form #classesAddForm='ngForm'>
-    <div class="select-div">
-      <div class="form-group center category-select-div" >
-        <label for="category" class="txt-green cat-select">Select Category</label>
-        <select class="" id="category" [(ngModel)]="category" [ngModelOptions]="{standalone: true}">
-          <option *ngFor="let category of selectedClass.categories" [ngValue]="category.id">{{category.name}}</option>
-        </select>
-        {{selectedClass.categories}}
-        <p>{{category}}</p>
-      </div>
-      <div class="center dow-select-div form-group">
-        <label for="day" class="txt-green day-select-label">Select Day of Week</label>
-        <angular2-multiselect class="day-select form-group" id="day" [data]="daysOfWeek" [(ngModel)]="selectedDays"
-                              [settings]="settings"
-                              name="days">
-        </angular2-multiselect>
-      </div>
-      <div class="btn-group-toggle time-of-day" >
-        <div>
-          <label class="txt-green tod-group">Select Time of Day</label>
+<div *ngIf="showCategories">
+  <div class="form-container">
+    <form #classesAddForm='ngForm'>
+      <div class="select-div">
+        <div class="form-group center category-select-div" >
+          <label for="category" class="txt-green cat-select">Select Category</label>
+          <select class="" id="category" [(ngModel)]="category" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let category of selectedClass.categories" [ngValue]="category.id">{{category.name}}</option>
+          </select>
+          {{selectedClass.categories}}
+          <p>{{category}}</p>
         </div>
-        <label class="btn-info btn-space" ngbButtonLabel>
-          <input type="checkbox" name="morning" ngbButton [(ngModel)]="morning"> Morning
-        </label>
-        <label class="btn-info btn-space" ngbButtonLabel>
-          <input type="checkbox" name="afternoon" ngbButton [(ngModel)]="afternoon"> Afternoon
-        </label>
+        <div class="center dow-select-div form-group">
+          <label for="day" class="txt-green day-select-label">Select Day of Week</label>
+          <angular2-multiselect class="day-select form-group" id="day" [data]="daysOfWeek" [(ngModel)]="selectedDays"
+                                [settings]="settings"
+                                name="days">
+          </angular2-multiselect>
+        </div>
+        <div class="btn-group-toggle time-of-day" >
+          <div>
+            <label class="txt-green tod-group">Select Time of Day</label>
+          </div>
+          <label class="btn-info btn-space" ngbButtonLabel>
+            <input type="checkbox" name="morning" ngbButton [(ngModel)]="morning"> Morning
+          </label>
+          <label class="btn-info btn-space" ngbButtonLabel>
+            <input type="checkbox" name="afternoon" ngbButton [(ngModel)]="afternoon"> Afternoon
+          </label>
 
+        </div>
+        <div class="add-button" *ngIf ="selection.id == null">
+          <button type="button" (click)="categoryAdd(classesAddForm)" class="btn btn-primary">Add Category</button>
+        </div>
+        <div class="edit-button" *ngIf="selection.id != null">
+          <button type="button" (click)="categoryEdit(classesAddForm)" class="btn btn-success">Save Changes</button>
+        </div>
       </div>
-      <div class="add-button" *ngIf ="selection.id == null">
-        <button type="button" (click)="categoryAdd(classesAddForm)" class="btn btn-primary">Add Category</button>
-      </div>
-      <div class="edit-button" *ngIf="selection.id != null">
-        <button type="button" (click)="categoryEdit(classesAddForm)" class="btn btn-success">Save Changes</button>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
+  <a class="nav-link pointer ml-auto" (click)="showClass()">Back to Classes View</a>
+  <div class="container" *ngIf="selectedClass.id != null">
+    <table class="table table-hover">
+      <tr>
+        <th scope="col">Category</th>
+        <th scope="col">Day(s) of Week</th>
+        <th scope="col">Time of Day</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+      <tr class="table-striped" *ngFor="let category of selectedClass.categories;">
+        <td>{{category.name}}</td>
+        <td>{{category.daysDisplay}}</td>
+        <td>{{category.timesDisplay}}</td>
+        <td>
+          <button type="submit" class="btn btn-primary btn-edit" (click)="onCategoryClick(category)">
+            <i class="fa fa-pencil-alt"></i></button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger btn-delete" (click)="categoryDelete(category)">
+            <i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
-<div class="container" *ngIf="selectedClass.id != null">
-  <table class="table table-hover">
-    <tr>
-      <th scope="col">Category</th>
-      <th scope="col">Day(s) of Week</th>
-      <th scope="col">Time of Day</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
-    </tr>
-    <tr class="table-striped" *ngFor="let category of selectedClass.categories;">
-      <td>{{category.name}}</td>
-      <td>{{category.daysDisplay}}</td>
-      <td>{{category.timesDisplay}}</td>
-      <td>
-        <button type="submit" class="btn btn-primary btn-edit" (click)="onCategoryClick(category)">
-          <i class="fa fa-pencil-alt"></i></button>
-      </td>
-      <td>
-        <button type="button" class="btn btn-danger btn-delete" (click)="categoryDelete(category)">
-          <i class="fa fa-trash"></i></button>
-      </td>
-    </tr>
-  </table>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
