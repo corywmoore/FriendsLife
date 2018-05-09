@@ -5,6 +5,7 @@ import { Friend } from '../models/friend.model';
 import { NgForm } from '@angular/forms';
 
 import { FriendService } from '../services/friend/friend.service';
+import { ClassService } from '../services/class/class.service';
 @Component({
   selector: 'app-friend',
   templateUrl: './friend.component.html',
@@ -20,17 +21,22 @@ export class FriendComponent implements OnInit {
   firstName: string;
   lastName: string;
   nickName: string;
-
-  constructor(private router: Router, private fs : FriendService) { }
+  classes;
+  class;
+  constructor(private router: Router, private fs : FriendService, private cs : ClassService) { }
 
   ngOnInit() {
     this.fs.getFriends((data)=>{
       this.friends = data;
     });
+    this.cs.getClasses((data)=>{
+      this.classes = data;
+    });
   }
 
   friendSelect() {
     localStorage.setItem('selectedFriend', JSON.stringify(this.friend));
+    localStorage.setItem('selectedClass', JSON.stringify(this.class));
     this.router.navigate(['availability']);
   }
 

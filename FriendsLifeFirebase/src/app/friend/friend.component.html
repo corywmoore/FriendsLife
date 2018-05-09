@@ -3,13 +3,26 @@
 </h3>
 <div class="form-container">
     <form #selectStudentForm='ngForm'>
-        <div>
-            <label class="txt-green txt-student add-text-height">Please select a student:</label>
-        </div>
-        <div class="center input-username">
+        <div class="friend-select">
+          <div>
+            <label class="txt-green txt-student add-text-height">Select a student:</label>
+          </div>
+          <div class="center input-username">
             <select class="select-student selectpicker" id="student" [(ngModel)]="friend" [ngModelOptions]="{standalone: true}">
               <option *ngFor="let friend of friends" [ngValue]="friend">{{friend.firstName}} {{friend.lastName}}</option>
             </select>
+          </div>
+        </div>
+        <div class="and">&</div>
+        <div class="class-select">
+          <div>
+            <label class="txt-green txt-student add-text-height">Select a class:</label>
+          </div>
+          <div class="center input-username class-select">
+            <select class="select-student selectpicker" id="class" [(ngModel)]="class" [ngModelOptions]="{standalone: true}">
+              <option *ngFor="let class of classes" [ngValue]="class">{{class.name}}</option>
+            </select>
+          </div>
         </div>
         <div>
             <button type="button" (click)="friendSelect()" class="btn btn-primary">Next</button>
