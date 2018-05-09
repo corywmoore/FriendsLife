@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Upload } from '../../models/upload/upload';
 import * as firebase from 'firebase';
+import * as _ from 'underscore';
 
 @Injectable()
 
@@ -42,11 +43,11 @@ export class CategoryService {
       "name": category.name,
       "description": category.description,
       "activities": (category.activities.length > 0) ? category.activities : [],
-      "imageUrl": category.imageUrl
+      "imageUrl": (!!category.imageUrl) ? category.imageUrl : ''
     });
   }
 
-  addImage(upload: Upload, category) {
+  addCategoryImage(upload: Upload, category) {
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
@@ -64,9 +65,23 @@ export class CategoryService {
     );
   }
 
-  deleteImage(category) {
-    category.imageUrl = '';
-    this.updateCategory(category);
+  addActivityImage(upload: Upload, activity, category) {
+
+    const storageRef = firebase.storage().ref();
+    const uploadTask = storageRef.child(`${this.basePath}/${category.name}/${activity.name}/${upload.file.name}`).put(upload.file);
+
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot: firebase.storage.UploadTaskSnapshot) => {
+        const snap = snapshot;
+      }, (error) => {
+        console.error(error);
+      }, () => {
+        //success
+        if (uploadTask.snapshot.downloadURL) {
+          activity.imageUrl = uploadTask.snapshot.downloadURL;
+          this.updateCategory(category);
+        }
+      });
   }
 
   getActivityCategories(cb) {

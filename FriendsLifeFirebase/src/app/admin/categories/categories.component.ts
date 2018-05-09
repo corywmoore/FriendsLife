@@ -58,11 +58,12 @@ export class AdminCategoriesComponent implements OnInit {
       return item.catId === category.id;
     });
 
-    this.cs.addImage(new Upload(catFile.file), category);
+    this.cs.addCategoryImage(new Upload(catFile.file), category);
   }
 
-  public deleteImage(category) {
-    this.cs.deleteImage(category);
+  public deleteCategoryImage(category) {
+    category.imageUrl = '';
+    this.cs.updateCategory(category);
   }
 
   private resetForm(form? : NgForm) {
