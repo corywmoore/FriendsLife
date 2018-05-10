@@ -28,10 +28,37 @@ export class AvailabilityComponent implements OnInit {
     var el = ($event.target.childElementCount > 0) ? $event.target : $event.target.parentElement;
 
     if(index < 0) {
-      var dt = new DateTimeSelection();
-      dt.day = day;
-      dt.time = time;
-      this.selection.push(dt);
+      if (this.selection.length > 0) {
+        //Checking for duplicates, then combining.
+        let dayExists = this.dayCheck(day);
+        if (dayExists) {
+          this.selection.map((s)=> {
+            if (s.day === day) {
+              if (time === 'PM' && !s.afternoon) {
+                s.afternoon = time === 'PM';
+              } else if (time === 'AM' && !s.morning) {
+                s.morning = time === 'AM';
+              } else if (s.afternoon && s.morning) {
+                return;
+              }
+            }
+          });
+        } else {
+          let dt = new DateTimeSelection();
+          dt.day = day;
+          dt.morning = time === 'AM';
+          dt.afternoon = time === 'PM';
+          dt.time = time;
+          this.selection.push(dt);
+        }
+      } else {
+        let dt = new DateTimeSelection();
+        dt.day = day;
+        dt.morning = time === 'AM';
+        dt.afternoon = time === 'PM';
+        dt.time = time;
+        this.selection.push(dt);
+      }
       this.renderer.setElementClass(el, 'green-bg', true);
       this.warning = false;
     } else {
@@ -50,9 +77,22 @@ export class AvailabilityComponent implements OnInit {
       this.router.navigate(['categories']);
     }
   }
+
+  private dayCheck(day) {
+    let isThere =false;
+    this.selection.map((s)=> {
+      if (s.day === day) {
+        isThere = true;
+      }
+    });
+
+    return isThere;
+  }
 }
 
 export class DateTimeSelection {
   day: string;
   time: string;
+  morning: boolean = false;
+  afternoon: boolean = false;
 }
