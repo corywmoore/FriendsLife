@@ -47,7 +47,7 @@ export class AdminCategoriesComponent implements OnInit {
 
   public detectFile($event, category) {
     category.imageUpload = true;
-    this.categoryFiles.push({ 
+    this.categoryFiles.push({
       file: ($event.target as HTMLInputElement).files[0],
       catId: category.id
     });
@@ -61,7 +61,7 @@ export class AdminCategoriesComponent implements OnInit {
     this.cs.addCategoryImage(new Upload(catFile.file), category);
   }
 
-  public deleteCategoryImage(category) {
+  public deleteImage(category) {
     category.imageUrl = '';
     this.cs.updateCategory(category);
   }

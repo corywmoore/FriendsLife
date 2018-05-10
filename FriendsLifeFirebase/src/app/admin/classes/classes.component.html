@@ -1,8 +1,8 @@
 
 
 <div class="">
-  <label *ngIf="!classSelected" class="txt-green add-text-height"><h1 class="txt-blue">Manage Classes</h1></label>
-  <label *ngIf="classSelected" class="txt-green add-text-height"><h1 class="txt-blue">Select Categories for {{selectedClass.name}} Class</h1></label>
+  <label *ngIf="showClasses" class="txt-green add-text-height"><h1 class="txt-blue">Manage Classes</h1></label>
+  <label *ngIf="showCategories" class="txt-green add-text-height"><h1 class="txt-blue">Select Categories for {{selectedClass.name}} Class</h1></label>
 </div>
 <div *ngIf="showClasses">
   <div class="input-div">

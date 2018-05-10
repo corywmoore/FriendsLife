@@ -17,7 +17,6 @@ export class AdminClassesComponent implements OnInit {
   public classes;
   public class;
   public selectedDays;
-  public classSelected : boolean = false;
   public afternoon : boolean = false;
   public morning : boolean = false;
   public editingCLass : boolean = false;
@@ -49,7 +48,6 @@ export class AdminClassesComponent implements OnInit {
   }
 
   public createClass() {
-    this.classSelected = true;
     this.cs.addClass(this.selectedClass);
   }
 
