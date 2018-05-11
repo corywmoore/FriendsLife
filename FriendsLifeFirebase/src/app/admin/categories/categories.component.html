@@ -8,6 +8,8 @@
       </div>
       <div class="row input-div">
         <input type="hidden" name="id" #id="ngModel" [(ngModel)]="selectedCategory.id">
+        <input type="hidden" name="activities" #id="ngModel" [(ngModel)]="selectedCategory.activities">
+        <input type="hidden" name="imageUrl" #id="ngModel" [(ngModel)]="selectedCategory.imageUrl">
         <div class="form-group col-xs-4 d-flex flex-column">
           <label class="txt-green txt-group">Name</label>
           <input type="text" placeholder="Name" [(ngModel)]="selectedCategory.name" name="name" class="txt txt-input">
@@ -23,7 +25,6 @@
           <button type="button" (click)="categoryEdit(editCategoryForm)" class="btn btn-success">Save Changes</button>
         </div>
       </div>
-
     </div>
   </form>
 </div>
@@ -40,7 +41,6 @@
     <tr class="table-striped" *ngFor="let category of categories; let idx = index">
       <td>{{category.name}}</td>
       <td>{{category.description}}</td>
-
       <td *ngIf="!category.imageUrl">
         <label>
           <input type="file" class="button" (change)="detectFile($event, category)">

@@ -23,6 +23,7 @@ export class AdminCategoriesComponent implements OnInit {
 
   ngOnInit() {
     this.cs.getCategories((data)=>{
+      console.log("data", data);
       this.categories = data;
     });
   }
