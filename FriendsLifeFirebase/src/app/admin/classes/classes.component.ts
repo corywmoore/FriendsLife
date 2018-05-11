@@ -11,8 +11,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class AdminClassesComponent implements OnInit {
 
   public selectedClass : Class = new Class();
-  public category;
-  public selection = {id: null};
+  public selectedCategory;
+  public category = {id: null};
   public categories;
   public classes;
   public class;
@@ -40,7 +40,7 @@ export class AdminClassesComponent implements OnInit {
     });
     this.classesAddForm = this.formBuilder.group({
       id: null,
-      category: '',
+      selectedCategory: '',
       days: [],
       morning: false,
       afternoon: false
@@ -52,7 +52,8 @@ export class AdminClassesComponent implements OnInit {
   }
 
   public categoryAdd(form) {
-    form.value.category = this.category;
+    form.value.category = this.categories.find((elem)=>{return elem.id === this.selectedCategory});
+    form.value.category.uiId = Date.now();
     form.value.daysDisplay = this.cs.formatDaysforDisplay(form.value.days);
     form.value.timesDisplay = this.cs.formatTimesforDisplay(form.value.morning, form.value.afternoon);
     let category = this.categoryFormat(form);
@@ -63,43 +64,45 @@ export class AdminClassesComponent implements OnInit {
 
     this.selectedClass.categories.push(category);
     this.cs.updateClass(this.selectedClass);
-    this.selectedClass = null;
+    this.selectedCategory = null;
     this.resetForm(form);
   }
 
   public onCategoryClick(category) {
-    this.selection = category;
+    this.category = category;
+    this.selectedCategory = category.id;
     this.afternoon = category.afternoon;
     this.morning = category.morning;
-    this.category = {"id": category.id, "name": category.name, "description": category.description, "activities": category.activities};
     this.selectedDays = category.days;
   }
 
   public categoryEdit(form) {
+    form.value.category = this.category;
     form.value.daysDisplay = this.cs.formatDaysforDisplay(form.value.days);
     form.value.timesDisplay = this.cs.formatTimesforDisplay(form.value.morning, form.value.afternoon);
     let category = this.categoryFormat(form);
     for (let i=0; i < this.selectedClass.categories.length; i++) {
-      if (this.selectedClass.categories[i].id === category.id) {
+      if (this.selectedClass.categories[i].uiId === category.uiId) {
         this.selectedClass.categories[i] = category;
         break;
       }
     }
 
     this.cs.updateClass(this.selectedClass);
+    this.selectedCategory = null;
+    this.category.id = null;
     this.resetForm(form);
   }
 
   public categoryDelete(category) {
-    console.log("category", category);
-    // let tempArray = [];
-    // cat.activities.map(a=> {
-    //   if (a.id != act.id) {
-    //     tempArray.push(a);
-    //   }
-    // });
-    // cat.activities = tempArray;
-    // this.cs.updateCategory(cat);
+    let tempArray = [];
+    this.selectedClass.categories.map(c=> {
+      if (c.uiId != category.uiId) {
+        tempArray.push(c);
+      }
+    });
+    this.selectedClass.categories = tempArray;
+    this.cs.updateClass(this.selectedClass);
   }
 
   public onClassClick(cl) {
@@ -109,6 +112,9 @@ export class AdminClassesComponent implements OnInit {
 
   public viewCategories(cl) {
     this.selectedClass = cl;
+    this.cs.getCategories((data)=> {
+      this.categories = data;
+    });
     this.showCategories = true;
     this.showClasses = false;
   }
@@ -133,7 +139,8 @@ export class AdminClassesComponent implements OnInit {
 
   private categoryFormat(form) {
 
-    let obj = {
+    return Object.assign({
+      uiId: form.value.category.uiId,
       id: form.value.category.id,
       name: form.value.category.name,
       description: form.value.category.description,
@@ -143,8 +150,6 @@ export class AdminClassesComponent implements OnInit {
       morning: form.value.morning,
       afternoon: form.value.afternoon,
       timesDisplay: form.value.timesDisplay
-    };
-
-    return Object.assign({obj}, new Category());
+    }, new Category());
   }
 }
