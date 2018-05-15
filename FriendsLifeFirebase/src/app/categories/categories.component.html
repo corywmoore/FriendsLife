@@ -1,29 +1,45 @@
 <div class="container">
 
-  <div *ngIf="categoryDays">
-    <div *ngFor="let catday of categoryDays; let i = index">
-      <h3 class="txt-blue home-header">
-        Availability for {{catday.day}}
-        <br>
-        <small>Please select up to 3 categories</small>
-      </h3>
-      <div class="row" *ngIf="catday">
-        <div class="col-4" *ngFor="let cat of catday.categories; let j = index">
-          <div class="card" [ngClass]="{'green-bg': cat.selected}" (click)="selectCategory(i, j)">
-            <div class="card-block">
-              <h4>{{cat.name}}</h4>
-              <img [src]="cat.imgUrl" alt="">
-            </div>
+  <div *ngIf="currentDay.mornCategories.length > 0">
+    <h3 class="txt-blue home-header">
+      Availability for {{currentDay.day}} Morning
+      <br>
+      <small>Please select up to 3 categories</small>
+    </h3>
+    <div class="row">
+      <div class="col-4" *ngFor="let mornCat of currentDay.mornCategories; let i = index">
+        <div class="card" [ngClass]="{'green-bg': mornCat.selected}" (click)="selectMornCategory(i)">
+          <div class="card-block">
+            <h4>{{mornCat.name}}</h4>
+            <img [src]="mornCat.imgUrl" alt="">
           </div>
         </div>
       </div>
     </div>
-
+  </div>
+  <div *ngIf="currentDay.aftCategories.length > 0">
+    <h3 class="txt-blue home-header">
+      Availability for {{currentDay.day}} Afternoon
+      <br>
+      <small>Please select up to 3 categories</small>
+    </h3>
+    <div class="row">
+      <div class="col-4" *ngFor="let aftCat of currentDay.aftCategories; let j = index">
+        <div class="card" [ngClass]="{'green-bg': aftCat.selected}" (click)="selectAftCategory(j)">
+          <div class="card-block">
+            <h4>{{aftCat.name}}</h4>
+            <img [src]="aftCat.imgUrl" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="row">
     <div class="col-12">
-      <div class="btn btn-primary mt-5" (click)="submitCategories()">Next</div>
+      <div *ngIf="previousDay != null"class="btn btn-primary mt-5" (click)="setPreviousDay()"><i class="fas fa-angle-double-left left"></i>{{previousDay.day}}</div>
+      <!--<div *ngIf="currentDay.aftCategories.length > 0"class="btn btn-primary mt-5" (click)="submitCategories()">Next</div>-->
+      <div *ngIf="nextDay != null"class="btn btn-primary mt-5" (click)="setNextDay()">{{nextDay.day}}<i class="fas fa-angle-double-right right"></i></div>
     </div>
   </div>
 

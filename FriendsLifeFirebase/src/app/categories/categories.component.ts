@@ -24,16 +24,16 @@ export class CategoriesComponent implements OnInit {
             let catday = this.formatDay(a.day);
             if ((c.morning && c.afternoon) && (a.morning && a.afternoon)) {
               let cat = this.formatCategory(c);
-              catday.mornCategories.push(cat);
-              catday.aftCategories.push(cat);
+              catday.mornCategories.push(Object.assign({}, cat));
+              catday.aftCategories.push(Object.assign({}, cat));
             }
             else if (c.morning && a.morning) {
               let cat = this.formatCategory(c);
-              catday.mornCategories.push(cat);
+              catday.mornCategories.push(Object.assign({}, cat));
             }
             else if (c.afternoon && a.afternoon) {
               let cat = this.formatCategory(c);
-              catday.aftCategories.push(cat);
+              catday.aftCategories.push(Object.assign({}, cat));
             }
             this.categoryDays.push(catday);
           } else if (this.dayExists(a.day) && !this.categoryExists(c.name)) {
@@ -42,16 +42,16 @@ export class CategoriesComponent implements OnInit {
                 let catday = cd;
                 if ((c.morning && c.afternoon) && (a.morning && a.afternoon)) {
                   let cat = this.formatCategory(c);
-                  catday.mornCategories.push(cat);
-                  catday.aftCategories.push(cat);
+                  catday.mornCategories.push(Object.assign({}, cat));
+                  catday.aftCategories.push(Object.assign({}, cat));
                 }
                  else if (c.morning && a.morning) {
                   let cat = this.formatCategory(c);
-                  catday.mornCategories.push(cat);
+                  catday.mornCategories.push(Object.assign({}, cat));
                 }
                 else if (c.afternoon && a.afternoon) {
                   let cat = this.formatCategory(c);
-                  catday.aftCategories.push(cat);
+                  catday.aftCategories.push(Object.assign({}, cat));
                 }
               }
             });
@@ -59,16 +59,15 @@ export class CategoriesComponent implements OnInit {
         }
       });
     });
-      console.log("this.categoryDays", this.categoryDays);
+
     this.currentDay = this.categoryDays[0];
     this.nextDay = this.categoryDays[1];
-    this.setNextDay();
   }
 
-  selectCategory(dayIndex: number, catIndex: number) {
-    console.log(dayIndex + ' ' + catIndex);
-    this.categoryDays[dayIndex].categories[catIndex].selected = !this.categoryDays[dayIndex].categories[catIndex].selected;
-    console.log(this.categoryDays[dayIndex].categories[catIndex].selected);
+  selectMornCategory(catIndex: number) {
+    this.currentDay.mornCategories[catIndex].selected = !this.currentDay.mornCategories[catIndex].selected;
+    let dayIndex = this.categoryDays.map(d=>{return d.day}).indexOf(this.currentDay.day);
+    this.categoryDays[dayIndex].mornCategories[catIndex].selected = this.currentDay.mornCategories[catIndex].selected;
   }
 
   submitCategories() {
@@ -76,7 +75,17 @@ export class CategoriesComponent implements OnInit {
   }
 
   public setNextDay() {
+    let dayIndex = this.categoryDays.map(d=>{return d.day}).indexOf(this.currentDay.day);
+    this.previousDay = this.categoryDays[dayIndex];
+    this.currentDay = this.categoryDays[dayIndex + 1];
+    this.nextDay = this.categoryDays[dayIndex + 2];
+  }
 
+  public setPreviousDay() {
+    let dayIndex = this.categoryDays.map(d=>{return d.day}).indexOf(this.currentDay.day);
+    this.previousDay = this.categoryDays[dayIndex - 2];
+    this.currentDay = this.categoryDays[dayIndex - 1];
+    this.nextDay = this.categoryDays[dayIndex];
   }
 
   private formatDay(day) {
@@ -115,7 +124,7 @@ export class CategoriesComponent implements OnInit {
     let categoryExists = false;
     if (this.categoryDays.length > 0) {
       this.categoryDays.map((c)=> {
-        if (c.name === name) {
+        if (c.day === name) {
           categoryExists = true;
         }
       });
