@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router  } from '@angular/router';
+import { Router } from '@angular/router';
 import { SelectionService } from '../services/selection/selection.service';
 import { Friend } from '../models/friend.model';
 import { NgForm } from '@angular/forms';
@@ -17,19 +17,24 @@ export class FriendComponent implements OnInit {
   error: any;
   friends;
   userName: string;
-  friend: string;
+  friend;
   firstName: string;
   lastName: string;
   nickName: string;
   classes;
   class;
-  constructor(private router: Router, private fs : FriendService, private cs : ClassService) { }
+  constructor(
+    private router: Router,
+    private fs: FriendService,
+    private cs: ClassService,
+    private ss: SelectionService
+  ) { }
 
   ngOnInit() {
-    this.fs.getFriends((data)=>{
+    this.fs.getFriends((data) => {
       this.friends = data;
     });
-    this.cs.getClasses((data)=>{
+    this.cs.getClasses((data) => {
       this.classes = data;
     });
   }
@@ -37,7 +42,21 @@ export class FriendComponent implements OnInit {
   friendSelect() {
     localStorage.setItem('selectedFriend', JSON.stringify(this.friend));
     localStorage.setItem('selectedClass', JSON.stringify(this.class));
-    this.router.navigate(['availability']);
+
+    console.log('friend', this.friend);
+    console.log('classes', this.class);
+
+    this.ss.getSelection(this.friend.id, this.class.id)
+      .then((isSelection: boolean) => {
+        if (isSelection) {
+          this.router.navigate(['availability']);
+        } else {
+          this.ss.createSelection(this.friend.id, this.class.id)
+            .then((selectionId: string) => {
+              this.router.navigate(['availability']);
+            });
+        }
+      });
   }
 
   friendAdd(friend) {
@@ -45,7 +64,7 @@ export class FriendComponent implements OnInit {
     this.resetForm(friend);
   }
 
-  resetForm(form? : NgForm) {
+  resetForm(form?: NgForm) {
     if (form != null) {
       form.reset();
     }
