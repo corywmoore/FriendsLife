@@ -145,10 +145,11 @@ export class AdminClassesComponent implements OnInit {
       name: form.value.category.name,
       description: form.value.category.description,
       activities: form.value.category.activities,
+      imageUrl: form.value.category.imageUrl,
       days: form.value.days,
       daysDisplay: form.value.daysDisplay,
-      morning: form.value.morning,
-      afternoon: form.value.afternoon,
+      morning: form.value.morning ? form.value.morning : false,
+      afternoon: form.value.afternoon ? form.value.afternoon : false,
       timesDisplay: form.value.timesDisplay
     }, new Category());
   }

@@ -8,84 +8,61 @@ import { Router } from '@angular/router';
 })
 export class CategoriesComponent implements OnInit {
   public categoryDays: CategoryDays[];
-
+  public class = JSON.parse(localStorage.getItem('selectedClass'));
+  public availability = JSON.parse(localStorage.getItem('selectedAvailability'));
+  public currentDay = null;
+  public nextDay = null;
+  public previousDay = null;
   constructor(private router: Router) { }
 
   ngOnInit() {
     this.categoryDays = [];
-
-    let catday = new CategoryDays();
-    catday.day = "Monday";
-    catday.categories = [];
-
-    let cat = new Category();
-    cat.title = "Cooking";
-    cat.selected = false;
-    cat.imgUrl = "../../assets/cooking-foodprep.png";
-    catday.categories.push(cat);
-    cat = new Category();
-
-    cat.title = "Visual Arts";
-    cat.selected = false;
-    cat.imgUrl = "../../assets/cooking-kitchentools.png";
-    catday.categories.push(cat);
-    cat = new Category();
-
-    cat.title = "Performing Arts";
-    cat.selected = false;
-    cat.imgUrl = "../../assets/cooking-shopping.png";
-    catday.categories.push(cat);
-    this.categoryDays.push(catday);
-
-
-    catday = new CategoryDays();
-    catday.day = "Wednesday";
-    catday.categories = [];
-
-    cat = new Category();
-    cat.title = "Cooking";
-    cat.selected = false;
-    cat.imgUrl = "../../assets/cooking-foodprep.png";
-    catday.categories.push(cat);
-
-    cat = new Category();
-    cat.title = "Visual Arts";
-    cat.selected = false;
-    cat.imgUrl = "../../assets/cooking-kitchentools.png";
-    catday.categories.push(cat);
-
-    cat = new Category();
-    cat.title = "Performing Arts";
-    cat.selected = false;
-    cat.imgUrl = "../../assets/cooking-shopping.png";
-    catday.categories.push(cat);
-    this.categoryDays.push(catday);
-
-
-    catday = new CategoryDays();
-    catday.day = "Friday";
-    catday.categories = [];
-
-    cat = new Category();
-    cat.title = "Cooking";
-    cat.selected = false;
-    cat.imgUrl = "../../assets/cooking-foodprep.png";
-    catday.categories.push(cat);
-
-    cat = new Category();
-    cat.title = "Visual Arts";
-    cat.selected = false;
-    cat.imgUrl = "../../assets/cooking-kitchentools.png";
-    catday.categories.push(cat);
-
-    cat = new Category();
-    cat.title = "Performing Arts";
-    cat.selected = false;
-    cat.imgUrl = "../../assets/cooking-shopping.png";
-    catday.categories.push(cat);
-    this.categoryDays.push(catday);
-
-    console.log(this.categoryDays);
+    this.availability.map((a)=> {
+      this.class.categories.map((c)=> {
+        if (c.days.some(d => d.itemName === a.day)) {
+          if (!this.dayExists(a.day) && !this.categoryExists(c.name)) {
+            let catday = this.formatDay(a.day);
+            if ((c.morning && c.afternoon) && (a.morning && a.afternoon)) {
+              let cat = this.formatCategory(c);
+              catday.mornCategories.push(cat);
+              catday.aftCategories.push(cat);
+            }
+            else if (c.morning && a.morning) {
+              let cat = this.formatCategory(c);
+              catday.mornCategories.push(cat);
+            }
+            else if (c.afternoon && a.afternoon) {
+              let cat = this.formatCategory(c);
+              catday.aftCategories.push(cat);
+            }
+            this.categoryDays.push(catday);
+          } else if (this.dayExists(a.day) && !this.categoryExists(c.name)) {
+            this.categoryDays.map((cd)=> {
+              if (cd.day === a.day) {
+                let catday = cd;
+                if ((c.morning && c.afternoon) && (a.morning && a.afternoon)) {
+                  let cat = this.formatCategory(c);
+                  catday.mornCategories.push(cat);
+                  catday.aftCategories.push(cat);
+                }
+                 else if (c.morning && a.morning) {
+                  let cat = this.formatCategory(c);
+                  catday.mornCategories.push(cat);
+                }
+                else if (c.afternoon && a.afternoon) {
+                  let cat = this.formatCategory(c);
+                  catday.aftCategories.push(cat);
+                }
+              }
+            });
+          }
+        }
+      });
+    });
+      console.log("this.categoryDays", this.categoryDays);
+    this.currentDay = this.categoryDays[0];
+    this.nextDay = this.categoryDays[1];
+    this.setNextDay();
   }
 
   selectCategory(dayIndex: number, catIndex: number) {
@@ -97,15 +74,67 @@ export class CategoriesComponent implements OnInit {
   submitCategories() {
     this.router.navigate(['activities']);
   }
+
+  public setNextDay() {
+
+  }
+
+  private formatDay(day) {
+    let catday = new CategoryDays();
+    catday.day = day;
+    catday.mornCategories = [];
+    catday.aftCategories = [];
+    return catday;
+  }
+
+  private formatCategory(cat) {
+    let category = new Category();
+    category.id = cat.id;
+    category.name =  cat.name;
+    category.imgUrl =  cat.imageUrl;
+    category.selected =false;
+    category.activities = cat.activities;
+
+    return category;
+  }
+
+  private dayExists(day) {
+    let dayExists = false;
+    if (this.categoryDays.length > 0) {
+      this.categoryDays.map((c)=> {
+        if (c.day === day) {
+          dayExists = true;
+        }
+      });
+    }
+
+    return dayExists;
+  }
+
+  private categoryExists(name) {
+    let categoryExists = false;
+    if (this.categoryDays.length > 0) {
+      this.categoryDays.map((c)=> {
+        if (c.name === name) {
+          categoryExists = true;
+        }
+      });
+    }
+
+    return categoryExists;
+  }
 }
 
 export class CategoryDays {
   day: string;
-  categories: Category[];
+  mornCategories: Category[];
+  aftCategories: Category[];
 }
 
 export class Category {
-  title: string;
+  id: string;
+  name: string;
   imgUrl: string;
   selected: boolean;
+  activities = [];
 }

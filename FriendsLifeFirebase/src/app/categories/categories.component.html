@@ -11,7 +11,7 @@
         <div class="col-4" *ngFor="let cat of catday.categories; let j = index">
           <div class="card" [ngClass]="{'green-bg': cat.selected}" (click)="selectCategory(i, j)">
             <div class="card-block">
-              <h4>{{cat.title}}</h4>
+              <h4>{{cat.name}}</h4>
               <img [src]="cat.imgUrl" alt="">
             </div>
           </div>
