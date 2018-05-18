@@ -46,7 +46,7 @@ export class FriendComponent implements OnInit {
     console.log('friend', this.friend);
     console.log('classes', this.class);
 
-    this.ss.getSelection(this.friend.id, this.class.id)
+    this.ss.getSelectionByFriend(this.friend.id, this.class.id)
       .then((isSelection: boolean) => {
         if (isSelection) {
           this.router.navigate(['availability']);
