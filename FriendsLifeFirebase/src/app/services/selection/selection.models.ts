@@ -1,7 +1,10 @@
 export class SelectionModel {
     classesId: string;
     uId: string;
-    availabilities: AvailabilityModel[]
+    availabilities: AvailabilityModel[];
+    firstName: string;
+    lastName: string;
+    nickName: string;
 }
 
 export class AvailabilityModel {
