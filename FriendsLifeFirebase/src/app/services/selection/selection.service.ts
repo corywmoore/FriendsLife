@@ -55,10 +55,13 @@ export class SelectionService {
       });
   }
 
-  createSelection(uId: string, classesId: string): Promise<string> {
+  createSelection(classesId: string, friend: any): Promise<string> {
     return this.selectionsCollection.ref.add({
-      uId: uId,
-      classesId: classesId
+      uId: friend.id,
+      classesId: classesId,
+      firstName: friend.firstName,
+      lastName: friend.lastName,
+      nickName: friend.nickName
     }).then((docRef: DocumentReference) => {
       localStorage.setItem('selectionId', docRef.id);
       return docRef.id;
