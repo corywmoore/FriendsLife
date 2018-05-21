@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ClassService } from '../services/class/class.service';
 
 @Component({
   selector: 'app-categories',
@@ -8,12 +9,21 @@ import { Router } from '@angular/router';
 })
 export class CategoriesComponent implements OnInit {
   public categoryDays: CategoryDays[];
+  public categories;
   public class = JSON.parse(localStorage.getItem('selectedClass'));
   public availability = JSON.parse(localStorage.getItem('selectedAvailability'));
   public currentDay = null;
   public nextDay = null;
   public previousDay = null;
-  constructor(private router: Router) { }
+
+  constructor(
+    private router: Router,
+    private classService: ClassService
+  ) {
+    this.classService.getCategories((data) => {
+      this.categories = data;
+     });
+  }
 
   ngOnInit() {
     this.categoryDays = [];

@@ -1,6 +1,9 @@
 import { Component, OnInit, Renderer } from '@angular/core';
 import { Router } from "@angular/router";
 import * as _ from 'lodash';
+import { SelectionService } from '../services/selection/selection.service';
+import { DocumentSnapshot } from '@firebase/firestore-types';
+import { SelectionModel, AvailabilityModel, AvailabilityDisplayModel, AvailabilityDisplayObject } from '../services/selection/selection.models';
 
 @Component({
   selector: 'app-availability',
@@ -9,88 +12,64 @@ import * as _ from 'lodash';
 })
 export class AvailabilityComponent implements OnInit {
 
-  public selection: DateTimeSelection[] = [];
+  public availability: AvailabilityDisplayModel[] = AvailabilityDisplayObject;
   public warning = false;
-  public selectedFriend;
+  public selection: SelectionModel;
+  public selectionId;
 
-  constructor(private renderer: Renderer, private router: Router) { }
+  constructor(
+    private renderer: Renderer,
+    private router: Router,
+    private ss: SelectionService
 
-  ngOnInit() {
-    let friend =JSON.parse(localStorage.getItem('selectedFriend'));
-    this.selectedFriend = friend;
-  }
-
-  public dateTimeClicked($event: any, time: string, day: string) {
-    var index = _.findIndex(this.selection, (item: DateTimeSelection) => {
-      return day === item.day && time === item.time;
+  ) {
+    this.selectionId = localStorage.getItem('selectionId');
+    this.ss.getSelection(this.selectionId).subscribe((payload: DocumentSnapshot) => {
+      this.selection = new SelectionModel();
+      this.selection = payload.data() as SelectionModel;
     });
 
-    var el = ($event.target.childElementCount > 0) ? $event.target : $event.target.parentElement;
+    this.ss.getAvailabilities(this.selectionId).subscribe((data) => {
+      for (let av of data) {
+        let item = _.find(this.availability, (i: AvailabilityDisplayModel) => {
+          return i.DayName === av.day && i.TimeValue === av.time;
+        });
 
-    if(index < 0) {
-      if (this.selection.length > 0) {
-        //Checking for duplicates, then combining.
-        let dayExists = this.dayCheck(day);
-        if (dayExists) {
-          this.selection.map((s)=> {
-            if (s.day === day) {
-              if (time === 'PM' && !s.afternoon) {
-                s.afternoon = time === 'PM';
-              } else if (time === 'AM' && !s.morning) {
-                s.morning = time === 'AM';
-              } else if (s.afternoon && s.morning) {
-                return;
-              }
-            }
-          });
-        } else {
-          let dt = new DateTimeSelection();
-          dt.day = day;
-          dt.morning = time === 'AM';
-          dt.afternoon = time === 'PM';
-          dt.time = time;
-          this.selection.push(dt);
+        if(item) { 
+          item.itemId = av.id;
         }
-      } else {
-        let dt = new DateTimeSelection();
-        dt.day = day;
-        dt.morning = time === 'AM';
-        dt.afternoon = time === 'PM';
-        dt.time = time;
-        this.selection.push(dt);
       }
-      this.renderer.setElementClass(el, 'green-bg', true);
-      this.warning = false;
+    });
+  }
+
+  ngOnInit() { }
+
+  public dateTimeClicked(id: string, index: number) {
+    let item = this.availability[index];
+
+    if (id) {
+      this.ss.deleteAvailability(this.selectionId, id)
+        .then(() => {
+          item.itemId = '';
+        });
     } else {
-      this.selection.splice(index, 1);
-      this.renderer.setElementClass(el, 'green-bg', false);
+      const av = new AvailabilityModel();
+      av.day = item.DayName;
+      av.time = item.TimeValue;
+      this.ss.addAvailability(this.selectionId, av)
+        .then((id) => {
+          this.availability[index].itemId = id;
+        });
     }
   }
 
   public validateAndRoute() {
-    if(this.selection.length < 1) {
+    if (this.availability.length < 1) {
       this.warning = true;
     } else {
-      localStorage.setItem('selectedAvailability', JSON.stringify(this.selection));
+      localStorage.setItem('selectedAvailability', JSON.stringify(this.availability));
       this.router.navigate(['categories']);
     }
   }
-
-  private dayCheck(day) {
-    let isThere =false;
-    this.selection.map((s)=> {
-      if (s.day === day) {
-        isThere = true;
-      }
-    });
-
-    return isThere;
-  }
 }
 
-export class DateTimeSelection {
-  day: string;
-  time: string;
-  morning: boolean = false;
-  afternoon: boolean = false;
-}
