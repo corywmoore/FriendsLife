@@ -18,29 +18,13 @@ export class SelectionService {
   constructor(private afs: AngularFirestore) {
     this.selectionsCollection = this.afs.collection('selections');
     this.categoriesCollection = this.afs.collection('categories');
+    this.classesCollection = this.afs.collection('classes');
   }
 
   getSelectionByFriend(uId: string, classesId: string): Promise<boolean> {
     return this.selectionsCollection.ref
       .where('uId', '==', uId)
       .where('classesId', '==', classesId)
-      .get()
-      .then((snapshot: QuerySnapshot) => {
-        if (!snapshot.empty) {
-          const selectionSnap = snapshot.docs[0];
-          localStorage.setItem('selectionId', selectionSnap.id);
-          console.log(localStorage.getItem('selectionId'));
-          return true;
-        } else {
-          console.log('no selectionId');
-          return false;
-        }
-      });
-  }
-
-  getSelectionById(id: string) {
-    return this.selectionsCollection.ref
-      .where('id', '==', id)
       .get()
       .then((snapshot: QuerySnapshot) => {
         if (!snapshot.empty) {
@@ -79,7 +63,7 @@ export class SelectionService {
 
   getAvailabilities(selectionId: string): Observable<any[]> {
     let ref = this.afs.collection('selections').doc(selectionId).collection('availabilities');
-  
+
     return ref.snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as AvailabilityModel[];

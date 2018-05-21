@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore'
+import { QuerySnapshot, DocumentReference, DocumentSnapshot } from '@firebase/firestore-types';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -7,6 +8,7 @@ import 'rxjs/add/operator/map';
 export class ClassService {
   classesCollection: AngularFirestoreCollection<any> = this.afs.collection('classes');
   categoriesCollection: AngularFirestoreCollection<any> = this.afs.collection('categories');
+  selectionsCollection: AngularFirestoreCollection<any> = this.afs.collection('selections');
   classes: Observable<any[]>;
 
   constructor(private afs : AngularFirestore) { }
@@ -34,6 +36,30 @@ export class ClassService {
     });
 
     this.classes.subscribe(data => cb(data));
+  }
+
+  getClassesById(id: string) {
+    return this.selectionsCollection.doc(id).ref
+      .get()
+      .then((selectionSnap: DocumentSnapshot) => {
+        if (selectionSnap.exists) {
+          const selection = selectionSnap.data();
+          localStorage.setItem('selectionId', selectionSnap.data().id);
+          return this.classesCollection.doc(selection.classesId).ref
+            .get()
+            .then((classesSnap: DocumentSnapshot) => {
+              if (classesSnap.exists) {
+                let cl = classesSnap.data();
+                cl.classesId = selection.classesId;
+                return cl;
+              } else {
+                console.log('no classes found with that id');
+              }
+            });
+        } else {
+          console.log('no selectionId');
+        }
+      });
   }
 
   addClass(cl) {

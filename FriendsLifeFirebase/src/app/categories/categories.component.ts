@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClassService } from '../services/class/class.service';
+import { SelectionService } from '../services/selection/selection.service';
 
 @Component({
   selector: 'app-categories',
@@ -10,68 +11,81 @@ import { ClassService } from '../services/class/class.service';
 export class CategoriesComponent implements OnInit {
   public categoryDays: CategoryDays[];
   public categories;
-  public class = JSON.parse(localStorage.getItem('selectedClass'));
+  public class;
   public availability = JSON.parse(localStorage.getItem('selectedAvailability'));
+  public friend = JSON.parse(localStorage.getItem('selectedFriend'));
+  public selection = localStorage.getItem('selectionId');
   public currentDay = null;
   public nextDay = null;
   public previousDay = null;
 
   constructor(
     private router: Router,
-    private classService: ClassService
+    private classService: ClassService,
+    private selectionService: SelectionService
   ) {
+    console.log("this", this);
     this.classService.getCategories((data) => {
       this.categories = data;
      });
+    this.classService.getClassesById(this.selection).then((data)=> {
+      this.class = data;
+      this.formatAvailibilty();
+    });
   }
 
   ngOnInit() {
     this.categoryDays = [];
-    this.availability.map((a)=> {
-      this.class.categories.map((c)=> {
-        if (c.days.some(d => d.itemName === a.day)) {
-          if (!this.dayExists(a.day) && !this.categoryExists(c.name)) {
-            let catday = this.formatDay(a.day);
-            if ((c.morning && c.afternoon) && (a.morning && a.afternoon)) {
-              let cat = this.formatCategory(c);
-              catday.mornCategories.push(Object.assign({}, cat));
-              catday.aftCategories.push(Object.assign({}, cat));
-            }
-            else if (c.morning && a.morning) {
-              let cat = this.formatCategory(c);
-              catday.mornCategories.push(Object.assign({}, cat));
-            }
-            else if (c.afternoon && a.afternoon) {
-              let cat = this.formatCategory(c);
-              catday.aftCategories.push(Object.assign({}, cat));
-            }
-            this.categoryDays.push(catday);
-          } else if (this.dayExists(a.day) && !this.categoryExists(c.name)) {
-            this.categoryDays.map((cd)=> {
-              if (cd.day === a.day) {
-                let catday = cd;
-                if ((c.morning && c.afternoon) && (a.morning && a.afternoon)) {
-                  let cat = this.formatCategory(c);
-                  catday.mornCategories.push(Object.assign({}, cat));
-                  catday.aftCategories.push(Object.assign({}, cat));
-                }
-                 else if (c.morning && a.morning) {
-                  let cat = this.formatCategory(c);
-                  catday.mornCategories.push(Object.assign({}, cat));
-                }
-                else if (c.afternoon && a.afternoon) {
-                  let cat = this.formatCategory(c);
-                  catday.aftCategories.push(Object.assign({}, cat));
-                }
-              }
-            });
-          }
-        }
-      });
-    });
+    // this.availability.map((a)=> {
+    //   this.class.categories.map((c)=> {
+    //     if (c.days.some(d => d.itemName === a.day)) {
+    //       if (!this.dayExists(a.day) && !this.categoryExists(c.name)) {
+    //         let catday = this.formatDay(a.day);
+    //         if ((c.morning && c.afternoon) && (a.morning && a.afternoon)) {
+    //           let cat = this.formatCategory(c);
+    //           catday.mornCategories.push(Object.assign({}, cat));
+    //           catday.aftCategories.push(Object.assign({}, cat));
+    //         }
+    //         else if (c.morning && a.morning) {
+    //           let cat = this.formatCategory(c);
+    //           catday.mornCategories.push(Object.assign({}, cat));
+    //         }
+    //         else if (c.afternoon && a.afternoon) {
+    //           let cat = this.formatCategory(c);
+    //           catday.aftCategories.push(Object.assign({}, cat));
+    //         }
+    //         this.categoryDays.push(catday);
+    //       } else if (this.dayExists(a.day) && !this.categoryExists(c.name)) {
+    //         this.categoryDays.map((cd)=> {
+    //           if (cd.day === a.day) {
+    //             let catday = cd;
+    //             if ((c.morning && c.afternoon) && (a.morning && a.afternoon)) {
+    //               let cat = this.formatCategory(c);
+    //               catday.mornCategories.push(Object.assign({}, cat));
+    //               catday.aftCategories.push(Object.assign({}, cat));
+    //             }
+    //              else if (c.morning && a.morning) {
+    //               let cat = this.formatCategory(c);
+    //               catday.mornCategories.push(Object.assign({}, cat));
+    //             }
+    //             else if (c.afternoon && a.afternoon) {
+    //               let cat = this.formatCategory(c);
+    //               catday.aftCategories.push(Object.assign({}, cat));
+    //             }
+    //           }
+    //         });
+    //       }
+    //     }
+    //   });
+    // });
 
     this.currentDay = this.categoryDays[0];
     this.nextDay = this.categoryDays[1];
+  }
+
+  formatAvailibilty() {
+    console.log("this", this);
+    debugger;
   }
 
   selectMornCategory(catIndex: number) {
