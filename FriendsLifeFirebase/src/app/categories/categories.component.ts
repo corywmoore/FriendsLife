@@ -24,68 +24,62 @@ export class CategoriesComponent implements OnInit {
     private classService: ClassService,
     private selectionService: SelectionService
   ) {
-    console.log("this", this);
+    if (this.selection == "undefined") {
+      this.router.navigate(['friend']);
+    }
     this.classService.getCategories((data) => {
       this.categories = data;
      });
     this.classService.getClassesById(this.selection).then((data)=> {
       this.class = data;
-      this.formatAvailibilty();
+      this.selectionService.getAvailabilities(this.selection).subscribe((data) => {
+        this.availability = data;
+        this.formatAvailibilty();
+      });
     });
   }
 
   ngOnInit() {
     this.categoryDays = [];
-    // this.availability.map((a)=> {
-    //   this.class.categories.map((c)=> {
-    //     if (c.days.some(d => d.itemName === a.day)) {
-    //       if (!this.dayExists(a.day) && !this.categoryExists(c.name)) {
-    //         let catday = this.formatDay(a.day);
-    //         if ((c.morning && c.afternoon) && (a.morning && a.afternoon)) {
-    //           let cat = this.formatCategory(c);
-    //           catday.mornCategories.push(Object.assign({}, cat));
-    //           catday.aftCategories.push(Object.assign({}, cat));
-    //         }
-    //         else if (c.morning && a.morning) {
-    //           let cat = this.formatCategory(c);
-    //           catday.mornCategories.push(Object.assign({}, cat));
-    //         }
-    //         else if (c.afternoon && a.afternoon) {
-    //           let cat = this.formatCategory(c);
-    //           catday.aftCategories.push(Object.assign({}, cat));
-    //         }
-    //         this.categoryDays.push(catday);
-    //       } else if (this.dayExists(a.day) && !this.categoryExists(c.name)) {
-    //         this.categoryDays.map((cd)=> {
-    //           if (cd.day === a.day) {
-    //             let catday = cd;
-    //             if ((c.morning && c.afternoon) && (a.morning && a.afternoon)) {
-    //               let cat = this.formatCategory(c);
-    //               catday.mornCategories.push(Object.assign({}, cat));
-    //               catday.aftCategories.push(Object.assign({}, cat));
-    //             }
-    //              else if (c.morning && a.morning) {
-    //               let cat = this.formatCategory(c);
-    //               catday.mornCategories.push(Object.assign({}, cat));
-    //             }
-    //             else if (c.afternoon && a.afternoon) {
-    //               let cat = this.formatCategory(c);
-    //               catday.aftCategories.push(Object.assign({}, cat));
-    //             }
-    //           }
-    //         });
-    //       }
-    //     }
-    //   });
-    // });
 
-    this.currentDay = this.categoryDays[0];
-    this.nextDay = this.categoryDays[1];
   }
 
   formatAvailibilty() {
-    console.log("this", this);
-    debugger;
+    this.availability.map((a)=> {
+      this.class.categories.map((c)=> {
+        if (c.days.some(d => d.itemName === a.day)) {
+          if (!this.dayExists(a.day) && !this.categoryExists(c.name)) {
+            let catday = this.formatDay(a.day);
+            if (c.morning && a.time == "AM") {
+              let cat = this.formatCategory(c);
+              catday.mornCategories.push(Object.assign({}, cat));
+            }
+            else if (c.afternoon && a.time == "PM") {
+              let cat = this.formatCategory(c);
+              catday.aftCategories.push(Object.assign({}, cat));
+            }
+            this.categoryDays.push(catday);
+          } else if (this.dayExists(a.day) && !this.categoryExists(c.name)) {
+            this.categoryDays.map((cd)=> {
+              if (cd.day === a.day) {
+                let catday = cd;
+                if (c.morning && a.time == "AM") {
+                  let cat = this.formatCategory(c);
+                  catday.mornCategories.push(Object.assign({}, cat));
+                }
+                else if (c.afternoon && a.time == "PM") {
+                  let cat = this.formatCategory(c);
+                  catday.aftCategories.push(Object.assign({}, cat));
+                }
+              }
+            });
+          }
+        }
+      });
+    });
+
+    this.currentDay = this.categoryDays[0];
+    this.nextDay = this.categoryDays[1];
   }
 
   selectMornCategory(catIndex: number) {

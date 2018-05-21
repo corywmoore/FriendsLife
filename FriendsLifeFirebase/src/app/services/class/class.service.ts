@@ -44,7 +44,6 @@ export class ClassService {
       .then((selectionSnap: DocumentSnapshot) => {
         if (selectionSnap.exists) {
           const selection = selectionSnap.data();
-          localStorage.setItem('selectionId', selectionSnap.data().id);
           return this.classesCollection.doc(selection.classesId).ref
             .get()
             .then((classesSnap: DocumentSnapshot) => {

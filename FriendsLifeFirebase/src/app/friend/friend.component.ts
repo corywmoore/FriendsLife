@@ -43,9 +43,6 @@ export class FriendComponent implements OnInit {
     localStorage.setItem('selectedFriend', JSON.stringify(this.friend));
     localStorage.setItem('selectedClass', JSON.stringify(this.class));
 
-    console.log('friend', this.friend);
-    console.log('classes', this.class);
-
     this.ss.getSelectionByFriend(this.friend.id, this.class.id)
       .then((isSelection: boolean) => {
         if (isSelection) {
