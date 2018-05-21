@@ -1,0 +1,21 @@
+{
+    "name": "friends-life-functions",
+    "version": "0.0.0",
+    "license": "MIT",
+    "scripts": {
+        "serve": "firebase serve --only functions",
+        "shell": "firebase experimental:functions:shell",
+        "start": "npm run shell",
+        "deploy": "firebase deploy --only functions",
+        "logs": "firebase functions:log"
+    },
+    "private": true,
+    "dependencies": {
+        "@google-cloud/storage": "^1.6.0",
+        "firebase-admin": "^5.12.1",
+        "firebase-functions": "^1.0.3",
+        "fs-extra": "^6.0.1",
+        "json2csv": "^4.1.2"
+    },
+    "devDependencies": {}
+}
