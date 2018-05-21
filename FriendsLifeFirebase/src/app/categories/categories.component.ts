@@ -70,6 +70,12 @@ export class CategoriesComponent implements OnInit {
     this.categoryDays[dayIndex].mornCategories[catIndex].selected = this.currentDay.mornCategories[catIndex].selected;
   }
 
+  selectAftCategory(catIndex: number) {
+    this.currentDay.aftCategories[catIndex].selected = !this.currentDay.aftCategories[catIndex].selected;
+    let dayIndex = this.categoryDays.map(d=>{return d.day}).indexOf(this.currentDay.day);
+    this.categoryDays[dayIndex].aftCategories[catIndex].selected = this.currentDay.aftCategories[catIndex].selected;
+  }
+
   submitCategories() {
     this.router.navigate(['activities']);
   }
