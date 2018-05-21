@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClassService } from '../services/class/class.service';
 import { SelectionService } from '../services/selection/selection.service';
+import { CategoryService } from '../services/category/category.service';
 
 @Component({
   selector: 'app-categories',
@@ -18,11 +19,13 @@ export class CategoriesComponent implements OnInit {
   public currentDay = null;
   public nextDay = null;
   public previousDay = null;
+  public saveCategories = false;
 
   constructor(
     private router: Router,
     private classService: ClassService,
-    private selectionService: SelectionService
+    private selectionService: SelectionService,
+    private categoryService: CategoryService
   ) {
     if (this.selection == "undefined") {
       this.router.navigate(['friend']);
@@ -95,7 +98,12 @@ export class CategoriesComponent implements OnInit {
   }
 
   submitCategories() {
-    this.router.navigate(['activities']);
+    console.log("this", this);
+    this.categoryService.addSelectedCategories(this.selection, {categories: this.categoryDays})
+      .then((id) => {
+        console.log("id", id);
+        // this.router.navigate(['activities']);
+      });
   }
 
   public setNextDay() {
@@ -103,6 +111,7 @@ export class CategoriesComponent implements OnInit {
     this.previousDay = this.categoryDays[dayIndex];
     this.currentDay = this.categoryDays[dayIndex + 1];
     this.nextDay = this.categoryDays[dayIndex + 2];
+    this.saveCategories = this.nextDay === undefined;
   }
 
   public setPreviousDay() {
@@ -110,6 +119,7 @@ export class CategoriesComponent implements OnInit {
     this.previousDay = this.categoryDays[dayIndex - 2];
     this.currentDay = this.categoryDays[dayIndex - 1];
     this.nextDay = this.categoryDays[dayIndex];
+    this.saveCategories = this.nextDay === undefined;
   }
 
   private formatDay(day) {

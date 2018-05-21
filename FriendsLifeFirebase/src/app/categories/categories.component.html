@@ -38,7 +38,7 @@
   <div class="row">
     <div class="col-12">
       <div *ngIf="previousDay != null"class="btn btn-primary mt-5" (click)="setPreviousDay()"><i class="fas fa-angle-double-left left"></i>{{previousDay.day}}</div>
-      <!--<div *ngIf="currentDay.aftCategories.length > 0"class="btn btn-primary mt-5" (click)="submitCategories()">Next</div>-->
+      <div *ngIf="saveCategories"class="btn btn-success mt-5" (click)="submitCategories()"><i class="far fa-save left"></i>Save</div>
       <div *ngIf="nextDay != null"class="btn btn-primary mt-5" (click)="setNextDay()">{{nextDay.day}}<i class="fas fa-angle-double-right right"></i></div>
     </div>
   </div>

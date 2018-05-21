@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore'
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { QuerySnapshot, DocumentReference, DocumentSnapshot } from '@firebase/firestore-types';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Upload } from '../../models/upload/upload';
@@ -95,6 +96,14 @@ export class CategoryService {
 
       cb(tempArray);
     });
+  }
+
+  addSelectedCategories(selectionId, categories): Promise<string> {
+    const ref = this.afs.collection('selections').doc(selectionId).collection('categories');
+    return ref.add(JSON.parse(JSON.stringify(categories)))
+      .then((docRef: DocumentReference) => {
+        return docRef.id;
+      });
   }
 
 }
