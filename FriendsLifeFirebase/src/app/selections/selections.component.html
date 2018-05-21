@@ -1,7 +1,4 @@
-<h3 class="txt-blue home-header">{{selectedFriend.firstName}} {{selectedFriend.lastName}}'s Program Preferences: </h3>
-<div class="form-container">
-  <h4>Please select the availability days and times:</h4>
-</div>
+<h3 class="txt-green home-header" *ngIf="selection && selection.firstName && selection.lastName">{{selection.firstName}}<span *ngIf="selection.nickName"> "{{selection.nickName}}"</span> {{selection.lastName}}'s Program Preferences:</h3>
 <div class="selection">
   <div class="row">
     <div class="col-2 offset-1">
@@ -21,63 +18,17 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-2 offset-1">
-      <div class="card ">
-        <div class="card-block">Morning</div>
-      </div>
-    </div>
-    <div class="col-2">
-      <div class="card green-bg">
-        <div class="card-block">Morning</div>
-      </div>
-    </div>
-    <div class="col-2">
-      <div class="card">
-        <div class="card-block">Morning</div>
-      </div>
-    </div>
-    <div class="col-2">
-      <div class="card">
-        <div class="card-block">Morning</div>
-      </div>
-    </div>
-    <div class="col-2">
-      <div class="card">
-        <div class="card-block">Morning</div>
+    <div class="col-2" [ngClass]="{'offset-1': (i%5)===0}" *ngFor="let block of availability; let i = index">
+      <div class="card" [ngClass]="{'green-bg': block.itemId}">
+        <div class="card-block">
+          {{block.TimeName}}
+        </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-2 offset-1">
-      <div class="card">
-        <div class="card-block">Afternoon</div>
-      </div>
-    </div>
-    <div class="col-2">
-      <div class="card">
-        <div class="card-block">Afternoon</div>
-      </div>
-    </div>
-    <div class="col-2">
-      <div class="card">
-        <div class="card-block">Afternoon</div>
-      </div>
-    </div>
-    <div class="col-2">
-      <div class="card green-bg">
-        <div class="card-block">Afternoon</div>
-      </div>
-    </div>
-    <div class="col-2">
-      <div class="card">
-        <div class="card-block">Afternoon</div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="row">
-  <div class="col-md-8 offset-2 col-sm-12">
+  <div class="col-md-8 offset-2 col-sm-12 pt-5 mt-5 pb-5 mb-5">
     <h4>Based on the availability of your schedule, here are your top selected categories and activities</h4>
   </div>
 </div>
