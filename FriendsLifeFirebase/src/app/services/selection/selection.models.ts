@@ -25,24 +25,34 @@ export const AvailabilityDisplayObject: AvailabilityDisplayModel[] = [{
     TimeValue: 'AM',
     itemId: ''
 }, {
+    DayName: 'Tuesday',
+    TimeName: 'Morning',
+    TimeValue: 'AM',
+    itemId: ''
+}, {
+    DayName: 'Wednesday',
+    TimeName: 'Morning',
+    TimeValue: 'AM',
+    itemId: ''
+}, {
+    DayName: 'Thursday',
+    TimeName: 'Morning',
+    TimeValue: 'AM',
+    itemId: ''
+}, {
+    DayName: 'Friday',
+    TimeName: 'Morning',
+    TimeValue: 'AM',
+    itemId: ''
+}, {
     DayName: 'Monday',
     TimeName: 'Afternoon',
     TimeValue: 'PM',
     itemId: ''
 }, {
     DayName: 'Tuesday',
-    TimeName: 'Morning',
-    TimeValue: 'AM',
-    itemId: ''
-}, {
-    DayName: 'Tuesday',
     TimeName: 'Afternoon',
     TimeValue: 'PM',
-    itemId: ''
-}, {
-    DayName: 'Wednesday',
-    TimeName: 'Morning',
-    TimeValue: 'AM',
     itemId: ''
 }, {
     DayName: 'Wednesday',
@@ -51,18 +61,8 @@ export const AvailabilityDisplayObject: AvailabilityDisplayModel[] = [{
     itemId: ''
 }, {
     DayName: 'Thursday',
-    TimeName: 'Morning',
-    TimeValue: 'AM',
-    itemId: ''
-}, {
-    DayName: 'Thursday',
     TimeName: 'Afternoon',
     TimeValue: 'PM',
-    itemId: ''
-}, {
-    DayName: 'Friday',
-    TimeName: 'Morning',
-    TimeValue: 'AM',
     itemId: ''
 }, {
     DayName: 'Friday',

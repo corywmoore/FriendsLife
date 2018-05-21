@@ -35,7 +35,7 @@ export class AvailabilityComponent implements OnInit {
           return i.DayName === av.day && i.TimeValue === av.time;
         });
 
-        if(item) { 
+        if(item) {
           item.itemId = av.id;
         }
       }
@@ -46,7 +46,6 @@ export class AvailabilityComponent implements OnInit {
 
   public dateTimeClicked(id: string, index: number) {
     let item = this.availability[index];
-
     if (id) {
       this.ss.deleteAvailability(this.selectionId, id)
         .then(() => {
