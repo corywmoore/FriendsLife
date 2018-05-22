@@ -108,7 +108,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   submitCategories() {
-    console.log("this", this);
     if (this.selectedCategories == null) {
       this.categoryService.addSelectedCategories(this.selection, {categories: this.categoryDays})
         .then((id) => {
