@@ -20,7 +20,7 @@ export class CategoriesComponent implements OnInit {
   public nextDay = null;
   public previousDay = null;
   public saveCategories = false;
-  public selectedCategories;
+  public selectedCategories = null;
 
   constructor(
     private router: Router,
@@ -109,11 +109,17 @@ export class CategoriesComponent implements OnInit {
 
   submitCategories() {
     console.log("this", this);
-    this.categoryService.addSelectedCategories(this.selection, {categories: this.categoryDays})
-      .then((id) => {
-        console.log("id", id);
-        // this.router.navigate(['activities']);
-      });
+    if (this.selectedCategories == null) {
+      this.categoryService.addSelectedCategories(this.selection, {categories: this.categoryDays})
+        .then((id) => {
+          console.log("id", id);
+          // this.router.navigate(['activities']);
+        });
+    } else {
+      this.selectedCategories.categories = this.categoryDays;
+      this.categoryService.updateSelectedCategories(this.selection, this.selectedCategories)
+    }
+
   }
 
   public setNextDay() {
