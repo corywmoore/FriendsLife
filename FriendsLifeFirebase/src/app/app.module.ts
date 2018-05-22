@@ -30,6 +30,8 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AdminClassesComponent } from './admin/classes/classes.component';
 import { ClassService } from './services/class/class.service';
+import { AdminExportComponent } from './admin/export/export.component';
+import { ReportLinkComponent } from './shared/report-link/report-link.component';
 
 export const firebaseConfig = environment.firebaseConfig;
 
@@ -47,7 +49,9 @@ export const firebaseConfig = environment.firebaseConfig;
     AdminFriendsComponent,
     AdminActivitiesComponent,
     CategoriesComponent,
-    AdminClassesComponent
+    AdminClassesComponent,
+    AdminExportComponent,
+    ReportLinkComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,2 @@
+<a class="button is-info" [class.is-loading]="report.status === 'processing'" 
+[href]="downloadUrl | async" download>Download Report {{ report.id}}</a>

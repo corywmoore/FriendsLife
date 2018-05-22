@@ -1,0 +1,12 @@
+
+
+<div *ngFor="let report of reports | async">
+  <app-report-link [report]="report"></app-report-link>
+</div>
+
+<button (click)="requestReport()">
+  Generate CSV
+</button>
+
+
+
