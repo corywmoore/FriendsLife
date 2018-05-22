@@ -123,7 +123,7 @@ export class CategoryService {
 
   }
 
-  updateSelectedCategories(selection, categories) {
+  updateSelectedCategories(selection, categories){
     this.afs.collection('selections').doc(selection).collection('categories').doc(categories.id).set({categories: categories.categories})
       .then(() => {
         console.log("Categories updated")

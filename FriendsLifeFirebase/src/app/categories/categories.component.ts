@@ -112,12 +112,14 @@ export class CategoriesComponent implements OnInit {
     if (this.selectedCategories == null) {
       this.categoryService.addSelectedCategories(this.selection, {categories: this.categoryDays})
         .then((id) => {
-          console.log("id", id);
-          // this.router.navigate(['activities']);
+          localStorage.setItem('selectedCategories', JSON.stringify(id));
+          this.router.navigate(['activities']);
         });
     } else {
       this.selectedCategories.categories = this.categoryDays;
-      this.categoryService.updateSelectedCategories(this.selection, this.selectedCategories)
+      this.categoryService.updateSelectedCategories(this.selection, this.selectedCategories);
+      localStorage.setItem('selectedCategories', JSON.stringify(this.selectedCategories.id));
+      this.router.navigate(['activities']);
     }
 
   }
