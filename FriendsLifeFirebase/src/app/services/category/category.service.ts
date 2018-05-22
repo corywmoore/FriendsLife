@@ -98,11 +98,38 @@ export class CategoryService {
     });
   }
 
-  addSelectedCategories(selectionId, categories): Promise<string> {
+  addSelectedCategories(selectionId, categories): Promise<string | void> {
     const ref = this.afs.collection('selections').doc(selectionId).collection('categories');
     return ref.add(JSON.parse(JSON.stringify(categories)))
       .then((docRef: DocumentReference) => {
         return docRef.id;
+      })
+      .catch((err)=>{
+        console.log(`Error adding categories: ${err}`);
+      });
+  }
+
+  getSelectedCategories(selection) {
+    let ref = this.afs.collection('selections').doc(selection).collection('categories');
+
+    return ref.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+
+        return {id, ...data};
+      });
+    });
+
+  }
+
+  updateSelectedCategories(selection, categories){
+    this.afs.collection('selections').doc(selection).collection('categories').doc(categories.id).set({categories: categories.categories})
+      .then(() => {
+        console.log("Categories updated")
+      })
+      .catch((err)=> {
+        console.log(`Error updating categories: ${err}`);
       });
   }
 

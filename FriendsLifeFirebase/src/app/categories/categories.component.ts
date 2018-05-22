@@ -13,13 +13,14 @@ export class CategoriesComponent implements OnInit {
   public categoryDays: CategoryDays[];
   public categories;
   public class;
-  public availability = JSON.parse(localStorage.getItem('selectedAvailability'));
+  public availability;
   public friend = JSON.parse(localStorage.getItem('selectedFriend'));
   public selection = localStorage.getItem('selectionId');
   public currentDay = null;
   public nextDay = null;
   public previousDay = null;
   public saveCategories = false;
+  public selectedCategories = null;
 
   constructor(
     private router: Router,
@@ -33,21 +34,30 @@ export class CategoriesComponent implements OnInit {
     this.classService.getCategories((data) => {
       this.categories = data;
      });
-    this.classService.getClassesById(this.selection).then((data)=> {
-      this.class = data;
-      this.selectionService.getAvailabilities(this.selection).subscribe((data) => {
-        this.availability = data;
-        this.formatAvailibilty();
-      });
+
+    this.categoryService.getSelectedCategories(this.selection).subscribe((data)=> {
+      if (data.length > 0) {
+        this.selectedCategories = data[0];
+        this.categoryDays = this.selectedCategories.categories;
+        this.currentDay = this.categoryDays[0];
+        this.nextDay = this.categoryDays[1];
+      } else {
+        this.classService.getClassesById(this.selection).then((data)=> {
+          this.class = data;
+          this.selectionService.getAvailabilities(this.selection).subscribe((data) => {
+            this.availability = data;
+            this.formatAvailibilty();
+          });
+        });
+      }
     });
   }
 
   ngOnInit() {
-    this.categoryDays = [];
-
   }
 
   formatAvailibilty() {
+    this.categoryDays = [];
     this.availability.map((a)=> {
       this.class.categories.map((c)=> {
         if (c.days.some(d => d.itemName === a.day)) {
@@ -98,12 +108,19 @@ export class CategoriesComponent implements OnInit {
   }
 
   submitCategories() {
-    console.log("this", this);
-    this.categoryService.addSelectedCategories(this.selection, {categories: this.categoryDays})
-      .then((id) => {
-        console.log("id", id);
-        // this.router.navigate(['activities']);
-      });
+    if (this.selectedCategories == null) {
+      this.categoryService.addSelectedCategories(this.selection, {categories: this.categoryDays})
+        .then((id) => {
+          localStorage.setItem('selectedCategories', JSON.stringify(id));
+          this.router.navigate(['activities']);
+        });
+    } else {
+      this.selectedCategories.categories = this.categoryDays;
+      this.categoryService.updateSelectedCategories(this.selection, this.selectedCategories);
+      localStorage.setItem('selectedCategories', JSON.stringify(this.selectedCategories.id));
+      this.router.navigate(['activities']);
+    }
+
   }
 
   public setNextDay() {
