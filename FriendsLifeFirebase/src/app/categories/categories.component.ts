@@ -10,7 +10,7 @@ import { CategoryService } from '../services/category/category.service';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  public categoryDays: CategoryDays[];
+  public categoryDays: CategoryDays[] = [];
   public existingCatDays= [];
   public categories;
   public class;
@@ -39,12 +39,11 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.getSelectedCategories(this.selection).subscribe((data)=> {
       if (data.length > 0) {
         this.selectedCategories = data[0];
-        this.categoryDays = this.selectedCategories.categories;
+        this.existingCatDays = this.selectedCategories.categories;
         this.classService.getClassesById(this.selection).then((data)=> {
           this.class = data;
           this.selectionService.getAvailabilities(this.selection).subscribe((data) => {
             this.availability = data;
-            this.formatExisitingAvailibilty();
             this.formatAvailibilty();
             if (this.existingCatDays.length > 0 && this.categoryDays.length > 0) {
               this.categoryDays = this.formatCategoryDays(this.categoryDays);
@@ -75,11 +74,10 @@ export class CategoriesComponent implements OnInit {
   }
 
   formatAvailibilty() {
-    this.categoryDays = [];
     this.availability.map((a)=> {
       this.class.categories.map((c)=> {
         if (c.days.some(d => d.itemName === a.day)) {
-          if (!this.dayExists(a.day) && !this.categoryExists(c.name)) {
+          if (!this.dayExists(this.categoryDays, a.day) && !this.categoryExists(c.name)) {
             let catday = this.formatDay(a.day);
             if (c.morning && a.time == "AM") {
               let cat = this.formatCategory(c);
@@ -90,7 +88,7 @@ export class CategoriesComponent implements OnInit {
               catday.aftCategories.push(cat);
             }
             this.categoryDays.push(catday);
-          } else if (this.dayExists(a.day) && !this.categoryExists(c.name)) {
+          } else if (this.dayExists(this.categoryDays, a.day) && !this.categoryExists(c.name)) {
             this.categoryDays.map((cd)=> {
               if (cd.day === a.day) {
                 let catday = cd;
@@ -110,37 +108,6 @@ export class CategoriesComponent implements OnInit {
     });
 
 
-  }
-
-  formatExisitingAvailibilty() {
-    this.availability.map((a)=> {
-      this.categoryDays.map((c)=> {
-        if (c.day == a.day) {
-          if (this.existingCatDays.length > 0) {
-            this.existingCatDays.map((cd)=> {
-              if (cd.day === a.day) {
-                let catday = cd;
-                if (c.mornCategories.length > 0 && a.time == "AM") {
-                  catday.mornCategories = c.mornCategories;
-                }
-                else if (c.aftCategories.length > 0 && a.time == "PM") {
-                  catday.aftCategories = c.aftCategories;
-                }
-              }
-            });
-          } else {
-            let catday = this.formatDay(a.day);
-            if (c.mornCategories.length > 0 && a.time == "AM") {
-              catday.mornCategories = c.mornCategories;
-            }
-            else if (c.aftCategories.length > 0 && a.time == "PM") {
-              catday.aftCategories = c.aftCategories;
-            }
-            this.existingCatDays.push(catday);
-          }
-        }
-      });
-    });
   }
 
   formatCategoryDays(catDays) {
@@ -169,7 +136,6 @@ export class CategoriesComponent implements OnInit {
       });
     });
 
-    // console.log("catDays", catDays);
     return catDays;
   }
 
@@ -186,7 +152,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   submitCategories() {
-    console.log("this", this);debugger;
     if (this.selectedCategories == null) {
       this.categoryService.addSelectedCategories(this.selection, {categories: this.categoryDays})
         .then((id) => {
@@ -237,10 +202,10 @@ export class CategoriesComponent implements OnInit {
     return category;
   }
 
-  private dayExists(day) {
+  private dayExists(days, day) {
     let dayExists = false;
-    if (this.categoryDays.length > 0) {
-      this.categoryDays.map((c)=> {
+    if (days.length > 0) {
+      days.map((c)=> {
         if (c.day === day) {
           dayExists = true;
         }
