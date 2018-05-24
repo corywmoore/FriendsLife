@@ -124,7 +124,6 @@ export class CategoryService {
   }
 
   updateSelectedCategories(selection, cat){
-    debugger;
     this.afs.collection('selections').doc(selection).collection('categories').doc(cat.id).set(JSON.parse(JSON.stringify({categories: cat.categories})))
       .then(() => {
         console.log("Categories updated")
