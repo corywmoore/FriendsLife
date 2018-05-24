@@ -30,10 +30,8 @@ export class SelectionService {
         if (!snapshot.empty) {
           const selectionSnap = snapshot.docs[0];
           localStorage.setItem('selectionId', selectionSnap.id);
-          console.log(localStorage.getItem('selectionId'));
           return true;
         } else {
-          console.log('no selectionId');
           return false;
         }
       });

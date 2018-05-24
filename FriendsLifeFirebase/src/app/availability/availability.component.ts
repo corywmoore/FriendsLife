@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer } from '@angular/core';
+import { Component, OnInit, Renderer, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
 import * as _ from 'lodash';
 import { SelectionService } from '../services/selection/selection.service';
@@ -12,7 +12,7 @@ import { SelectionModel, AvailabilityModel, AvailabilityDisplayModel, Availabili
 })
 export class AvailabilityComponent implements OnInit {
 
-  public availability: AvailabilityDisplayModel[] = AvailabilityDisplayObject;
+  public availability: AvailabilityDisplayModel[] = JSON.parse(JSON.stringify(AvailabilityDisplayObject));
   public warning = false;
   public selection: SelectionModel;
   public selectionId;
@@ -24,6 +24,9 @@ export class AvailabilityComponent implements OnInit {
 
   ) {
     this.selectionId = localStorage.getItem('selectionId');
+  }
+
+  ngOnInit() {
     this.ss.getSelection(this.selectionId).subscribe((payload: DocumentSnapshot) => {
       this.selection = new SelectionModel();
       this.selection = payload.data() as SelectionModel;
@@ -41,8 +44,6 @@ export class AvailabilityComponent implements OnInit {
       }
     });
   }
-
-  ngOnInit() { }
 
   public dateTimeClicked(id: string, index: number) {
     let item = this.availability[index];

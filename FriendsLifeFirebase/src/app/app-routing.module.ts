@@ -15,6 +15,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { AdminClassesComponent } from './admin/classes/classes.component';
 
 import { AuthGuard } from './services/auth/auth.guard';
+import { AdminExportComponent } from './admin/export/export.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,7 +30,7 @@ const routes: Routes = [
   { path: 'friends-life-management/friends', component: AdminFriendsComponent, canActivate: [AuthGuard] },
   { path: 'friends-life-management/activities', component: AdminActivitiesComponent, canActivate: [AuthGuard] },
   { path: 'friends-life-management/classes', component: AdminClassesComponent, canActivate: [AuthGuard] },
-
+  { path: 'friends-life-management/export', component: AdminExportComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
