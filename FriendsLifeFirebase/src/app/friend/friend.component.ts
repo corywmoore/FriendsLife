@@ -31,6 +31,7 @@ export class FriendComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    localStorage.clear();
     this.fs.getFriends((data) => {
       this.friends = data;
     });

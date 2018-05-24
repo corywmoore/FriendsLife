@@ -11,6 +11,7 @@ import { CategoryService } from '../services/category/category.service';
 })
 export class CategoriesComponent implements OnInit {
   public categoryDays: CategoryDays[];
+  public existingCatDays= [];
   public categories;
   public class;
   public availability;
@@ -39,14 +40,31 @@ export class CategoriesComponent implements OnInit {
       if (data.length > 0) {
         this.selectedCategories = data[0];
         this.categoryDays = this.selectedCategories.categories;
-        this.currentDay = this.categoryDays[0];
-        this.nextDay = this.categoryDays[1];
+        this.classService.getClassesById(this.selection).then((data)=> {
+          this.class = data;
+          this.selectionService.getAvailabilities(this.selection).subscribe((data) => {
+            this.availability = data;
+            this.formatExisitingAvailibilty();
+            this.formatAvailibilty();
+            if (this.existingCatDays.length > 0 && this.categoryDays.length > 0) {
+              this.categoryDays = this.formatCategoryDays(this.categoryDays);
+              this.currentDay = this.categoryDays[0];
+              this.nextDay = this.categoryDays[1];
+            } else {
+              debugger;
+              this.currentDay = this.categoryDays[0];
+              this.nextDay = this.categoryDays[1];
+            }
+          });
+        });
       } else {
         this.classService.getClassesById(this.selection).then((data)=> {
           this.class = data;
           this.selectionService.getAvailabilities(this.selection).subscribe((data) => {
             this.availability = data;
             this.formatAvailibilty();
+            this.currentDay = this.categoryDays[0];
+            this.nextDay = this.categoryDays[1];
           });
         });
       }
@@ -65,11 +83,11 @@ export class CategoriesComponent implements OnInit {
             let catday = this.formatDay(a.day);
             if (c.morning && a.time == "AM") {
               let cat = this.formatCategory(c);
-              catday.mornCategories.push(Object.assign({}, cat));
+              catday.mornCategories.push(cat);
             }
             else if (c.afternoon && a.time == "PM") {
               let cat = this.formatCategory(c);
-              catday.aftCategories.push(Object.assign({}, cat));
+              catday.aftCategories.push(cat);
             }
             this.categoryDays.push(catday);
           } else if (this.dayExists(a.day) && !this.categoryExists(c.name)) {
@@ -78,11 +96,11 @@ export class CategoriesComponent implements OnInit {
                 let catday = cd;
                 if (c.morning && a.time == "AM") {
                   let cat = this.formatCategory(c);
-                  catday.mornCategories.push(Object.assign({}, cat));
+                  catday.mornCategories.push(cat);
                 }
                 else if (c.afternoon && a.time == "PM") {
                   let cat = this.formatCategory(c);
-                  catday.aftCategories.push(Object.assign({}, cat));
+                  catday.aftCategories.push(cat);
                 }
               }
             });
@@ -91,8 +109,68 @@ export class CategoriesComponent implements OnInit {
       });
     });
 
-    this.currentDay = this.categoryDays[0];
-    this.nextDay = this.categoryDays[1];
+
+  }
+
+  formatExisitingAvailibilty() {
+    this.availability.map((a)=> {
+      this.categoryDays.map((c)=> {
+        if (c.day == a.day) {
+          if (this.existingCatDays.length > 0) {
+            this.existingCatDays.map((cd)=> {
+              if (cd.day === a.day) {
+                let catday = cd;
+                if (c.mornCategories.length > 0 && a.time == "AM") {
+                  catday.mornCategories = c.mornCategories;
+                }
+                else if (c.aftCategories.length > 0 && a.time == "PM") {
+                  catday.aftCategories = c.aftCategories;
+                }
+              }
+            });
+          } else {
+            let catday = this.formatDay(a.day);
+            if (c.mornCategories.length > 0 && a.time == "AM") {
+              catday.mornCategories = c.mornCategories;
+            }
+            else if (c.aftCategories.length > 0 && a.time == "PM") {
+              catday.aftCategories = c.aftCategories;
+            }
+            this.existingCatDays.push(catday);
+          }
+        }
+      });
+    });
+  }
+
+  formatCategoryDays(catDays) {
+    catDays.map((cd)=>{
+      this.existingCatDays.map((ecd)=>{
+        if (cd.day == ecd.day) {
+          if (cd.mornCategories.length > 0 && ecd.mornCategories.length > 0) {
+            for (let i = 0; i < cd.mornCategories.length; i++) {
+              for (let j = 0; j < ecd.mornCategories.length; j++) {
+                if (cd.mornCategories[i].name == ecd.mornCategories[j].name) {
+                  cd.mornCategories[i] = ecd.mornCategories[j];
+                }
+              }
+            }
+          }
+          if (cd.aftCategories.length > 0 && ecd.aftCategories.length > 0) {
+            for (let i = 0; i < cd.aftCategories.length; i++) {
+              for (let j = 0; j < ecd.aftCategories.length; j++) {
+                if (cd.aftCategories[i].name == ecd.aftCategories[j].name) {
+                  cd.aftCategories[i] = ecd.aftCategories[j];
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+
+    // console.log("catDays", catDays);
+    return catDays;
   }
 
   selectMornCategory(catIndex: number) {
@@ -108,6 +186,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   submitCategories() {
+    console.log("this", this);debugger;
     if (this.selectedCategories == null) {
       this.categoryService.addSelectedCategories(this.selection, {categories: this.categoryDays})
         .then((id) => {
@@ -152,7 +231,7 @@ export class CategoriesComponent implements OnInit {
     category.id = cat.id;
     category.name =  cat.name;
     category.imgUrl =  cat.imageUrl;
-    category.selected =false;
+    category.selected = false;
     category.activities = cat.activities;
 
     return category;
