@@ -9,7 +9,7 @@
     </div>
     <div class="row">
       <div class='col-4' *ngFor="let act of morn.activities; let j = index">
-        <div [ngClass]="{'green-activity':act.rank===1, 'yellow-activity':act.rank===2, 'red-activity':act.rank===3}" class="card activity" (click)="mornActivityClicked(act, i, j)">
+        <div [ngClass]="{'green-activity':act.rank===1, 'yellow-activity':act.rank===2, 'red-activity':act.rank===3}" class="card activity" (click)="activityClicked(act, i, j, true)">
             <div class="card-block">
                 <img [ngClass]="{'opacity':act.rank>0}" class="img-card" [src]="act.imageUrl">
             </div>
@@ -83,7 +83,7 @@
     </div>
     <div class="row">
       <div class='col-4' *ngFor="let act of aft.activities; let j = index">
-        <div [ngClass]="{'green-activity':act.rank===1, 'yellow-activity':act.rank===2, 'red-activity':act.rank===3}" class="card activity" (click)="mornActivityClicked(act, i, j)">
+        <div [ngClass]="{'green-activity':act.rank===1, 'yellow-activity':act.rank===2, 'red-activity':act.rank===3}" class="card activity" (click)="activityClicked(act, i, j, false)">
           <div class="card-block">
             <img [ngClass]="{'opacity':act.rank>0}" class="img-card" [src]="act.imageUrl">
           </div>
