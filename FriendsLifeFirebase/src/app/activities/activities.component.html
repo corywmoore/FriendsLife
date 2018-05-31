@@ -1,7 +1,7 @@
 
 <div class="container" *ngIf="showMorning">
   <h3 class="txt-green home-header">Activities for {{currentDay}} Morning</h3>
-  <div *ngFor="let morn of currentCategories.mornCategories; let i = index">
+  <div *ngFor="let morn of currentCategories.mornCategories.categories; let i = index">
     <div class="row">
       <div class="col-12">
         <h4>Which activity for {{morn.name}} is your favorite?</h4>
@@ -29,21 +29,21 @@
       </div>
       <div class="row">
           <div class="col-4">
-              <div class="card skills" (click)="skillClicked($event, 'Beginner')">
+              <div class="card skills" (click)="skillClicked('Beginner', true)" [ngClass]="{'green-activity':currentCategories.mornCategories.skillLevel === 'Beginner'}">
                   <div class="card-block">
                       Beginner
                   </div>
               </div>
           </div>
           <div class="col-4">
-              <div class="card skills" (click)="skillClicked($event, 'Intermediate')">
+              <div class="card skills" (click)="skillClicked('Intermediate', true)" [ngClass]="{'green-activity':currentCategories.mornCategories.skillLevel === 'Intermediate'}">
                   <div class="card-block">
                       Intermediate
                   </div>
               </div>
           </div>
           <div class="col-4">
-              <div class="card skills" (click)="skillClicked($event, 'Advanced')">
+              <div class="card skills" (click)="skillClicked('Advanced', true)" [ngClass]="{'green-activity':currentCategories.mornCategories.skillLevel === 'Advanced'}">
                   <div class="card-block">
                       Advanced
                   </div>
@@ -75,7 +75,7 @@
 
 <div class="container" *ngIf="showAfternoon">
   <h3 class="txt-green home-header">Activities for {{currentDay}} Afternoon</h3>
-  <div *ngFor="let aft of currentCategories.aftCategories; let i = index">
+  <div *ngFor="let aft of currentCategories.aftCategories.categories; let i = index">
     <div class="row">
       <div class="col-12">
         <h3>Which activity for {{aft.name}} is your favorite?</h3>
@@ -103,21 +103,21 @@
     </div>
     <div class="row">
       <div class="col-4">
-        <div class="card skills" (click)="skillClicked($event, 'Beginner')">
+        <div class="card skills" (click)="skillClicked('Beginner', false)" [ngClass]="{'green-activity':currentCategories.aftCategories.skillLevel === 'Beginner'}">
           <div class="card-block">
             Beginner
           </div>
         </div>
       </div>
       <div class="col-4">
-        <div class="card skills" (click)="skillClicked($event, 'Intermediate')">
+        <div class="card skills" (click)="skillClicked('Intermediate', false)" [ngClass]="{'green-activity':currentCategories.aftCategories.skillLevel === 'Intermediate'}">
           <div class="card-block">
             Intermediate
           </div>
         </div>
       </div>
       <div class="col-4">
-        <div class="card skills" (click)="skillClicked($event, 'Advanced')">
+        <div class="card skills" (click)="skillClicked('Advanced', false)" [ngClass]="{'green-activity':currentCategories.aftCategories.skillLevel === 'Advanced'}">
           <div class="card-block">
             Advanced
           </div>

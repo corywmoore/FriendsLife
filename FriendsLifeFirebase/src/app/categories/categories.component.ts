@@ -81,11 +81,11 @@ export class CategoriesComponent implements OnInit {
             let catday = this.formatDay(a.day);
             if (c.morning && a.time == "AM") {
               let cat = this.formatCategory(c);
-              catday.mornCategories.push(cat);
+              catday.mornCategories.categories.push(cat);
             }
             else if (c.afternoon && a.time == "PM") {
               let cat = this.formatCategory(c);
-              catday.aftCategories.push(cat);
+              catday.aftCategories.categories.push(cat);
             }
             this.categoryDays.push(catday);
           } else if (this.dayExists(this.categoryDays, a.day) && !this.categoryExists(c.name)) {
@@ -94,11 +94,11 @@ export class CategoriesComponent implements OnInit {
                 let catday = cd;
                 if (c.morning && a.time == "AM") {
                   let cat = this.formatCategory(c);
-                  catday.mornCategories.push(cat);
+                  catday.mornCategories.categories.push(cat);
                 }
                 else if (c.afternoon && a.time == "PM") {
                   let cat = this.formatCategory(c);
-                  catday.aftCategories.push(cat);
+                  catday.aftCategories.categories.push(cat);
                 }
               }
             });
@@ -140,15 +140,15 @@ export class CategoriesComponent implements OnInit {
   }
 
   selectMornCategory(catIndex: number) {
-    this.currentDay.mornCategories[catIndex].selected = !this.currentDay.mornCategories[catIndex].selected;
+    this.currentDay.mornCategories.categories[catIndex].selected = !this.currentDay.mornCategories.categories[catIndex].selected;
     let dayIndex = this.categoryDays.map(d=>{return d.day}).indexOf(this.currentDay.day);
-    this.categoryDays[dayIndex].mornCategories[catIndex].selected = this.currentDay.mornCategories[catIndex].selected;
+    this.categoryDays[dayIndex].mornCategories.categories[catIndex].selected = this.currentDay.mornCategories.categories[catIndex].selected;
   }
 
   selectAftCategory(catIndex: number) {
-    this.currentDay.aftCategories[catIndex].selected = !this.currentDay.aftCategories[catIndex].selected;
+    this.currentDay.aftCategories.categories[catIndex].selected = !this.currentDay.aftCategories.categories[catIndex].selected;
     let dayIndex = this.categoryDays.map(d=>{return d.day}).indexOf(this.currentDay.day);
-    this.categoryDays[dayIndex].aftCategories[catIndex].selected = this.currentDay.aftCategories[catIndex].selected;
+    this.categoryDays[dayIndex].aftCategories.categories[catIndex].selected = this.currentDay.aftCategories.categories[catIndex].selected;
   }
 
   submitCategories() {
@@ -186,8 +186,10 @@ export class CategoriesComponent implements OnInit {
   private formatDay(day) {
     let catday = new CategoryDays();
     catday.day = day;
-    catday.mornCategories = [];
-    catday.aftCategories = [];
+    catday.mornCategories = new SelectionCategories();
+    catday.mornCategories.categories = [];
+    catday.aftCategories = new SelectionCategories();
+    catday.aftCategories.categories = [];
     return catday;
   }
 
@@ -231,8 +233,13 @@ export class CategoriesComponent implements OnInit {
 
 export class CategoryDays {
   day: string;
-  mornCategories: Category[];
-  aftCategories: Category[];
+  mornCategories: SelectionCategories;
+  aftCategories: SelectionCategories;
+}
+
+export class SelectionCategories {
+  skillLevel: string;
+  categories: Category[];
 }
 
 export class Category {
