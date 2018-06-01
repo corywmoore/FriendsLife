@@ -39,6 +39,7 @@ export class ActivitiesComponent implements OnInit {
         console.log('data', data[0]);
         this.selectedCategories = data[0];
         this.currentCategories = this.filterCategories(0);
+        console.log('current', this.currentCategories);
         this.mornActivities = this.filterMornActivities(0);
         this.aftActivities = this.filterAftActivities(0);
 
@@ -104,12 +105,17 @@ export class ActivitiesComponent implements OnInit {
   }
 
   public skillClicked(skill: string, isMorning: boolean) {
+    let cat = this.selectedCategories.categories[this.catIndex];
     if (isMorning) {
+      cat.mornCategories.skillLevel = skill;
       this.currentCategories.mornCategories.skillLevel = skill;
     } else {
+      cat.aftCategories.skillLevel = skill;
       this.currentCategories.aftCategories.skillLevel = skill;
     }
 
+    console.log('updated', this.selectedCategories);
+    console.log('again', this.currentCategories);
     this.categoryService.updateSelectedCategories(this.selection, this.selectedCategories);
 
     console.log('skill clicked');
@@ -122,7 +128,9 @@ export class ActivitiesComponent implements OnInit {
     };
 
     currentCategories.aftCategories.categories = this.selectedCategories.categories[i].aftCategories.categories.filter((mc) => { return mc.selected });
+    currentCategories.aftCategories.skillLevel = (this.selectedCategories.categories[i].aftCategories.skillLevel) ? this.selectedCategories.categories[i].aftCategories.skillLevel : null;
     currentCategories.mornCategories.categories = this.selectedCategories.categories[i].mornCategories.categories.filter((mc) => { return mc.selected });
+    currentCategories.mornCategories.skillLevel = (this.selectedCategories.categories[i].mornCategories.skillLevel) ? this.selectedCategories.categories[i].mornCategories.skillLevel : null;
 
     return currentCategories;
   }
