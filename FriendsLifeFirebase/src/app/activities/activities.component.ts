@@ -9,21 +9,22 @@ import { CategoryService } from '../services/category/category.service';
   styleUrls: ['./activities.component.scss']
 })
 export class ActivitiesComponent implements OnInit {
-  public activitiesSelection: ActivitySelectionModel[] = [];
   public mornActivities: ActivityModel[] = [];
   public aftActivities: ActivityModel[] = [];
   public currentDay = null;
   public nextDay = null;
-  public currentRank = 1;
-  public currentSkill: string;
+  public mornRank = 1;
+  public mornSkill: string;
+  public aftRank = 1;
+  public aftSkill: string;
   public warning = false;
-  public selectedFriend;
-  public activity: ActivityModel[] = [];
   public selection = localStorage.getItem('selectionId');
   public selectedCategories;
   public currentCategories = new FilteredCategories();
-  public showMorning:boolean = false;
-  public showAfternoon:boolean = false;
+  public showMorning: boolean = false;
+  public showAfternoon: boolean = false;
+
+  private catIndex = 0;
 
   private colors = ['green-activity', 'yellow-activity', 'red-activity'];
 
@@ -33,40 +34,30 @@ export class ActivitiesComponent implements OnInit {
     private router: Router,
     private categoryService: CategoryService
   ) {
-    this.categoryService.getSelectedCategories(this.selection).subscribe((data)=> {
+    this.categoryService.getSelectedCategories(this.selection).subscribe((data) => {
       if (data.length > 0) {
+        console.log('data', data[0]);
         this.selectedCategories = data[0];
-        this.currentDay = this.selectedCategories.categories[0].day;
-        this.nextDay = this.selectedCategories.categories[1].day;
         this.currentCategories = this.filterCategories(0);
+        console.log('current', this.currentCategories);
         this.mornActivities = this.filterMornActivities(0);
         this.aftActivities = this.filterAftActivities(0);
-        if (this.currentCategories.mornCategories.length > 0) {
+
+        this.currentDay = this.selectedCategories.categories[this.catIndex].day;
+        this.nextDay = (this.selectedCategories.categories[this.catIndex + 1]) ? this.selectedCategories.categories[1].day : null;
+
+        console.log(this.currentCategories);
+
+        if (this.currentCategories.mornCategories.categories.length > 0) {
           this.showMorning = true;
-        } else if (this.currentCategories.aftCategories.length > 0) {
+        } else if (this.currentCategories.aftCategories.categories.length > 0) {
           this.showAfternoon = true;
         }
-        console.log("this", this);
-        // this.categoryDays = this.selectedCategories.categories;
-        // this.currentDay = this.categoryDays[0];
-        // this.nextDay = this.categoryDays[1];
       }
     });
   }
 
-  ngOnInit() {
-    let friend = JSON.parse(localStorage.getItem('selectedFriend'));
-    this.selectedFriend = friend;
-    const imgArr = ['../../assets/cooking-foodprep.png', '../../assets/cooking-kitchentools.png', '../../assets/cooking-shopping.png'];
-    let act;
-    for (let i = 1; i <= 3; i++) {
-      act = new ActivityModel();
-      act.name = 'Place Holder';
-      act.rank = 0;
-      act.imgUrl = imgArr[i - 1];
-      this.activity.push(act);
-    }
-  }
+  ngOnInit() { }
 
   public submitActivities() {
 
@@ -75,63 +66,85 @@ export class ActivitiesComponent implements OnInit {
   }
 
   public resetActivities() {
-    this.currentRank = 1;
-    this.activitiesSelection = [];
+    this.mornRank = 1;
+    this.aftRank = 1;
+    this.warning = false;
 
-    const els = document.getElementsByClassName('activity');
+    if (this.currentCategories.mornCategories && this.currentCategories.mornCategories.categories.length > 0) {
+      this.clearCategoryActivitiesRank(this.currentCategories.mornCategories.categories);
+    }
 
-    for (let i = els.length - 1; i >= 0; i--) {
-      for (let j = this.colors.length - 1; j >= 0; j--) {
-        els[i].classList.remove(this.colors[j]);
+    if (this.currentCategories.aftCategories && this.currentCategories.aftCategories.categories.length > 0) {
+      this.clearCategoryActivitiesRank(this.currentCategories.aftCategories.categories);
+    }
+  }
+
+  private clearCategoryActivitiesRank(cat) {
+    for (let i = cat.length - 1; i >= 0; i--) {
+      for (let j = cat[i].activities.length - 1; j >= 0; j--) {
+        cat[i].activities[j].rank = -1;
       }
     }
 
-    this.warning = false;
+    this.categoryService.updateSelectedCategories(this.selection, this.selectedCategories);
   }
 
-  public mornActivityClicked(act: any, i: number, j:number) {
-    //currentCategories.mornCategories
-    console.log("this", this);
-    console.log("act", act);
-    console.log("i", i);
-    console.log("j", j);
-    this.currentCategories.mornCategories[i].activities[j].rank = this.currentRank;
-    this.currentRank++;
-    this.warning = false;
-  }
-
-  public skillClicked($event: any, skill: string) {
-    let els = document.getElementsByClassName('skills');
-
-    for (let i = els.length - 1; i >= 0; i--) {
-      for (let j = this.colors.length - 1; j >= 0; j--) {
-        els[i].classList.remove(this.colors[0]);
+  public activityClicked(act: any, i: number, j: number, isMorning: boolean) {
+    console.log('clicked', act);
+    if (act && (!act.rank || (act.rank && act.rank < 1))) {
+      let cat = (isMorning) ? this.currentCategories.mornCategories.categories[i] : this.currentCategories.aftCategories.categories[i];
+      cat.activities[j].rank = (isMorning) ? this.mornRank : this.aftRank;
+      if (isMorning) {
+        this.mornRank++;
+      } else {
+        this.aftRank++;
       }
+      this.warning = false;
+      this.categoryService.updateSelectedCategories(this.selection, this.selectedCategories);
+    }
+  }
+
+  public skillClicked(skill: string, isMorning: boolean) {
+    let cat = this.selectedCategories.categories[this.catIndex];
+    if (isMorning) {
+      cat.mornCategories.skillLevel = skill;
+      this.currentCategories.mornCategories.skillLevel = skill;
+    } else {
+      cat.aftCategories.skillLevel = skill;
+      this.currentCategories.aftCategories.skillLevel = skill;
     }
 
-    let el = ($event.target.classList.contains('card')) ? $event.target : $event.target.parentElement;
+    console.log('updated', this.selectedCategories);
+    console.log('again', this.currentCategories);
+    this.categoryService.updateSelectedCategories(this.selection, this.selectedCategories);
 
-    this.currentSkill = skill;
-    this.renderer.setElementClass(el, this.colors[0], true);
-
-    this.warning = false;
+    console.log('skill clicked');
   }
 
-  public filterCategories(i:number) {
+  public filterCategories(i: number) {
     let currentCategories = {
-      mornCategories: this.selectedCategories.categories[i].mornCategories.filter((mc) => {return mc.selected}),
-      aftCategories: this.selectedCategories.categories[i].aftCategories.filter((mc) => {return mc.selected}),
+      mornCategories: new SelectionCategories(),
+      aftCategories: new SelectionCategories()
     };
+
+    currentCategories.aftCategories.categories = this.selectedCategories.categories[i].aftCategories.categories.filter((mc) => { return mc.selected });
+    currentCategories.aftCategories.skillLevel = (this.selectedCategories.categories[i].aftCategories.skillLevel) ? this.selectedCategories.categories[i].aftCategories.skillLevel : null;
+    currentCategories.mornCategories.categories = this.selectedCategories.categories[i].mornCategories.categories.filter((mc) => { return mc.selected });
+    currentCategories.mornCategories.skillLevel = (this.selectedCategories.categories[i].mornCategories.skillLevel) ? this.selectedCategories.categories[i].mornCategories.skillLevel : null;
 
     return currentCategories;
   }
 
-  public filterMornActivities(i:number) {
-   return this.currentCategories.mornCategories[i].activities;
+  public filterMornActivities(i: number) {
+    return (this.currentCategories.mornCategories.categories && this.currentCategories.mornCategories.categories.length > 0)
+      ? this.currentCategories.mornCategories.categories[i].activities
+      : null;
   }
 
-  public filterAftActivities(i:number) {
-    return this.currentCategories.aftCategories[i].activities;
+  public filterAftActivities(i: number) {
+    return (this.currentCategories.aftCategories.categories && this.currentCategories.aftCategories.categories.length > 0)
+      ? this.currentCategories.aftCategories.categories[i].activities
+      : null;
   }
 }
 
@@ -149,6 +162,20 @@ export class ActivitySelectionModel {
 }
 
 export class FilteredCategories {
-  mornCategories= [];
-  aftCategories = [];
+  mornCategories: SelectionCategories;
+  aftCategories: SelectionCategories;
 }
+
+export class SelectionCategories {
+  skillLevel: string;
+  categories: Category[];
+}
+
+export class Category {
+  id: string;
+  name: string;
+  imgUrl: string;
+  selected: boolean;
+  activities = [];
+}
+
