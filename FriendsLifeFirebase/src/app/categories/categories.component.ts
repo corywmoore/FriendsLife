@@ -20,7 +20,6 @@ export class CategoriesComponent implements OnInit {
   public currentDay = null;
   public nextDay = null;
   public previousDay = null;
-  public saveCategories = false;
   public selectedCategories = null;
 
   constructor(
@@ -172,7 +171,6 @@ export class CategoriesComponent implements OnInit {
     this.previousDay = this.categoryDays[dayIndex];
     this.currentDay = this.categoryDays[dayIndex + 1];
     this.nextDay = this.categoryDays[dayIndex + 2];
-    this.saveCategories = this.nextDay === undefined;
   }
 
   public setPreviousDay() {
@@ -180,7 +178,6 @@ export class CategoriesComponent implements OnInit {
     this.previousDay = this.categoryDays[dayIndex - 2];
     this.currentDay = this.categoryDays[dayIndex - 1];
     this.nextDay = this.categoryDays[dayIndex];
-    this.saveCategories = this.nextDay === undefined;
   }
 
   private formatDay(day) {
