@@ -1,4 +1,5 @@
-<h3 class="txt-green home-header" *ngIf="selection && selection.firstName && selection.lastName">{{selection.firstName}}<span *ngIf="selection.nickName"> "{{selection.nickName}}"</span> {{selection.lastName}}'s Program Preferences:</h3>
+<h3 class="txt-green home-header" *ngIf="selection && selection.firstName && selection.lastName">{{selection.firstName}}
+  <span *ngIf="selection.nickName"> "{{selection.nickName}}"</span> {{selection.lastName}}'s Program Preferences:</h3>
 <div class="selection">
   <div class="row">
     <div class="col-2 offset-1">
@@ -27,115 +28,28 @@
     </div>
   </div>
 
-<div class="row">
-  <div class="col-md-8 offset-2 col-sm-12 pt-5 mt-5 pb-5 mb-5">
-    <h4>Based on the availability of your schedule, here are your top selected categories and activities</h4>
+  <div class="row">
+    <div class="col-md-8 offset-2 col-sm-12 pt-5 mt-5 pb-5 mb-5">
+      <h4>Based on the availability of your schedule, here are your top selected categories and activities</h4>
+    </div>
   </div>
-</div>
 
-<div class="container skills text-left">
+  <div class="container skills text-left">
     <div class="row">
-        <div class="col-sm-6">
-          <div class="card m-3">
-            <div class="card-block">
-              <h3>
-                Title
-                <br>
-                <small>BEGINNER</small>
-              </h3>
-              <hr>
-              <ol type="1">
-                <li class="bold">Skill 1</li>
-                <li>Skill 2</li>
-                <li>Skill 3</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card m-3">
-            <div class="card-block">
-              <h3>
-                Title
-                <br>
-                <small>BEGINNER</small>
-              </h3>
-              <hr>
-              <ol type="1">
-                <li class="bold">Skill 1</li>
-                <li>Skill 2</li>
-                <li>Skill 3</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card m-3">
-            <div class="card-block">
-              <h3>
-                Title
-                <br>
-                <small>BEGINNER</small>
-              </h3>
-              <hr>
-              <ol type="1">
-                <li class="bold">Skill 1</li>
-                <li>Skill 2</li>
-                <li>Skill 3</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card m-3">
-            <div class="card-block">
-              <h3>
-                Title
-                <br>
-                <small>BEGINNER</small>
-              </h3>
-              <hr>
-              <ol type="1">
-                <li class="bold">Skill 1</li>
-                <li>Skill 2</li>
-                <li>Skill 3</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card m-3">
-            <div class="card-block">
-              <h3>
-                Title
-                <br>
-                <small>BEGINNER</small>
-              </h3>
-              <hr>
-              <ol type="1">
-                <li class="bold">Skill 1</li>
-                <li>Skill 2</li>
-                <li>Skill 3</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card m-3">
-            <div class="card-block">
-              <h3>
-                Title
-                <br>
-                <small>BEGINNER</small>
-              </h3>
-              <hr>
-              <ol type="1">
-                <li class="bold">Skill 1</li>
-                <li>Skill 2</li>
-                <li>Skill 3</li>
-              </ol>
-            </div>
+      <div class="col-sm-6" *ngFor="let cat of selectedCategories">
+        <div class="card m-3">
+          <div class="card-block">
+            <h3>
+              {{cat.name}}
+              <br>
+              <small>{{cat.skillLevel}}</small>
+            </h3>
+            <hr>
+            <ol type="1">
+              <li *ngFor="let act of cat.activities" [ngClass]="{'bold':act.rank === 1}">{{act.name}}</li>
+            </ol>
           </div>
         </div>
       </div>
-</div>
+    </div>
+  </div>

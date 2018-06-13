@@ -14,8 +14,8 @@ export class ActivitiesComponent implements OnInit {
   public warning = false;
   public selection = localStorage.getItem('selectionId');
   public selectedCategories;
+  public catIndex = 0;
 
-  private catIndex = 0;
   private colors = ['green-activity', 'yellow-activity', 'red-activity'];
 
   constructor(
