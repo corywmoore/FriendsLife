@@ -25,9 +25,7 @@ export class ActivitiesComponent implements OnInit {
     private categoryService: CategoryService
   ) {
     this.categoryService.getSelectedCategories(this.selection).subscribe((data) => {
-      console.log('resp', data[0]);
       this.selectedCategories = this.orderDays(JSON.parse(JSON.stringify(data[0])));
-      console.log('cats', this.selectedCategories);
       this.currentDay = this.selectedCategories.categories[this.catIndex].day;
       this.checkThings();
     });
@@ -66,10 +64,14 @@ export class ActivitiesComponent implements OnInit {
   }
 
   public activityClicked(cat: any, act: any) {
+    console.log('activity clicked', cat);
     const rank = this.getRank(cat);
+
+    console.log('rank', rank);
 
     if (rank < 4) {
       act.rank = rank;
+      console.log(this.selectedCategories);
       this.categoryService.updateSelectedCategories(this.selection, this.selectedCategories);
     }
 
@@ -94,7 +96,8 @@ export class ActivitiesComponent implements OnInit {
         if (act.rank === 3) {
           return 4;
         } else {
-          rank = act.rank++;
+          rank = act.rank;
+          rank++;
         }
       }
     }
@@ -121,34 +124,4 @@ export class ActivitiesComponent implements OnInit {
   }
 }
 
-export class ActivityModel {
-  id: number;
-  name: string;
-  imgUrl: string;
-  rank: number;
-}
-
-
-export class ActivitySelectionModel {
-  id: number;
-  crank: number;
-}
-
-export class FilteredCategories {
-  mornCategories: SelectionCategories;
-  aftCategories: SelectionCategories;
-}
-
-export class SelectionCategories {
-  skillLevel: string;
-  categories: Category[];
-}
-
-export class Category {
-  id: string;
-  name: string;
-  imgUrl: string;
-  selected: boolean;
-  activities = [];
-}
 
