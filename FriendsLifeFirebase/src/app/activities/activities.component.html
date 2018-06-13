@@ -29,21 +29,21 @@
     </div>
     <div class="row">
       <div class="col-4">
-        <div class="card skills" (click)="skillClicked('Beginner', true)" [ngClass]="{'green-activity':morn.skillLevel === 'Beginner'}">
+        <div class="card skills" (click)="skillClicked('Beginner', true, morn)" [ngClass]="{'green-activity':morn.skillLevel === 'Beginner'}">
           <div class="card-block">
             Beginner
           </div>
         </div>
       </div>
       <div class="col-4">
-        <div class="card skills" (click)="skillClicked('Intermediate', true)" [ngClass]="{'green-activity':morn.skillLevel === 'Intermediate'}">
+        <div class="card skills" (click)="skillClicked('Intermediate', true, morn)" [ngClass]="{'green-activity':morn.skillLevel === 'Intermediate'}">
           <div class="card-block">
             Intermediate
           </div>
         </div>
       </div>
       <div class="col-4">
-        <div class="card skills" (click)="skillClicked('Advanced', true)" [ngClass]="{'green-activity':morn.skillLevel === 'Advanced'}">
+        <div class="card skills" (click)="skillClicked('Advanced', true, morn)" [ngClass]="{'green-activity':morn.skillLevel === 'Advanced'}">
           <div class="card-block">
             Advanced
           </div>
