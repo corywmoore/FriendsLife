@@ -15,6 +15,8 @@ export class ActivitiesComponent implements OnInit {
   public selection = localStorage.getItem('selectionId');
   public selectedCategories;
   public catIndex = 0;
+  public showMorn = false;
+  public showAft = false;
 
   private colors = ['green-activity', 'yellow-activity', 'red-activity'];
 
@@ -25,9 +27,14 @@ export class ActivitiesComponent implements OnInit {
     private categoryService: CategoryService
   ) {
     this.categoryService.getSelectedCategories(this.selection).subscribe((data) => {
-      this.selectedCategories = this.orderDays(JSON.parse(JSON.stringify(data[0])));
+      this.selectedCategories = this.categoryService.orderDays(JSON.parse(JSON.stringify(data[0])));
       this.currentDay = this.selectedCategories.categories[this.catIndex].day;
       this.checkThings();
+
+      this.showMorn = (this.selectedCategories && this.selectedCategories.categories[this.catIndex].mornCategories.categories.length > 0);
+      this.showAft = (this.selectedCategories && this.selectedCategories.categories[this.catIndex].aftCategories.categories.length > 0);
+
+      console.log(this.selectedCategories)
     });
   }
 
@@ -65,10 +72,9 @@ export class ActivitiesComponent implements OnInit {
   }
 
   public activityClicked(cat: any, act: any) {
-    console.log('activity clicked', cat);
-    const rank = this.getRank(cat);
+    if (act.rank > 0) { return; }
 
-    console.log('rank', rank);
+    const rank = this.getRank(cat);
 
     if (rank < 4) {
       act.rank = rank;
@@ -104,24 +110,6 @@ export class ActivitiesComponent implements OnInit {
     }
 
     return rank;
-  }
-
-  private orderDays(data) {
-    data.categories.sort((a, b) => {
-      return this.sorter[a.day.toLowerCase()] - this.sorter[b.day.toLowerCase()];
-    });
-
-    return data;
-  }
-
-  private sorter = {
-    "sunday": 0,
-    "monday": 1,
-    "tuesday": 2,
-    "wednesday": 3,
-    "thursday": 4,
-    "friday": 5,
-    "saturday": 6
   }
 }
 

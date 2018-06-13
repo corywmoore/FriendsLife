@@ -67,7 +67,6 @@ export class AvailabilityComponent implements OnInit {
     if (this.availability.length < 1) {
       this.warning = true;
     } else {
-      localStorage.setItem('selectedAvailability', JSON.stringify(this.availability));
       this.router.navigate(['categories']);
     }
   }

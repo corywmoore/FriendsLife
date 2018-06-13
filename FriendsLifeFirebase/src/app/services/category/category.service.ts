@@ -14,6 +14,16 @@ export class CategoryService {
   categories: Observable<any[]>;
   basePath = 'uploads/categories';
 
+  private daySorter = {
+    "sunday": 0,
+    "monday": 1,
+    "tuesday": 2,
+    "wednesday": 3,
+    "thursday": 4,
+    "friday": 5,
+    "saturday": 6
+  };
+
   constructor(private afs: AngularFirestore) { }
 
   getCategories(cb) {
@@ -133,4 +143,12 @@ export class CategoryService {
       });
   }
 
+  orderDays(data) {
+    data.categories.sort((a, b) => {
+      return this.daySorter[a.day.toLowerCase()] - this.daySorter[b.day.toLowerCase()];
+    });
+
+    return data;
+  }
 }
+

@@ -1,4 +1,5 @@
-<div class="container" *ngIf="selectedCategories && selectedCategories.categories[catIndex].mornCategories.categories.length > 0">
+{{showMorn}} | {{showAft}}
+<div class="container" *ngIf="showMorn > 0">
   <h3 class="txt-green home-header">Activities for {{currentDay}} Morning</h3>
   <div *ngFor="let morn of selectedCategories.categories[catIndex].mornCategories.categories; let i = index">
     <div class="row">
@@ -60,21 +61,21 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="!showAft">
     <div class="col-12">
       <div *ngIf="nextDay" class="btn btn-primary mt-5" (click)="nextActivity()">Next</div>
       <div *ngIf="!nextDay" class="btn btn-success mt-5" (click)="submitActivities()">Save</div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="!showAft">
     <div class="col-12">
-      <div class="mt-2" (click)="resetActivities(morn)">Reset</div>
+      <div class="mt-2" (click)="resetActivities()">Reset</div>
     </div>
   </div>
 </div>
 
 
-<div class="container" *ngIf="selectedCategories && selectedCategories.categories[catIndex].aftCategories.categories.length > 0">
+<div class="container" *ngIf="showAft">
   <h3 class="txt-green home-header">Activities for {{currentDay}} Afternoon</h3>
   <div *ngFor="let aft of selectedCategories.categories[catIndex].aftCategories.categories; let i = index">
     <div *ngIf="aft.selected">
@@ -146,7 +147,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <div class="mt-2 pointer" (click)="resetActivities(aft)">Reset</div>
+      <div class="mt-2 pointer" (click)="resetActivities()">Reset</div>
     </div>
   </div>
 </div>
