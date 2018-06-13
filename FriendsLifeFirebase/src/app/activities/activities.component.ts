@@ -39,6 +39,7 @@ export class ActivitiesComponent implements OnInit {
 
   public nextActivity() {
     this.catIndex++;
+    this.currentDay = this.selectedCategories.categories[this.catIndex].day;
   }
 
   public resetActivities() {
