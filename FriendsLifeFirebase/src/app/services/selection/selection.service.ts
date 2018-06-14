@@ -64,9 +64,8 @@ export class SelectionService {
 
     return ref.snapshotChanges().map(actions => {
       return actions.map(a => {
-        const data = a.payload.doc.data() as AvailabilityModel[];
+        let data = a.payload.doc.data() as AvailabilityModel[];
         const id = a.payload.doc.id;
-
         return {id, ...data};
       });
     });

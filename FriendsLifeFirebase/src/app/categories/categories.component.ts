@@ -43,9 +43,10 @@ export class CategoriesComponent implements OnInit {
           this.class = data;
           this.selectionService.getAvailabilities(this.selection).subscribe((data) => {
             this.availability = data;
-            this.formatAvailibilty();
+            this.formatAvailability();
             if (this.existingCatDays.length > 0 && this.categoryDays.length > 0) {
               this.categoryDays = this.formatCategoryDays(this.categoryDays);
+              console.log("this", this);
               this.currentDay = this.categoryDays[0];
               this.nextDay = this.categoryDays[1];
             } else {
@@ -60,7 +61,7 @@ export class CategoriesComponent implements OnInit {
           this.class = data;
           this.selectionService.getAvailabilities(this.selection).subscribe((data) => {
             this.availability = data;
-            this.formatAvailibilty();
+            this.formatAvailability();
             this.currentDay = this.categoryDays[0];
             this.nextDay = this.categoryDays[1];
           });
@@ -72,7 +73,8 @@ export class CategoriesComponent implements OnInit {
   ngOnInit() {
   }
 
-  formatAvailibilty() {
+  //Filtering Categories from the Class's Availability compared to Students Selected Availability
+  formatAvailability() {
     this.availability.map((a)=> {
       this.class.categories.map((c)=> {
         if (c.days.some(d => d.itemName === a.day)) {
@@ -105,28 +107,30 @@ export class CategoriesComponent implements OnInit {
         }
       });
     });
-
-
+    //This to sort category days by day of the week.
+    let categories = this.categoryService.orderDays({categories: this.categoryDays});
+    this.categoryDays = categories.categories;
   }
 
+  // Formatting from Students saved selected Categories
   formatCategoryDays(catDays) {
     catDays.map((cd)=>{
       this.existingCatDays.map((ecd)=>{
         if (cd.day == ecd.day) {
-          if (cd.mornCategories.length > 0 && ecd.mornCategories.length > 0) {
-            for (let i = 0; i < cd.mornCategories.length; i++) {
-              for (let j = 0; j < ecd.mornCategories.length; j++) {
-                if (cd.mornCategories[i].name == ecd.mornCategories[j].name) {
-                  cd.mornCategories[i] = ecd.mornCategories[j];
+          if (cd.mornCategories.categories.length > 0 && ecd.mornCategories.categories.length > 0) {
+            for (let i = 0; i < cd.mornCategories.categories.length; i++) {
+              for (let j = 0; j < ecd.mornCategories.categories.length; j++) {
+                if (cd.mornCategories.categories[i].name == ecd.mornCategories.categories[j].name) {
+                  cd.mornCategories.categories[i] = ecd.mornCategories.categories[j];
                 }
               }
             }
           }
-          if (cd.aftCategories.length > 0 && ecd.aftCategories.length > 0) {
-            for (let i = 0; i < cd.aftCategories.length; i++) {
-              for (let j = 0; j < ecd.aftCategories.length; j++) {
-                if (cd.aftCategories[i].name == ecd.aftCategories[j].name) {
-                  cd.aftCategories[i] = ecd.aftCategories[j];
+          if (cd.aftCategories.categories.length > 0 && ecd.aftCategories.categories.length > 0) {
+            for (let i = 0; i < cd.aftCategories.categories.length; i++) {
+              for (let j = 0; j < ecd.aftCategories.categories.length; j++) {
+                if (cd.aftCategories.categories[i].name == ecd.aftCategories.categories[j].name) {
+                  cd.aftCategories.categories[i] = ecd.aftCategories.categories[j];
                 }
               }
             }
@@ -151,6 +155,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   submitCategories() {
+    debugger;
     if (this.selectedCategories == null) {
       this.categoryService.addSelectedCategories(this.selection, {categories: this.categoryDays})
         .then((id) => {

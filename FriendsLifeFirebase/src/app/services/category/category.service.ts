@@ -124,9 +124,9 @@ export class CategoryService {
 
     return ref.snapshotChanges().map(actions => {
       return actions.map(a => {
-        const data = a.payload.doc.data();
+        let data = a.payload.doc.data();
         const id = a.payload.doc.id;
-
+        data = this.orderDays(data);
         return {id, ...data};
       });
     });
