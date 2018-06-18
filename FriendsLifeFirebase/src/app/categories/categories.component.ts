@@ -50,7 +50,6 @@ export class CategoriesComponent implements OnInit {
               this.currentDay = this.categoryDays[0];
               this.nextDay = this.categoryDays[1];
             } else {
-              debugger;
               this.currentDay = this.categoryDays[0];
               this.nextDay = this.categoryDays[1];
             }
@@ -155,7 +154,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   submitCategories() {
-    debugger;
     if (this.selectedCategories == null) {
       this.categoryService.addSelectedCategories(this.selection, {categories: this.categoryDays})
         .then((id) => {
