@@ -51,24 +51,35 @@ export class SelectionsComponent implements OnInit {
   }
 
   private filterCategories(data) {
+    console.log('data', data);
     let fCats = [];
-
+    let dayName = '';
+    
     for(let day of data.categories) {
+      dayName = day.day;
+
       for(let cat of day.mornCategories.categories) {
         if(cat.selected) {
+          cat.day = dayName;
+          cat.time = 'Morning';
           cat = this.sortActivities(cat);
-          fCats.push(_.sortBy());
+          fCats.push(cat);
         }
       }
       for(let cat of day.aftCategories.categories) {
         if(cat.selected) {
+          cat.day = dayName;
+          cat.time = 'Afternoon';
           cat = this.sortActivities(cat);
           fCats.push(cat);
         }
       }
     }
 
-    return _.sortBy(fCats, (o) => { return o.name; })
+    return fCats.sort((a, b) => {
+      return this.categoryService.daySorter[a.day.toLowerCase()] - this.categoryService.daySorter[b.day.toLowerCase()];
+    });
+    // return _.sortBy(fCats, (o) => { return o.name; })
   }
 
   private sortActivities(cat) {

@@ -44,6 +44,7 @@
               <br>
               <small>{{cat.skillLevel}}</small>
             </h3>
+            {{cat.day}} - {{cat.time}}
             <hr>
             <ol type="1">
               <li *ngFor="let act of cat.activities" [ngClass]="{'bold':act.rank === 1}">{{act.name}}</li>
