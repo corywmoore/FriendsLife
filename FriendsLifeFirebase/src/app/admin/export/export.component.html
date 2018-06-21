@@ -4,6 +4,20 @@
   <app-report-link [report]="report"></app-report-link>
 </div>
 
+
+<div *ngIf="classes">
+  <form #classesAddForm='ngForm'>
+    <div class="select-div">
+      <div class="form-group center category-select-div">
+        <label for="class" class="txt-green cat-select">Select a set of Classes</label>
+        <select id="class" [(ngModel)]="selectedClass" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let class of classes" [ngValue]="class.id">{{class.name}}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+
 <button (click)="requestReport()">
   Generate CSV
 </button>
