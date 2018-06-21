@@ -29,7 +29,7 @@ export class ActivitiesComponent implements OnInit {
     this.categoryService.getSelectedCategories(this.selection).subscribe((data) => {
       this.selectedCategories = this.categoryService.orderDays(JSON.parse(JSON.stringify(data[0])));
       this.currentDay = this.selectedCategories.categories[this.catIndex].day;
-      this.checkThings();
+      this.nextDay = (this.selectedCategories.categories.length > this.catIndex + 1);
 
       this.showMorn = (this.selectedCategories && this.selectedCategories.categories[this.catIndex].mornCategories.categories.length > 0);
       this.showAft = (this.selectedCategories && this.selectedCategories.categories[this.catIndex].aftCategories.categories.length > 0);
@@ -47,6 +47,9 @@ export class ActivitiesComponent implements OnInit {
   public nextActivity() {
     this.catIndex++;
     this.currentDay = this.selectedCategories.categories[this.catIndex].day;
+    this.showMorn = (this.selectedCategories && this.selectedCategories.categories[this.catIndex].mornCategories.categories.length > 0);
+    this.showAft = (this.selectedCategories && this.selectedCategories.categories[this.catIndex].aftCategories.categories.length > 0);
+    this.nextDay = (this.selectedCategories.categories.length > this.catIndex + 1);
   }
 
   public resetActivities() {
@@ -89,10 +92,6 @@ export class ActivitiesComponent implements OnInit {
     let cat = this.selectedCategories.categories[this.catIndex];
     aft.skillLevel = skill;
     this.categoryService.updateSelectedCategories(this.selection, this.selectedCategories);
-  }
-
-  private checkThings() {
-    this.nextDay = (this.selectedCategories.categories.length > this.catIndex + 1);
   }
 
   private getRank(cat: any) {
