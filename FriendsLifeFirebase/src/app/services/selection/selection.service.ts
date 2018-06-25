@@ -59,6 +59,10 @@ export class SelectionService {
       });
   }
 
+  getSelections(classesId: string) {
+    return this.selectionsCollection.ref.where('classesId', '==', classesId).get();
+  }
+
   getAvailabilities(selectionId: string): Observable<any[]> {
     let ref = this.afs.collection('selections').doc(selectionId).collection('availabilities');
 

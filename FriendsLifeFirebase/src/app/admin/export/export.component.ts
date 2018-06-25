@@ -3,6 +3,9 @@ import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/fires
 import { Observable } from '@firebase/util';
 import { ClassService } from '../../services/class/class.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SelectionService } from '../../services/selection/selection.service';
+import { QuerySnapshot } from '@firebase/firestore-types';
+import { query } from '@angular/core/src/animation/dsl';
 
 @Component({
   selector: 'app-export',
@@ -13,6 +16,7 @@ export class AdminExportComponent implements OnInit {
   public classes;
   public exportDataForm: FormGroup;
   public selectedClass;
+  public class;
 
   selections: any;
   reportsRef: AngularFirestoreCollection<any>;
@@ -21,7 +25,8 @@ export class AdminExportComponent implements OnInit {
   constructor(
     private afs: AngularFirestore,
     private svcClass: ClassService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private svcSelection: SelectionService
   ) { }
 
   ngOnInit() {
@@ -48,12 +53,24 @@ export class AdminExportComponent implements OnInit {
   }
 
   requestReport() {
-    const data = {
-      status: 'processing',
-      createdAt: new Date()
-    };
+    console.log(this.class);
 
-    this.reportsRef.add(data);
+    this.selections = this.svcSelection.getSelections(this.class.id).then(function (querySnapshot) {
+      querySnapshot.forEach(function (documentSnapshot) {
+        var data = documentSnapshot.data();
+        console.log(data);
+        // do something with the data of each document.
+      });
+    });
+
+    // const data = {
+    //   status: 'processing',
+    //   createdAt: new Date()
+    // };
+
+    // this.reportsRef.add(data);
+
+    // alert(this.class.id);
   }
 
 }
