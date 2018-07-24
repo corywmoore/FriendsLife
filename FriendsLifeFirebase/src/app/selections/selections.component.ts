@@ -45,45 +45,8 @@ export class SelectionsComponent implements OnInit {
     });
 
     this.categoryService.getSelectedCategories(this.selectionId).subscribe((data) => {
-      this.selectedCategories = this.filterCategories(JSON.parse(JSON.stringify(data[0])));
+      this.selectedCategories = this.categoryService.filterCategories(JSON.parse(JSON.stringify(data[0])));
       console.log(this.selectedCategories);
     });
-  }
-
-  private filterCategories(data) {
-    console.log('data', data);
-    let fCats = [];
-    let dayName = '';
-    
-    for(let day of data.categories) {
-      dayName = day.day;
-
-      for(let cat of day.mornCategories.categories) {
-        if(cat.selected) {
-          cat.day = dayName;
-          cat.time = 'Morning';
-          cat = this.sortActivities(cat);
-          fCats.push(cat);
-        }
-      }
-      for(let cat of day.aftCategories.categories) {
-        if(cat.selected) {
-          cat.day = dayName;
-          cat.time = 'Afternoon';
-          cat = this.sortActivities(cat);
-          fCats.push(cat);
-        }
-      }
-    }
-
-    return fCats.sort((a, b) => {
-      return this.categoryService.daySorter[a.day.toLowerCase()] - this.categoryService.daySorter[b.day.toLowerCase()];
-    });
-    // return _.sortBy(fCats, (o) => { return o.name; })
-  }
-
-  private sortActivities(cat) {
-    cat.activities = _.sortBy(cat.activities, (o) => { return o.rank; })
-    return cat;
   }
 }

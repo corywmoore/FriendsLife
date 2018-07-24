@@ -114,7 +114,7 @@ export class CategoryService {
       .then((docRef: DocumentReference) => {
         return docRef.id;
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(`Error adding categories: ${err}`);
       });
   }
@@ -127,18 +127,18 @@ export class CategoryService {
         let data = a.payload.doc.data();
         const id = a.payload.doc.id;
         data = this.orderDays(data);
-        return {id, ...data};
+        return { id, ...data };
       });
     });
 
   }
 
-  updateSelectedCategories(selection, cat){
-    this.afs.collection('selections').doc(selection).collection('categories').doc(cat.id).set(JSON.parse(JSON.stringify({categories: cat.categories})))
+  updateSelectedCategories(selection, cat) {
+    this.afs.collection('selections').doc(selection).collection('categories').doc(cat.id).set(JSON.parse(JSON.stringify({ categories: cat.categories })))
       .then(() => {
         console.log("Categories updated")
       })
-      .catch((err)=> {
+      .catch((err) => {
         console.log(`Error updating categories: ${err}`);
       });
   }
@@ -149,6 +149,43 @@ export class CategoryService {
     });
 
     return data;
+  }
+
+
+  filterCategories(data) {
+    console.log('data', data);
+    let fCats = [];
+    let dayName = '';
+
+    for (let day of data.categories) {
+      dayName = day.day;
+
+      for (let cat of day.mornCategories.categories) {
+        if (cat.selected) {
+          cat.day = dayName;
+          cat.time = 'Morning';
+          cat = this.sortActivities(cat);
+          fCats.push(cat);
+        }
+      }
+      for (let cat of day.aftCategories.categories) {
+        if (cat.selected) {
+          cat.day = dayName;
+          cat.time = 'Afternoon';
+          cat = this.sortActivities(cat);
+          fCats.push(cat);
+        }
+      }
+    }
+
+    return fCats.sort((a, b) => {
+      return this.daySorter[a.day.toLowerCase()] - this.daySorter[b.day.toLowerCase()];
+    });
+  }
+
+  private sortActivities(cat) {
+    cat.activities = _.sortBy(cat.activities, (o) => { return o.rank; })
+    return cat;
   }
 }
 
