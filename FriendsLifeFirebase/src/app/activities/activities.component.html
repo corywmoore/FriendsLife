@@ -1,154 +1,150 @@
 <div class="container" *ngIf="showMorn">
-  <h3 class="txt-green home-header">Activities for {{currentDay}} Morning</h3>
-  <div *ngFor="let morn of selectedCategories.categories[catIndex].mornCategories.categories; let i = index">
-    <div *ngIf="morn.selected">
-      <div class="row">
+    <h3 class="txt-green home-header">Activities for {{currentDay}} Morning</h3>
+    <div *ngFor="let morn of selectedCategories.categories[catIndex].mornCategories.categories; let i = index">
+        <div *ngIf="morn.selected">
+            <div class="row">
+                <div class="col-12">
+                    <h4>Which activity for {{morn.name}} is your favorite?</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class='col-4' *ngFor="let act of morn.activities; let j = index">
+                    <div [ngClass]="{'green-activity':act.rank===1, 'yellow-activity':act.rank===2, 'red-activity':act.rank===3}" class="card activity" (click)="activityClicked(morn, act)">
+                        <div class="card-block">
+                            <img [ngClass]="{'opacity':act.rank>0}" class="img-card" [src]="act.imageUrl">
+                        </div>
+                        {{act.name}}
+                    </div>
+                    <div>
+                        <p *ngIf="act.rank>0" class="overlay-text">{{act.rank}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-5">
+                <div class="col-12">
+                    <h3>Please choose the skill level:</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="card skills" (click)="skillClicked('Beginner', true, morn)" [ngClass]="{'green-activity':morn.skillLevel === 'Beginner'}">
+                        <div class="card-block">
+                            Beginner
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card skills" (click)="skillClicked('Intermediate', true, morn)" [ngClass]="{'green-activity':morn.skillLevel === 'Intermediate'}">
+                        <div class="card-block">
+                            Intermediate
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card skills" (click)="skillClicked('Advanced', true, morn)" [ngClass]="{'green-activity':morn.skillLevel === 'Advanced'}">
+                        <div class="card-block">
+                            Advanced
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <hr />
+            <br/>
+        </div>
+    </div>
+    <div class="row mt-3" *ngIf="warning">
         <div class="col-12">
-          <h4>Which activity for {{morn.name}} is your favorite?</h4>
-        </div>
-      </div>
-      <div class="row">
-        <div class='col-4' *ngFor="let act of morn.activities; let j = index">
-          <div [ngClass]="{'green-activity':act.rank===1, 'yellow-activity':act.rank===2, 'red-activity':act.rank===3}" class="card activity"
-            (click)="activityClicked(morn, act)">
-            <div class="card-block">
-              <img [ngClass]="{'opacity':act.rank>0}" class="img-card" [src]="act.imageUrl">
+            <div class="alert alert-warning">
+                Please complete the page before moving forward.
             </div>
-            {{act.name}}
-          </div>
-          <div>
-            <p *ngIf="act.rank>0" class="overlay-text">{{act.rank}}</p>
-          </div>
         </div>
-      </div>
-
-      <hr>
-      <div class="row">
+    </div>
+    <div class="row" *ngIf="!showAft">
         <div class="col-12">
-          <h3>Please choose the skill level:</h3>
+            <div *ngIf="nextDay" class="btn btn-primary mt-5" (click)="nextActivity()">Next</div>
+            <div *ngIf="!nextDay" class="btn btn-success mt-5" (click)="submitActivities()">Save</div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-4">
-          <div class="card skills" (click)="skillClicked('Beginner', true, morn)" [ngClass]="{'green-activity':morn.skillLevel === 'Beginner'}">
-            <div class="card-block">
-              Beginner
-            </div>
-          </div>
+    </div>
+    <div class="row" *ngIf="!showAft">
+        <div class="col-12">
+            <div class="mt-2" (click)="resetActivities()">Reset</div>
         </div>
-        <div class="col-4">
-          <div class="card skills" (click)="skillClicked('Intermediate', true, morn)" [ngClass]="{'green-activity':morn.skillLevel === 'Intermediate'}">
-            <div class="card-block">
-              Intermediate
-            </div>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="card skills" (click)="skillClicked('Advanced', true, morn)" [ngClass]="{'green-activity':morn.skillLevel === 'Advanced'}">
-            <div class="card-block">
-              Advanced
-            </div>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <br/>
     </div>
-  </div>
-  <div class="row mt-3" *ngIf="warning">
-    <div class="col-12">
-      <div class="alert alert-warning">
-        Please complete the page before moving forward.
-      </div>
-    </div>
-  </div>
-  <div class="row" *ngIf="!showAft">
-    <div class="col-12">
-      <div *ngIf="nextDay" class="btn btn-primary mt-5" (click)="nextActivity()">Next</div>
-      <div *ngIf="!nextDay" class="btn btn-success mt-5" (click)="submitActivities()">Save</div>
-    </div>
-  </div>
-  <div class="row" *ngIf="!showAft">
-    <div class="col-12">
-      <div class="mt-2" (click)="resetActivities()">Reset</div>
-    </div>
-  </div>
 </div>
 
 
 <div class="container" *ngIf="showAft">
-  <h3 class="txt-green home-header">Activities for {{currentDay}} Afternoon</h3>
-  <div *ngFor="let aft of selectedCategories.categories[catIndex].aftCategories.categories; let i = index">
-    <div *ngIf="aft.selected">
-      <div class="row">
+    <h3 class="txt-green home-header">Activities for {{currentDay}} Afternoon</h3>
+    <div *ngFor="let aft of selectedCategories.categories[catIndex].aftCategories.categories; let i = index">
+        <div *ngIf="aft.selected">
+            <div class="row">
+                <div class="col-12">
+                    <h3>Which activity for {{aft.name}} is your favorite?</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class='col-4' *ngFor="let act of aft.activities; let j = index">
+                    <div [ngClass]="{'green-activity':act.rank===1, 'yellow-activity':act.rank===2, 'red-activity':act.rank===3}" class="card activity" (click)="activityClicked(aft, act)">
+                        <div class="card-block">
+                            <img [ngClass]="{'opacity':act.rank>0}" class="img-card" [src]="act.imageUrl">
+                        </div>
+                        {{act.name}}
+                    </div>
+                    <div>
+                        <p *ngIf="act.rank>0" class="overlay-text">{{act.rank}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-5">
+                <div class="col-12">
+                    <h4>Please choose the skill level:</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="card skills" (click)="skillClicked('Beginner', false, aft)" [ngClass]="{'green-activity':aft.skillLevel === 'Beginner'}">
+                        <div class="card-block">
+                            Beginner
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card skills" (click)="skillClicked('Intermediate', false, aft)" [ngClass]="{'green-activity':aft.skillLevel === 'Intermediate'}">
+                        <div class="card-block">
+                            Intermediate
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card skills" (click)="skillClicked('Advanced', false, aft)" [ngClass]="{'green-activity':aft.skillLevel === 'Advanced'}">
+                        <div class="card-block">
+                            Advanced
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <hr />
+            <br/>
+        </div>
+    </div>
+    <div class="row mt-3" *ngIf="warning">
         <div class="col-12">
-          <h3>Which activity for {{aft.name}} is your favorite?</h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class='col-4' *ngFor="let act of aft.activities; let j = index">
-          <div [ngClass]="{'green-activity':act.rank===1, 'yellow-activity':act.rank===2, 'red-activity':act.rank===3}" class="card activity"
-            (click)="activityClicked(aft, act)">
-            <div class="card-block">
-              <img [ngClass]="{'opacity':act.rank>0}" class="img-card" [src]="act.imageUrl">
+            <div class="alert alert-warning">
+                Please complete the page before moving forward.
             </div>
-            {{act.name}}
-          </div>
-          <div>
-            <p *ngIf="act.rank>0" class="overlay-text">{{act.rank}}</p>
-          </div>
         </div>
-      </div>
-
-      <hr>
-      <div class="row">
+    </div>
+    <div class="row">
         <div class="col-12">
-          <h4>Please choose the skill level:</h4>
+            <div *ngIf="nextDay" class="btn btn-primary mt-5" (click)="nextActivity()">Next</div>
+            <div *ngIf="!nextDay" class="btn btn-success mt-5" (click)="submitActivities()">Save</div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-4">
-          <div class="card skills" (click)="skillClicked('Beginner', false, aft)" [ngClass]="{'green-activity':aft.skillLevel === 'Beginner'}">
-            <div class="card-block">
-              Beginner
-            </div>
-          </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="mt-2 pointer" (click)="resetActivities()">Reset</div>
         </div>
-        <div class="col-4">
-          <div class="card skills" (click)="skillClicked('Intermediate', false, aft)" [ngClass]="{'green-activity':aft.skillLevel === 'Intermediate'}">
-            <div class="card-block">
-              Intermediate
-            </div>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="card skills" (click)="skillClicked('Advanced', false, aft)" [ngClass]="{'green-activity':aft.skillLevel === 'Advanced'}">
-            <div class="card-block">
-              Advanced
-            </div>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <br/>
     </div>
-  </div>
-  <div class="row mt-3" *ngIf="warning">
-    <div class="col-12">
-      <div class="alert alert-warning">
-        Please complete the page before moving forward.
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <div *ngIf="nextDay" class="btn btn-primary mt-5" (click)="nextActivity()">Next</div>
-      <div *ngIf="!nextDay" class="btn btn-success mt-5" (click)="submitActivities()">Save</div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <div class="mt-2 pointer" (click)="resetActivities()">Reset</div>
-    </div>
-  </div>
 </div>
